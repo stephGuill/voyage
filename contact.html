@@ -7,10 +7,364 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
      </head>
+     <body>
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-plane"></i> VoyagePassion
+                </a>
+                <nav>
+                   <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="circuits.html">Circuits</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul> 
+                </nav>
+            </div>
+        </header>
+        <main>
+        <!-- Hero Section -->
+        <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1596524430615-b46475ddff6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2835&q=80') center/cover; height: 50vh;">
+            <div class="hero-content">
+                <h1>Contactez-Nous</h1>
+                <p>Nos experts vous accompagnent dans la création de votre voyage sur mesure</p>
+            </div>
+        </section>
+
+        <!-- > Formulaire de contact -->
+         <section class="section">
+            <div class="container">
+                <h2 class="section-title">✉️ Demande de Devis Gratuit</h2>
+                <div class="contact-form">
+                    <form action="#" method="post">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="prenom"><i class="fas fa-user"></i> Prénom *</label>
+                                <input type="text" id="prenom" name="prenom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nom"><i class="fas fa-user"></i> Nom *</label>
+                                <input type="text" id="nom" name="nom" required>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telephone"><i class="fas fa-phone"></i> Téléphone</label>
+                                <input type="tel" id="telephone" name="telephone">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="destination"><i class="fas fa-map-marker-alt"></i> Destination souhaitée</label>
+                                <select id="destination" name="destination">
+                                    <option value="">Sélectionnez une destination</option>
+                                    <optgroup label="Europe">
+                                        <option value="france">France</option>
+                                        <option value="italie">Italie</option>
+                                        <option value="espagne">Espagne</option>
+                                        <option value="grece">Grèce</option>
+                                        <option value="portugal">Portugal</option>
+                                        <option value="croatie">Croatie</option>
+                                    </optgroup>
+                                    <optgroup label="Asie">
+                                        <option value="japon">Japon</option>
+                                        <option value="chine">Chine</option>
+                                        <option value="thailande">Thaïlande</option>
+                                        <option value="vietnam">Vietnam</option>
+                                        <option value="inde">Inde</option>
+                                        <option value="bali">Bali</option>
+                                    </optgroup>
+                                    <optgroup label="Amérique">
+                                        <option value="usa">États-Unis</option>
+                                        <option value="canada">Canada</option>
+                                        <option value="mexique">Mexique</option>
+                                        <option value="perou">Pérou</option>
+                                        <option value="argentine">Argentine</option>
+                                        <option value="costa-rica">Costa Rica</option>
+                                    </optgroup>
+                                    <optgroup label="Afrique">
+                                        <option value="maroc">Maroc</option>
+                                        <option value="egypte">Égypte</option>
+                                        <option value="kenya">Kenya</option>
+                                        <option value="afrique-sud">Afrique du Sud</option>
+                                        <option value="tanzanie">Tanzanie</option>
+                                    </optgroup>
+                                    <option value="autre">Autre destination</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="type-voyage"><i class="fas fa-suitcase-rolling"></i> Type de voyage</label>
+                                <select id="type-voyage" name="type-voyage">
+                                    <option value="">Type de voyage</option>
+                                    <option value="circuit-groupe">Circuit en groupe</option>
+                                    <option value="sur-mesure">Voyage sur mesure</option>
+                                    <option value="lune-miel">Lune de miel</option>
+                                    <option value="famille">Voyage en famille</option>
+                                    <option value="affaires">Voyage d'affaires</option>
+                                    <option value="aventure">Voyage aventure</option>
+                                    <option value="croisiere">Croisière</option>
+                                    <option value="sejour">Séjour détente</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="nb-personnes"><i class="fas fa-users"></i> Nombre de personnes</label>
+                                <select id="nb-personnes" name="nb-personnes">
+                                    <option value="">Combien êtes-vous ?</option>
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                    <option value="5">5 personnes</option>
+                                    <option value="6+">6 personnes ou plus</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="duree"><i class="fas fa-calendar-alt"></i> Durée souhaitée</label>
+                                <select id="duree" name="duree">
+                                    <option value="">Durée du voyage</option>
+                                    <option value="weekend">Week-end (2-3 jours)</option>
+                                    <option value="court">Court séjour (4-7 jours)</option>
+                                    <option value="moyen">Séjour moyen (8-14 jours)</option>
+                                    <option value="long">Long voyage (15-21 jours)</option>
+                                    <option value="tres-long">Très long voyage (+ 3 semaines)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget"><i class="fas fa-euro-sign"></i> Budget par personne</label>
+                                <select id="budget" name="budget">
+                                    <option value="">Budget indicatif</option>
+                                    <option value="500-1000">500€ - 1 000€</option>
+                                    <option value="1000-2000">1 000€ - 2 000€</option>
+                                    <option value="2000-3000">2 000€ - 3 000€</option>
+                                    <option value="3000-5000">3 000€ - 5 000€</option>
+                                    <option value="5000+">Plus de 5 000€</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="periode"><i class="fas fa-calendar"></i> Période de voyage souhaitée</label>
+                            <input type="text" id="periode" name="periode" placeholder="Ex: Été 2024, Noël 2024, Mars 2025...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message"><i class="fas fa-comment"></i> Décrivez-nous votre projet de voyage *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Parlez-nous de vos envies, vos attentes, vos centres d'intérêt, contraintes particulières..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" required>
+                                <span>J'accepte d'être contacté par VoyagePassion concernant ma demande *</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox">
+                                <span>Je souhaite recevoir la newsletter VoyagePassion</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Envoyer ma demande
+                        </button>
+
+                        <p style="font-size: 0.9rem; color: #666; text-align: center; margin-top: 1rem;">
+                            <i class="fas fa-clock"></i> Réponse garantie sous 4h en jours ouvrés
+                        </p>
+                    </form>
+                </div>
+            </div>
+         </section>
+
+          <!-- Informations de Contact -->
+        <section class="section" style="background: white;">
+            <div class="container">
+                <h2 class="section-title">📞 Nos Coordonnées</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="service-icon" style="color: #3498db;">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <h3>Par Téléphone</h3>
+                            <p><strong>01 23 45 67 89</strong></p>
+                            <p><strong>Horaires :</strong><br>
+                            Lundi à Vendredi : 9h - 19h<br>
+                            Samedi : 9h - 17h<br>
+                            Dimanche : 10h - 16h</p>
+                            <p><em>Numéro non surtaxé - Appel local</em></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="service-icon" style="color: #e74c3c;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Par Email</h3>
+                            <p><strong>General :</strong><br>contact@voyagepassion.fr</p>
+                            <p><strong>Devis :</strong><br>devis@voyagepassion.fr</p>
+                            <p><strong>Urgence :</strong><br>urgence@voyagepassion.fr</p>
+                            <p><em>Réponse sous 4h garantie</em></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="service-icon" style="color: #27ae60;">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3>Chat en Ligne</h3>
+                            <p><strong>Disponible sur notre site</strong></p>
+                            <p><strong>Horaires :</strong><br>
+                            Lundi à Vendredi : 9h - 18h<br>
+                            Samedi : 10h - 16h</p>
+                            <div style="background: #27ae60; color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-top: 1rem;">
+                                <i class="fas fa-circle" style="font-size: 0.5rem; margin-right: 0.5rem;"></i>
+                                En ligne maintenant
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nos Agences -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">🏪 Nos Agences</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Agence Paris">
+                        <div class="card-content">
+                            <h3><i class="fas fa-map-marker-alt"></i> Paris - Champs-Élysées</h3>
+                            <p><strong>Adresse :</strong><br>
+                            45 Avenue des Champs-Élysées<br>
+                            75008 Paris</p>
+                            <p><strong>Métro :</strong> Franklin D. Roosevelt (Lignes 1, 9)</p>
+                            <p><strong>Horaires :</strong><br>
+                            Lun-Sam : 9h30-19h<br>
+                            Dim : 10h-17h</p>
+                            <p><strong>Parking :</strong> Parking Champs-Élysées</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Agence Lyon">
+                        <div class="card-content">
+                            <h3><i class="fas fa-map-marker-alt"></i> Lyon - Part-Dieu</h3>
+                            <p><strong>Adresse :</strong><br>
+                            Centre Commercial Part-Dieu<br>
+                            17 Rue du Docteur Bouchut<br>
+                            69003 Lyon</p>
+                            <p><strong>Métro :</strong> Part-Dieu (Lignes A, B)</p>
+                            <p><strong>Horaires :</strong><br>
+                            Lun-Sam : 10h-19h</p>
+                            <p><strong>Parking :</strong> Part-Dieu gratuit 2h</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1541949087947-4e8da1b8ca78?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Agence Marseille">
+                        <div class="card-content">
+                            <h3><i class="fas fa-map-marker-alt"></i> Marseille - Vieux-Port</h3>
+                            <p><strong>Adresse :</strong><br>
+                            12 Quai des Belges<br>
+                            Vieux-Port<br>
+                            13001 Marseille</p>
+                            <p><strong>Métro :</strong> Vieux-Port (Ligne M1)</p>
+                            <p><strong>Horaires :</strong><br>
+                            Lun-Sam : 9h30-18h30</p>
+                            <p><strong>Parking :</strong> Parking Vieux-Port</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Rapide -->
+        <section class="section" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+            <div class="container">
+                <h2 class="section-title">❓ Questions Fréquentes</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div style="background: white; padding: 1.5rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h3 style="color: #2c3e50; margin-bottom: 0.5rem;">🕒 Sous quel délai recevrai-je une réponse ?</h3>
+                        <p>Nous nous engageons à vous répondre sous 4h maximum en jours ouvrés. En cas d'urgence, contactez-nous directement par téléphone.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1.5rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h3 style="color: #2c3e50; margin-bottom: 0.5rem;">💰 Le devis est-il vraiment gratuit ?</h3>
+                        <p>Absolument ! Nos devis sont entièrement gratuits et sans engagement. Vous ne payez que si vous décidez de réserver votre voyage.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1.5rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h3 style="color: #2c3e50; margin-bottom: 0.5rem;">📅 Puis-je modifier mon voyage après réservation ?</h3>
+                        <p>Oui, dans la limite des conditions du voyage et moyennant d'éventuels frais. Nous nous efforçons d'être le plus flexible possible.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 1.5rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h3 style="color: #2c3e50; margin-bottom: 0.5rem;">🛡️ Que comprend l'assurance voyage ?</h3>
+                        <p>Notre assurance de base inclut l'assistance rapatriement. Nous proposons aussi des assurances complémentaires (annulation, bagages, etc.).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Urgence -->
+        <section class="section" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white;">
+            <div class="container text-center">
+                <h2 style="color: white; margin-bottom: 1rem;"><i class="fas fa-exclamation-triangle"></i> Urgence Voyage</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">En cas d'urgence pendant votre voyage, contactez notre assistance 24h/24</p>
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">📞 +33 1 23 45 67 90</div>
+                        <div>Numéro d'urgence 24h/24</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">✉️ urgence@voyagepassion.fr</div>
+                        <div>Email prioritaire</div>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5rem; font-style: italic;">Toujours là pour vous, où que vous soyez dans le monde</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Accueil</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="circuits.html">Circuits</a>
+                <a href="services.html">Services</a>
+                <a href="apropos.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2024 VoyagePassion. Tous droits réservés.</p>
+            <p>📞 01 23 45 67 89 | ✉️ contact@voyagepassion.fr</p>
+        </div>
+    </footer>
+
+
+     </body>
+     </html>
 
 
 
 
 
-     
 </html>
