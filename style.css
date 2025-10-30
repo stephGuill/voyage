@@ -22,3 +22,110 @@ body {
     /* color: #333 est une couleur de texte gris foncé */
     /* background-color est la couleur de fond gris très clair pour contraste */
 }
+
+/* partie header (en-tête) avec son style */
+header {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+} 
+/* j'applique un dégradé diagonal bleu gris vers bleu avec le texte blanc pour contraster avec un fond sombre */
+/* un espacement vertical 1rem (16px), horizontal 0 avec une ombre portée sous l'en-tête en position fixe maintenu en haut lors du scroll */
+/* une largeur de 100% de l'écran positioné tout en haut  */
+/* z-index élevé pour passer au-dessus des autres éléments */
+
+.header-container {
+    /* un conteneur interne du header pour limiter la largeur */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* j'applique une largeur maximale 1200px pour design responsive avec un centrage horizontal automatique */
+    /* un espacement horizontal 20px de chaque côté, un flexbox pour alignement horizontal */
+    /* je réparti le logo à gauche et une navigation à droite avec un alignement vertical centré */
+
+}
+
+.logo {
+    /* style pour le logo de l'agence */
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+
+/* j'applique la taille de police 1.8rem (28px) avec un texte en gras et une couleur blanche et supprime le soulignement du lien */
+}
+
+nav ul {
+    /* la liste de naviation */
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    /* je supprime les puces de liste ajoute un flexbox pour un alignement horizontal et un espacement 2rem entre chaque élément */
+}
+
+nav a {
+    /* liens de navigation */
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    /* j'applique la couleur du texte blanc, supprime le soulignement et graisse la police moyenne (500) */
+    /* j'applique une transition douce couleur de 0.3secondes  */
+    /* un espacement interne : 0.5rem vertical, 1rem horizontal avec coins arrondis 5px */
+}
+
+nav a:hover,
+nav a:active {
+    /* un  pseudo-classe :hover au survol de la souris et classe .active pour une page courante */
+    background-color: rgba(255,255,255,0.2);
+    color: #fff;
+    /* j'applique un fond blanc semi-transparent (20% opacité) et maintient une couleur blanche */
+}
+/* main content */
+/* style pour pour le contenu principal des ppages */
+
+main {
+    /* élément du main contenant le contenu principal */
+    margin-top: 80px;
+    min-height: calc(100vh - 160px);
+    /* marge haute 80px pour compenser le header fixe et une hauteur mini calculée : 100vh -160px (header + footer) */
+}
+
+.container {
+    /* classe conteneur générique utilisée dans toutes les sections */
+    max-width: 1200px;                       
+    margin: 0 auto;                           
+    padding: 0 20px;
+    /* j'applique une largeur max 1200px, un centrage horizontal et un espacement horizontal 20px */
+}
+
+/* Hero Section */
+/* Commentaire : Styles pour la section bannière principale */
+
+.hero {
+    /* Section héro avec image de fond */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),   
+    /* Calque noir semi-transparent */
+                url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2835&q=80') center/cover; 
+    /* Image fond Unsplash centrée couvrant */
+    height: 70vh;                             
+    display: flex;                            
+    align-items: center;                      
+    justify-content: center;                  
+    text-align: center;                       
+    color: white;                            
+    margin-bottom: 4rem;                     
+    /* j'apllique une hauteur de 70% de la hauteur viewport, un flexbox pour centrer le contenu */
+    /* j'aplllique un centrage vertical et horizontal, le texte centré en blanc sur fond sombre */
+    /* une marge basse 4rem pour espacement */
+}
