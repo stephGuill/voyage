@@ -129,3 +129,283 @@ main {
     /* j'aplllique un centrage vertical et horizontal, le texte centré en blanc sur fond sombre */
     /* une marge basse 4rem pour espacement */
 }
+
+.hero-content h1 {
+    /* Titre principal du héro */
+    font-size: 3.5rem;                       /* Taille très grande 3.5rem */
+    margin-bottom: 1rem;                     /* Marge basse 1rem */
+    animation: fadeInUp 1s ease-out;         /* Animation entrée fadeInUp, durée 1s, transition douce */
+}
+
+.hero-content p {
+    /* Paragraphe descriptif du héro */
+    font-size: 1.2rem;                       /* Taille légèrement plus grande */
+    margin-bottom: 2rem;                     /* Marge basse 2rem */
+    animation: fadeInUp 1s ease-out 0.3s both;  /* Animation identique avec délai 0.3s et both (forwards + backwards) */
+}
+
+.cta-button {
+    /* Bouton call-to-action (appel à l'action) */
+    background: linear-gradient(45deg, #e74c3c, #f39c12);  /* Dégradé rouge vers orange à 45° */
+    color: white;                            /* Texte blanc */
+    padding: 15px 30px;                      /* Espacement interne généreux */
+    text-decoration: none;                   /* Supprime soulignement lien */
+    border-radius: 50px;                     /* Coins très arrondis (forme pilule) */
+    font-weight: bold;                       /* Texte gras */
+    font-size: 1.1rem;                       /* Taille légèrement plus grande */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transitions multiples : transform et ombre */
+    display: inline-block;                   /* Affichage bloc en ligne pour pouvoir appliquer transform */
+    animation: fadeInUp 1s ease-out 0.6s both;  /* Animation avec délai 0.6s */
+}
+
+.cta-button:hover {
+    /* État survol du bouton CTA */
+    transform: translateY(-2px);             /* Translation vers le haut de 2px (effet lvitation) */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Ombre portée plus prononcée */
+}
+
+/* Section Styles */
+/* Commentaire : Styles génériques pour toutes les sections du site */
+
+.section {
+    /* Classe générique pour sections de contenu */
+    padding: 4rem 0;                         /* Espacement vertical important 4rem */
+}
+
+.section-title {
+    /* Titres de sections */
+    text-align: center;                      /* Centrage texte */
+    font-size: 2.5rem;                       /* Grande taille 2.5rem */
+    margin-bottom: 3rem;                     /* Grande marge basse */
+    color: #2c3e50;                         /* Couleur bleu-gris foncé */
+    position: relative;                      /* Position relative pour pseudo-élément */
+}
+
+.section-title::after {
+    /* Pseudo-élément décoratif sous le titre */
+    content: '';                            /* Contenu vide obligatoire */
+    width: 100px;                           /* Largeur 100px */
+    height: 3px;                            /* Hauteur 3px (ligne fine) */
+    background: linear-gradient(45deg, #3498db, #e74c3c);  /* Dégradé bleu vers rouge */
+    position: absolute;                      /* Position absolue par rapport au titre */
+    bottom: -10px;                          /* 10px sous le texte */
+    left: 50%;                              /* Positionnement à 50% de la largeur */
+    transform: translateX(-50%);             /* Translation -50% pour centrage parfait */
+}
+
+/* Cards Grid */
+/* Commentaire : Système de grille pour cartes de contenu */
+
+.cards-grid {
+    /* Grille responsive pour cartes */
+    display: grid;                           /* Affichage CSS Grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  /* Colonnes auto-adaptatives, min 300px */
+    gap: 2rem;                              /* Espacement 2rem entre cartes */
+    margin: 2rem 0;                         /* Marge verticale 2rem */
+}
+
+.card {
+    /* Styles pour cartes individuelles */
+    background: white;                       /* Fond blanc */
+    border-radius: 15px;                     /* Coins arrondis 15px */
+    overflow: hidden;                        /* Masque dépassements (important pour images) */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Ombre portée subtile */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transitions pour hover */
+}
+
+.card:hover {
+    /* État survol des cartes */
+    transform: translateY(-10px);            /* Élévation 10px vers le haut */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* Ombre plus prononcée */
+}
+
+.card img {
+    /* Images dans les cartes */
+    width: 100%;                            /* Largeur 100% du conteneur */
+    height: 200px;                          /* Hauteur fixe 200px */
+    object-fit: cover;                      /* Recadrage image pour couvrir zone sans déformation */
+}
+
+.card-content {
+    /* Contenu textuel des cartes */
+    padding: 1.5rem;                        /* Espacement interne généreux */
+}
+
+.card h3 {
+    /* Titres dans les cartes */
+    font-size: 1.3rem;                      /* Taille moyenne */
+    margin-bottom: 1rem;                    /* Marge basse */
+    color: #2c3e50;                         /* Couleur bleu-gris */
+}
+
+.card p {
+    /* Paragraphes dans les cartes */
+    color: #666;                            /* Gris moyen pour lisibilité */
+    margin-bottom: 1rem;                    /* Marge basse */
+}
+
+.price {
+    /* Affichage des prix */
+    font-size: 1.4rem;                      /* Taille plus grande */
+    font-weight: bold;                      /* Gras pour attirer attention */
+    color: #e74c3c;                         /* Rouge pour urgence/action */
+}
+
+/* Services Grid */
+/* Commentaire : Grille spécifique pour la page services */
+
+.services-grid {
+    /* Grille pour services (plus petites cellules que cards) */
+    display: grid;                           /* CSS Grid */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Colonnes min 250px (plus petites) */
+    gap: 2rem;                              /* Espacement identique */
+    margin: 2rem 0;                         /* Marge verticale */
+}
+
+.service-item {
+    /* Items individuels de services */
+    text-align: center;                     /* Centrage du contenu */
+    padding: 2rem;                          /* Espacement interne */
+    background: white;                       /* Fond blanc */
+    border-radius: 15px;                     /* Coins arrondis */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Ombre portée */
+    transition: transform 0.3s ease;         /* Transition pour hover */
+}
+
+.service-item:hover {
+    /* État survol des services */
+    transform: translateY(-5px);             /* Légère élévation 5px */
+}
+
+.service-icon {
+    /* Icônes des services */
+    font-size: 3rem;                        /* Très grande taille pour visibilité */
+    margin-bottom: 1rem;                    /* Marge basse */
+    color: #3498db;                         /* Couleur bleue cohérente */
+}
+
+/* Form Styles */
+/* Commentaire : Styles pour formulaires de contact */
+
+.contact-form {
+    /* Conteneur principal du formulaire */
+    max-width: 600px;                       /* Largeur max raisonnable pour lisibilité */
+    margin: 0 auto;                         /* Centrage horizontal */
+    background: white;                       /* Fond blanc */
+    padding: 2rem;                          /* Espacement interne généreux */
+    border-radius: 15px;                     /* Coins arrondis */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Ombre portée */
+}
+
+.form-group {
+    /* Groupes de champs (label + input) */
+    margin-bottom: 1.5rem;                  /* Espacement entre groupes */
+}
+
+.form-group label {
+    /* Labels des champs */
+    display: block;                         /* Affichage bloc pour saut de ligne */
+    margin-bottom: 0.5rem;                  /* Petit espacement sous label */
+    font-weight: bold;                      /* Gras pour lisibilité */
+    color: #2c3e50;                         /* Couleur cohérente */
+}
+
+.form-group input,      /* Champs de saisie */
+.form-group textarea,   /* Zones de texte multi-lignes */
+.form-group select {    /* Listes déroulantes */
+    /* Styles communs à tous les champs */
+    width: 100%;                            /* Largeur 100% du conteneur */
+    padding: 12px;                          /* Espacement interne confortable */
+    border: 2px solid #e0e0e0;              /* Bordure grise claire */
+    border-radius: 8px;                     /* Coins légèrement arrondis */
+    font-size: 1rem;                        /* Taille police standard */
+    transition: border-color 0.3s ease;     /* Transition couleur bordure */
+}
+
+.form-group input:focus,    /* État focus (clic/tab) sur input */
+.form-group textarea:focus, /* État focus sur textarea */
+.form-group select:focus {  /* État focus sur select */
+    /* Styles pour champs actifs */
+    outline: none;                          /* Supprime outline par défaut navigateur */
+    border-color: #3498db;                  /* Bordure bleue pour indiquer état actif */
+}
+
+.submit-btn {
+    /* Bouton de soumission formulaire */
+    background: linear-gradient(45deg, #3498db, #2c3e50);  /* Dégradé bleu vers gris */
+    color: white;                           /* Texte blanc */
+    padding: 12px 30px;                     /* Espacement interne */
+    border: none;                           /* Supprime bordure par défaut */
+    border-radius: 8px;                     /* Coins arrondis */
+    font-size: 1.1rem;                      /* Taille légèrement plus grande */
+    cursor: pointer;                        /* Curseur pointeur au survol */
+    transition: transform 0.3s ease;        /* Transition pour effet hover */
+    width: 100%;                           /* Largeur 100% */
+}
+
+.submit-btn:hover {
+    /* État survol bouton soumission */
+    transform: translateY(-2px);            /* Élévation légère */
+}
+
+/* Footer */
+/* Commentaire : Styles pour pied de page */
+
+footer {
+    /* Pied de page du site */
+    background: #2c3e50;                    /* Fond gris foncé */
+    color: white;                           /* Texte blanc */
+    text-align: center;                     /* Centrage du contenu */
+    padding: 2rem 0;                        /* Espacement vertical */
+    margin-top: 4rem;                       /* Grande marge haute pour séparation */
+}
+
+.footer-content {
+    /* Conteneur interne du footer */
+    max-width: 1200px;                      /* Largeur max cohérente */
+    margin: 0 auto;                         /* Centrage horizontal */
+    padding: 0 20px;                        /* Espacement horizontal */
+}
+
+.footer-links {
+    /* Conteneur des liens de navigation footer */
+    display: flex;                          /* Flexbox pour alignement */
+    justify-content: center;                /* Centrage horizontal */
+    gap: 2rem;                             /* Espacement entre liens */
+    margin-bottom: 1rem;                   /* Marge basse */
+    flex-wrap: wrap;                       /* Retour à la ligne si nécessaire */
+}
+
+.footer-links a {
+    /* Liens dans le footer */
+    color: #bdc3c7;                        /* Gris clair */
+    text-decoration: none;                 /* Sans soulignement */
+    transition: color 0.3s ease;          /* Transition couleur */
+}
+
+.footer-links a:hover {
+    /* État survol liens footer */
+    color: #3498db;                        /* Bleu au survol */
+}
+
+/* Animations */
+/* Commentaire : Définitions des animations CSS */
+
+@keyframes fadeInUp {
+    /* Animation fadeInUp : apparition avec montée */
+    from {
+        /* État initial */
+        opacity: 0;                        /* Invisible */
+        transform: translateY(30px);       /* Décalé 30px vers le bas */
+    }
+    to {
+        /* État final */
+        opacity: 1;                        /* Visible */
+        transform: translateY(0);          /* Position normale */
+    }
+}
+
+.fade-in {
+    /* Classe utilitaire pour appliquer animation */
+    animation: fadeInUp 0.8s ease-out;     /* Animation fadeInUp durée 0.8s */
+}
