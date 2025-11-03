@@ -4,9 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Circuits - VoyagePassion</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<script>
+// Script pour le menu déroulant Carnet de voyage au clic (mobile et desktop)
+document.addEventListener('DOMContentLoaded', function() {
+  var dropdown = document.querySelector('.dropdown');
+  var dropbtn = dropdown.querySelector('.dropbtn');
+  var dropdownContent = dropdown.querySelector('.dropdown-content');
+  // Pour mobile et desktop : ouvrir au clic
+  dropbtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var isOpen = dropdownContent.style.display === 'block';
+    if (!isOpen) {
+      dropdownContent.style.display = 'block';
+      dropdownContent.style.animation = 'slideDown 0.3s ease';
+      dropbtn.classList.add('active');
+    } else {
+      dropdownContent.style.display = 'none';
+      dropbtn.classList.remove('active');
+    }
+  });
+  // Fermer le menu si on clique ailleurs
+  document.addEventListener('click', function(e) {
+    if (!dropdown.contains(e.target)) {
+      dropdownContent.style.display = 'none';
+      dropbtn.classList.remove('active');
+    }
+  });
+  // Fermer le menu après avoir choisi une option
+  dropdownContent.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      dropdownContent.style.display = 'none';
+      dropbtn.classList.remove('active');
+    });
+  });
+});
+</script>
+
+    <!--
+      Explications détaillées du fichier `circuits.html` :
+
+      - Structure générale :
+        * <head> : méta, titres, feuilles de style et polices
+        * <body> : header (navigation), main (sections de contenu), footer
+        * Les scripts JS (en bas) gèrent des comportements interactifs (navbar auto-hide, dropdown)
+
+      - But des commentaires insérés ci-dessous : expliquer les fonctions JavaScript,
+        les variables, les conditions et les événements afin que le code soit lisible
+        par un développeur débutant ou pour maintenance ultérieure.
+
+      Remarque : je commente surtout les blocs JavaScript (variables, conditions, événements).
+      Si vous souhaitez que chaque balise HTML reçoive un commentaire ligne-par-ligne,
+      dites-le et je l'ajouterai (cela alourdira le fichier HTML).
+    -->
+
 <body>
 
     <header>
@@ -21,6 +74,14 @@
                     <li><a href="circuits.html" class="active">Circuits</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="apropos.html">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Carnet de voyage <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="souvenirs-japon.html">🌸 Souvenirs du Japon</a>
+                            <a href="souvenirs-kenya.html">🦁 Souvenirs du Kenya</a>
+                            <a href="souvenirs-maldives.html">🏝️ Souvenirs des Maldives</a>
+                        </div>
+                    </li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
@@ -78,7 +139,7 @@
                     </div>
 
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Safari Luxury">
+                        <img src="assets/img/depositphotos_8902844-stock-photo-elephant-family-in-front-of.jpg" alt="Safari Luxury">
                         <div class="card-content">
                             <h3>🦁 Safari Luxury Kenya-Tanzanie</h3>
                             <p><strong>12 jours / 11 nuits</strong></p>
@@ -345,5 +406,42 @@
             <p>📞 01 23 45 67 89 | ✉️ contact@voyagepassion.fr</p>
         </div>
     </footer>
+
+<script>
+// Script pour masquer/afficher automatiquement la navbar pendant le scroll
+let lastScrollTop = 0;
+let scrollTimer;
+const navbar = document.querySelector('header');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Masquer la navbar immédiatement lors du scroll vers le bas
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Scroll vers le bas
+        navbar.classList.add('navbar-hidden');
+        navbar.classList.remove('navbar-visible');
+    } else if (scrollTop < lastScrollTop) {
+        // Scroll vers le haut
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }
+    
+    // Afficher la navbar quand le scroll s'arrête
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function() {
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }, 150); // 150ms après l'arrêt du scroll
+    
+    lastScrollTop = scrollTop;
+});
+
+// S'assurer que la navbar est visible au chargement
+window.addEventListener('load', function() {
+    navbar.classList.add('navbar-visible');
+});
+</script>
+
 </body>
 </html>

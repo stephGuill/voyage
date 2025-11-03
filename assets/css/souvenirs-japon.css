@@ -1,0 +1,1276 @@
+/*
+ * Styles spécifiques pour la page Souvenirs du Japon
+ * ================================================
+ * 
+ * Description :
+ * Feuille de style dédiée à la thématique japonaise,
+ * utilisant des couleurs, typographies et animations 
+ * inspirées de la culture japonaise.
+ *
+ * Composants principaux :
+ * 1. Hero section avec animation sakura
+ * 2. Cartes de témoignages avec effets
+ * 3. Statistiques avec design minimaliste
+ * 4. Call-to-action avec gradient thématique
+ */
+
+/*
+ * Import des polices
+ * -----------------
+ * Noto Sans JP : Police principale optimisée pour le japonais
+ * - Graisses : 300 (light), 400 (regular), 500 (medium), 700 (bold)
+ * Dancing Script : Pour les éléments décoratifs
+ * - Graisses : 400 (regular), 700 (bold)
+ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Dancing+Script:wght@400;700&display=swap');
+
+/*
+ * Variables CSS globales
+ * --------------------
+ * Palette de couleurs inspirée du Japon :
+ * - Rouge : Couleur traditionnelle des torii
+ * - Rose cerise : Inspiré des sakura
+ * - Or : Accent pour les éléments décoratifs
+ * - Bleu marine : Couleur de fond profonde
+ * - Crème : Pour les contrastes doux
+ * - Vert sauge : Accent naturel
+ * 
+ * Gradients et ombres :
+ * - japanese-gradient : Dégradé tri-couleur pour éléments importants
+ * - shadow-japanese : Ombre douce avec teinte rosée
+ */
+:root {
+    --japanese-red: #d63031;      /* Rouge torii */
+    --japanese-cherry: #fd79a8;    /* Rose sakura */
+    --japanese-gold: #f39c12;      /* Or décoratif */
+    --japanese-navy: #2d3436;      /* Bleu profond */
+    --japanese-cream: #ffeaa7;     /* Crème douce */
+    --japanese-sage: #00b894;      /* Vert nature */
+    --japanese-gradient: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 50%, #e17055 100%);
+    --shadow-japanese: 0 8px 32px rgba(253, 121, 168, 0.15);
+}
+
+/*
+ * Conteneur principal de la page
+ * ----------------------------
+ * Définit la typographie de base et l'espacement des lignes
+ * pour toute la page thématique Japon
+ */
+.japan-page {
+    font-family: 'Noto Sans JP', sans-serif;  /* Police optimisée pour le japonais */
+    line-height: 1.7;                         /* Espacement des lignes pour meilleure lisibilité */
+}
+
+/*
+ * Section Hero Japonaise
+ * ---------------------
+ * Section d'en-tête pleine hauteur avec effets visuels :
+ * 1. Arrière-plan avec superposition de gradient
+ * 2. Image de fond du Japon
+ * 3. Animation de flottement global
+ * 4. Overlay de pétales de cerisier
+ *
+ * Structure :
+ * - Conteneur relatif pleine hauteur
+ * - Centrage flexbox du contenu
+ * - Superposition de couches (background, overlay, contenu)
+ */
+.japan-hero {
+    position: relative;                /* Pour le positionnement des éléments enfants */
+    height: 100vh;                     /* Hauteur plein écran */
+    background: linear-gradient(       /* Double couche : gradient + image */
+        rgba(45, 52, 54, 0.3),        /* Assombrissement subtil en haut */
+        rgba(253, 121, 168, 0.2)      /* Teinte rosée en bas */
+    ), 
+    url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+    display: flex;                     /* Centrage du contenu */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;                  /* Masque les débordements des animations */
+    animation: sakuraFloat 20s ease-in-out infinite;  /* Animation de respiration */
+}
+
+/*
+ * Overlay pétales de cerisier
+ * --------------------------
+ * Crée un motif de pétales de sakura flottants :
+ * - Utilise un radial-gradient pour créer des points
+ * - Animation de dérive continue
+ * - Effet de profondeur avec transparence
+ */
+.sakura-overlay {
+    position: absolute;                /* Couvre toute la zone hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(  /* Crée les pétales individuels */
+        circle,
+        rgba(255, 182, 193, 0.3) 2px,  /* Couleur rose pâle pour les pétales */
+        transparent 2px
+    );
+    background-size: 50px 50px;        /* Espacement des pétales */
+    animation: sakuraDrift 30s linear infinite;  /* Animation de chute */
+}
+
+/*
+ * Animations des pétales de cerisier
+ * -------------------------------
+ * Deux animations principales :
+ * 1. sakuraDrift : Mouvement de chute des pétales
+ * 2. sakuraFloat : Effect de respiration sur le hero
+ */
+@keyframes sakuraDrift {
+    0% { 
+        transform: translateY(-100px) rotate(0deg);    /* Début au-dessus de l'écran */
+    }
+    100% { 
+        transform: translateY(100vh) rotate(360deg);   /* Chute avec rotation complète */
+    }
+}
+
+@keyframes sakuraFloat {
+    0%, 100% { 
+        transform: scale(1);      /* Taille normale */
+    }
+    50% { 
+        transform: scale(1.02);   /* Léger zoom pour effet de respiration */
+    }
+}
+
+/*
+ * Titre principal bilingue
+ * ----------------------
+ * Structure en deux parties :
+ * 1. Texte en kanji (japonais)
+ * 2. Traduction française
+ *
+ * Effets :
+ * - Ombre portée pour lisibilité
+ * - Animation de pulse lumineux sur les kanji
+ * - Contraste avec arrière-plan sombre
+ */
+.japan-title {
+    text-align: center;              /* Centrage horizontal */
+    margin-bottom: 2rem;             /* Espacement avec sous-titre */
+}
+
+/* Style du texte japonais */
+.kanji {
+    display: block;                  /* Placement en block pour séparation */
+    font-size: 3rem;                 /* Taille importante pour impact */
+    color: var(--japanese-cherry);   /* Couleur sakura */
+    font-weight: 300;                /* Police fine pour élégance */
+    margin-bottom: 0.5rem;           /* Espacement avant traduction */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);  /* Ombre douce */
+    animation: glowPulse 3s ease-in-out infinite alternate;  /* Effet lumineux */
+}
+
+/* Style de la traduction française */
+.french {
+    display: block;                  /* Placement en block */
+    font-size: 2.5rem;              /* Taille légèrement plus petite que kanji */
+    color: white;                    /* Contraste maximal */
+    font-weight: 700;               /* Gras pour lisibilité */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);  /* Ombre plus prononcée */
+}
+
+/*
+ * Animation de pulse lumineux
+ * ------------------------
+ * Crée un effet de halo pulsant autour du texte :
+ * - Ombre portée de base pour profondeur
+ * - Halo lumineux qui varie en intensité
+ * - Couleur coordonnée avec le thème sakura
+ */
+@keyframes glowPulse {
+    0% { 
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3),     /* Ombre de base */
+                     0 0 10px rgba(253, 121, 168, 0.3); /* Halo faible */
+    }
+    100% { 
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3),     /* Ombre de base maintenue */
+                     0 0 20px rgba(253, 121, 168, 0.6); /* Halo plus intense */
+    }
+}
+
+/*
+ * Sous-titre du hero
+ * ----------------
+ * Texte descriptif sous le titre principal :
+ * - Taille modérée pour hiérarchie visuelle
+ * - Couleur crème pour contraste doux
+ * - Largeur maximale pour lisibilité
+ * - Ombre pour lisibilité sur fond variable
+ */
+.hero-subtitle {
+    font-size: 1.3rem;                /* Taille lisible */
+    color: var(--japanese-cream);      /* Couleur douce */
+    text-align: center;                /* Alignement avec titre */
+    max-width: 600px;                  /* Largeur de lecture optimale */
+    margin: 0 auto;                    /* Centrage horizontal */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);  /* Ombre pour lisibilité */
+}
+
+/*
+ * Diviseur décoratif en vague
+ * -------------------------
+ * Élément de transition en bas du hero :
+ * - Positionnement absolu en bas
+ * - Masquage du dépassement
+ * - SVG pour forme fluide
+ *
+ * Structure :
+ * - Conteneur avec dimensions fixes
+ * - SVG intérieur qui s'adapte
+ */
+.wave-divider {
+    position: absolute;               /* Positionnement en bas du hero */
+    bottom: 0;
+    left: 0;
+    width: 100%;                      /* Pleine largeur */
+    height: 60px;                     /* Hauteur fixe */
+    overflow: hidden;                 /* Masque débordements */
+}
+
+.wave-divider svg {
+    width: 100%;                      /* SVG en pleine largeur */
+    height: 100%;                     /* Hauteur complète du conteneur */
+}
+
+/*
+ * Sections de contenu
+ * =================
+ * Styles communs et spécifiques pour les différentes
+ * sections de la page
+ */
+
+/*
+ * Section d'introduction
+ * -------------------
+ * Premier bloc de contenu après le hero :
+ * - Fond dégradé doux
+ * - Motif de points décoratifs
+ * - Espacement généreux
+ *
+ * Structure :
+ * 1. Conteneur principal avec gradient
+ * 2. Overlay avec motif SVG
+ * 3. Contenu centré au-dessus
+ */
+.intro-section {
+    padding: 4rem 0;                /* Espacement vertical important */
+    background: linear-gradient(    /* Dégradé thématique */
+        135deg,
+        #ffeaa7 0%,               /* Crème doux */
+        #fd79a8 100%              /* Rose sakura */
+    );
+    position: relative;            /* Pour positionner le motif */
+}
+
+/* 
+ * Motif de points décoratifs
+ * ------------------------
+ * Crée un pattern subtil en arrière-plan :
+ * - Points de tailles variées
+ * - Disposition aléatoire
+ * - Opacité faible pour effet de texture
+ */
+.intro-section::before {
+    content: '';
+    position: absolute;           /* Couvre toute la section */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* SVG inline pour motif de points */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+    background-size: 100px 100px; /* Taille du motif répété */
+}
+
+/*
+ * Conteneur du contenu d'introduction
+ * --------------------------------
+ * Assure que le contenu reste au-dessus du motif :
+ * - Position relative pour z-index
+ * - Centrage du texte
+ */
+.intro-content {
+    position: relative;           /* Pour z-index */
+    z-index: 2;                  /* Au-dessus du motif */
+    text-align: center;          /* Alignement centré */
+}
+
+/*
+ * Titres de section thématiques
+ * --------------------------
+ * Style commun pour les titres de section :
+ * - Taille importante pour hiérarchie
+ * - Couleur navy pour contraste
+ * - Espacement et alignement uniformes
+ */
+.section-title-japan {
+    font-size: 2.5rem;              /* Taille importante */
+    color: var(--japanese-navy);     /* Couleur contrastée */
+    text-align: center;             /* Centrage */
+    margin-bottom: 2rem;            /* Espacement bas */
+    font-weight: 500;               /* Graisse medium */
+    position: relative;             /* Pour positionnement des ornements */
+}
+
+/*
+ * Ornements de titre
+ * ----------------
+ * Éléments décoratifs emoji autour des titres :
+ * - Taille proportionnée au titre
+ * - Animation de rebond continue
+ * - Espacement latéral uniforme
+ */
+.title-ornament {
+    font-size: 2rem;               /* Taille relative au titre */
+    margin: 0 1rem;                /* Espacement latéral */
+    animation: bounce 2s ease-in-out infinite;  /* Animation continue */
+}
+
+/*
+ * Animation de rebond
+ * ----------------
+ * Mouvement vertical doux des ornements :
+ * - Début et fin à position initiale
+ * - Point culminant à -10px
+ * - Timing fluide avec ease-in-out
+ */
+@keyframes bounce {
+    0%, 100% { 
+        transform: translateY(0);    /* Position de repos */
+    }
+    50% { 
+        transform: translateY(-10px); /* Point haut du rebond */
+    }
+}
+
+/*
+ * Texte d'introduction
+ * -----------------
+ * Style pour le paragraphe principal :
+ * - Police fine pour élégance
+ * - Largeur limitée pour lisibilité
+ * - Espacement des lignes confortable
+ * - Couleur contrastée sur fond clair
+ */
+.intro-text {
+    font-size: 1.2rem;              /* Taille lisible */
+    color: var(--japanese-navy);     /* Couleur contrastée */
+    max-width: 800px;               /* Largeur de lecture optimale */
+    margin: 0 auto;                 /* Centrage horizontal */
+    line-height: 1.8;               /* Espacement des lignes aéré */
+    font-weight: 300;               /* Police fine pour élégance */
+}
+
+/*
+ * Galerie de Témoignages
+ * ====================
+ * Section présentant les expériences des voyageurs
+ * avec un design moderne et interactif
+ */
+
+/*
+ * Conteneur de la galerie
+ * ---------------------
+ * Structure globale de la section :
+ * - Fond clair pour contraste
+ * - Espacement généreux
+ * - Layout responsive
+ */
+.testimonials-gallery {
+    padding: 4rem 0;                /* Espacement vertical */
+    background: #f8f9fa;            /* Fond subtil */
+}
+
+/*
+ * Cartes de témoignage
+ * ------------------
+ * Design avec effets visuels sophistiqués :
+ * 1. Fond blanc avec coins arrondis
+ * 2. Ombre douce thématique
+ * 3. Bordure animée au hover
+ * 4. Effet de survol avec élévation
+ *
+ * Caractéristiques :
+ * - Border-clip pour effet de bordure
+ * - Transition fluide sur interactions
+ * - Position relative pour z-index
+ */
+.testimonial-card {
+    background: white;                     /* Fond clair */
+    border-radius: 20px;                   /* Coins arrondis */
+    overflow: hidden;                      /* Masque débordements */
+    margin-bottom: 3rem;                   /* Espacement entre cartes */
+    box-shadow: var(--shadow-japanese);    /* Ombre thématique */
+    transition: all 0.3s ease;             /* Animation fluide */
+    border: 3px solid transparent;         /* Bordure pour effet gradient */
+    background-clip: padding-box;          /* Empêche gradient sur fond */
+    position: relative;                    /* Pour pseudo-élément */
+}
+
+/*
+ * Effet de bordure gradient
+ * ----------------------
+ * Crée une bordure animée avec gradient :
+ * - Pseudo-élément en position absolue
+ * - Gradient thématique japonais
+ * - Animation d'opacité au hover
+ */
+.testimonial-card::before {
+    content: '';
+    position: absolute;               /* Positionnement absolu */
+    top: -3px;                       /* Compensation bordure */
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: var(--japanese-gradient);  /* Gradient thématique */
+    border-radius: 23px;              /* Coins arrondis +3px */
+    z-index: -1;                      /* Derrière le contenu */
+    opacity: 0;                       /* Invisible par défaut */
+    transition: opacity 0.3s ease;    /* Animation douce */
+}
+
+/*
+ * Effets au survol
+ * -------------
+ * Animations multiples :
+ * 1. Apparition du gradient
+ * 2. Élévation de la carte
+ * 3. Ombre plus prononcée
+ */
+.testimonial-card:hover::before {
+    opacity: 1;                       /* Affiche le gradient */
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);     /* Élévation */
+    box-shadow: 0 20px 40px rgba(253, 121, 168, 0.2);  /* Ombre rose */
+}
+
+/*
+ * En-tête des cartes de témoignage
+ * =============================
+ * Section supérieure des cartes contenant
+ * les informations sur le voyageur
+ */
+
+/*
+ * Conteneur d'en-tête
+ * -----------------
+ * Design avec gradient thématique :
+ * - Fond dégradé japonais
+ * - Texte blanc pour contraste
+ * - Espacement intérieur généreux
+ */
+.card-header {
+    padding: 2rem;                         /* Espacement interne */
+    background: var(--japanese-gradient);   /* Dégradé thématique */
+    color: white;                          /* Texte contrasté */
+}
+
+/*
+ * Informations voyageur
+ * ------------------
+ * Layout flexible pour photo et détails :
+ * - Alignement centré vertical
+ * - Espacement entre éléments
+ * - Disposition responsive
+ */
+.traveler-info {
+    display: flex;                /* Layout flexible */
+    align-items: center;          /* Centrage vertical */
+    gap: 1.5rem;                 /* Espacement entre photo et texte */
+}
+
+/*
+ * Photo du voyageur
+ * --------------
+ * Style de l'avatar :
+ * - Format carré arrondi en cercle
+ * - Bordure blanche épaisse
+ * - Ombre portée douce
+ * - Ajustement de l'image
+ */
+.traveler-photo {
+    width: 80px;                          /* Dimensions fixes */
+    height: 80px;
+    border-radius: 50%;                   /* Format cercle */
+    object-fit: cover;                    /* Ajustement image */
+    border: 4px solid white;              /* Bordure distinctive */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);  /* Ombre douce */
+}
+
+/*
+ * Détails du voyageur
+ * ----------------
+ * Textes d'information :
+ * - Nom en évidence
+ * - Date de voyage
+ * - Note avec étoiles
+ */
+.traveler-details h3 {
+    margin: 0 0 0.5rem 0;        /* Espacement bas uniquement */
+    font-size: 1.5rem;           /* Taille importante */
+    font-weight: 600;            /* Semi-gras */
+}
+
+/*
+ * Date du voyage
+ * -----------
+ * Style subtil :
+ * - Taille réduite
+ * - Légère transparence
+ * - Espacement contrôlé
+ */
+.travel-date {
+    margin: 0 0 0.5rem 0;        /* Espacement bas */
+    opacity: 0.9;                /* Légère transparence */
+    font-size: 1rem;             /* Taille standard */
+}
+
+/*
+ * Notation étoiles
+ * -------------
+ * Affichage des étoiles :
+ * - Couleur or japonais
+ * - Taille proportionnée
+ */
+.rating {
+    color: var(--japanese-gold);  /* Couleur or */
+    font-size: 1.2rem;           /* Taille des étoiles */
+}
+
+/*
+ * Contenu des souvenirs
+ * ===================
+ * Section principale des cartes contenant
+ * les photos et le récit du voyage
+ */
+
+/*
+ * Conteneur du contenu
+ * -----------------
+ * Espacement et organisation :
+ * - Padding uniforme
+ * - Fond blanc (hérité)
+ */
+.memory-content {
+    padding: 2rem;              /* Espacement interne */
+}
+
+/*
+ * Grille de photos
+ * -------------
+ * Layout en grille asymétrique :
+ * - Photo principale plus grande
+ * - Deux photos secondaires
+ * - Espacement et arrondis
+ *
+ * Structure :
+ * - 3 colonnes : 2fr + 1fr + 1fr
+ * - Photo principale sur 2 lignes
+ * - Gap uniforme entre photos
+ */
+.photos-grid {
+    display: grid;                          /* Layout en grille */
+    grid-template-columns: 2fr 1fr 1fr;     /* Répartition colonnes */
+    gap: 1rem;                              /* Espacement uniforme */
+    margin-bottom: 2rem;                    /* Espace avant texte */
+    border-radius: 15px;                    /* Coins arrondis */
+    overflow: hidden;                       /* Masque débordements */
+}
+
+/*
+ * Photos individuelles
+ * ----------------
+ * Style commun pour toutes les photos :
+ * - Ajustement automatique
+ * - Animation au hover
+ * - Curseur interactif
+ */
+.memory-photo {
+    width: 100%;                           /* Pleine largeur */
+    height: 200px;                         /* Hauteur fixe */
+    object-fit: cover;                     /* Ajustement image */
+    transition: transform 0.3s ease;        /* Animation douce */
+    cursor: pointer;                       /* Indique interactivité */
+}
+
+/*
+ * Photo principale
+ * -------------
+ * Modifications pour la grande photo :
+ * - Hauteur doublée
+ * - Span sur deux lignes
+ */
+.main-photo {
+    height: 400px;                         /* Double hauteur */
+    grid-row: span 2;                      /* Occupe 2 lignes */
+}
+
+/*
+ * Animation au survol
+ * ---------------
+ * Effet de zoom doux :
+ * - Scale modéré
+ * - Transition fluide
+ */
+.memory-photo:hover {
+    transform: scale(1.05);                /* Zoom léger */
+}
+
+/*
+ * Contenu textuel des témoignages
+ * ============================
+ * Mise en forme du récit et des citations
+ * avec une hiérarchie visuelle claire
+ */
+
+/*
+ * Titre du récit
+ * -----------
+ * Style du titre de l'histoire :
+ * - Couleur thématique rouge
+ * - Taille importante mais pas dominante
+ * - Graisse medium pour lisibilité
+ */
+.story-content h4 {
+    font-size: 1.4rem;                /* Taille importante */
+    color: var(--japanese-red);       /* Rouge japonais */
+    margin-bottom: 1rem;              /* Espacement */
+    font-weight: 500;                 /* Semi-gras */
+}
+
+/*
+ * Paragraphes du récit
+ * -----------------
+ * Style du texte principal :
+ * - Couleur grise pour lecture confortable
+ * - Interlignage généreux
+ * - Taille légèrement augmentée
+ */
+.story-content p {
+    color: #666;                      /* Gris lisible */
+    line-height: 1.8;                /* Espacement lignes */
+    margin-bottom: 1.5rem;           /* Marge basse */
+    font-size: 1.1rem;               /* Taille confortable */
+}
+
+/*
+ * Citations des voyageurs
+ * -------------------
+ * Style distinctif pour les citations :
+ * - Fond avec gradient thématique
+ * - Bordure latérale dorée
+ * - Coins arrondis
+ * - Citation décorative
+ *
+ * Structure :
+ * 1. Conteneur avec gradient
+ * 2. Bordure latérale accent
+ * 3. Guillemet décoratif
+ */
+.story-content blockquote {
+    background: var(--japanese-gradient);  /* Fond dégradé */
+    color: white;                         /* Texte blanc */
+    padding: 1.5rem;                      /* Espacement interne */
+    border-radius: 15px;                  /* Coins arrondis */
+    border-left: 5px solid var(--japanese-gold);  /* Accent latéral */
+    margin: 1.5rem 0;                     /* Espacement vertical */
+    font-style: italic;                   /* Style italique */
+    font-size: 1.1rem;                    /* Taille texte */
+    position: relative;                   /* Pour guillemet */
+}
+
+/*
+ * Guillemet décoratif
+ * ----------------
+ * Ajout d'un grand guillemet en arrière-plan :
+ * - Taille importante
+ * - Position absolue
+ * - Couleur semi-transparente
+ */
+.story-content blockquote::before {
+    content: '"';                         /* Guillemet */
+    font-size: 3rem;                      /* Grande taille */
+    position: absolute;                   /* Positionnement */
+    top: -10px;                          /* Ajustement haut */
+    left: 15px;                          /* Ajustement gauche */
+    color: rgba(255,255,255,0.3);        /* Semi-transparent */
+}
+
+/*
+ * Tags de points forts
+ * ==================
+ * Section des mots-clés et activités principales
+ * présentée sous forme de tags interactifs
+ */
+
+/*
+ * Conteneur des tags
+ * ---------------
+ * Layout flexible et adaptatif :
+ * - Disposition en ligne avec retour
+ * - Espacement uniforme entre tags
+ * - Marge supérieure pour séparation
+ */
+.highlights {
+    display: flex;                /* Disposition flexible */
+    flex-wrap: wrap;             /* Retour à la ligne auto */
+    gap: 0.5rem;                 /* Espacement uniforme */
+    margin-top: 1.5rem;          /* Séparation du contenu */
+}
+
+/*
+ * Tags individuels
+ * -------------
+ * Style des étiquettes :
+ * - Fond avec gradient thématique
+ * - Forme arrondie type pill
+ * - Animation au survol
+ * - Texte contrasté
+ *
+ * Caractéristiques :
+ * - Padding asymétrique pour forme
+ * - Police semi-grasse pour lisibilité
+ * - Transition douce pour interaction
+ */
+.highlight-tag {
+    background: var(--japanese-gradient);  /* Fond dégradé */
+    color: white;                         /* Texte blanc */
+    padding: 0.5rem 1rem;                 /* Espacement interne */
+    border-radius: 25px;                  /* Coins très arrondis */
+    font-size: 0.9rem;                    /* Taille réduite */
+    font-weight: 500;                     /* Semi-gras */
+    transition: transform 0.2s ease;       /* Animation douce */
+}
+
+/*
+ * Animation des tags
+ * --------------
+ * Effet de survol subtil :
+ * - Léger agrandissement
+ * - Transition fluide
+ */
+.highlight-tag:hover {
+    transform: scale(1.05);               /* Zoom léger */
+}
+
+/*
+ * Section Statistiques
+ * =================
+ * Présentation visuelle des chiffres clés
+ * avec un design moderne et interactif
+ */
+
+/*
+ * Conteneur principal
+ * ----------------
+ * Design sombre avec motif animé :
+ * - Fond bleu marine japonais
+ * - Texte blanc contrasté
+ * - Motif de points en rotation
+ */
+.stats-section {
+    padding: 4rem 0;                      /* Espacement vertical */
+    background: var(--japanese-navy);      /* Fond sombre */
+    color: white;                         /* Texte blanc */
+    position: relative;                   /* Pour motif */
+    overflow: hidden;                     /* Masque débordements */
+}
+
+/*
+ * Motif d'arrière-plan
+ * -----------------
+ * Points en rotation continue :
+ * - Gradient radial pour points
+ * - Animation de rotation infinie
+ * - Positionnement étendu
+ */
+.stats-section::before {
+    content: '';
+    position: absolute;                   /* Couverture totale */
+    top: -50%;                           /* Débordement pour rotation */
+    left: -50%;
+    width: 200%;                         /* Surface étendue */
+    height: 200%;
+    background: radial-gradient(          /* Points roses */
+        circle,
+        rgba(253, 121, 168, 0.1) 1px,
+        transparent 1px
+    );
+    background-size: 40px 40px;          /* Espacement points */
+    animation: rotate 60s linear infinite; /* Rotation continue */
+}
+
+/*
+ * Animation de rotation
+ * -----------------
+ * Rotation complète en 60 secondes :
+ * - Mouvement linéaire
+ * - Boucle infinie
+ */
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*
+ * Grille des statistiques
+ * -------------------
+ * Layout responsive en grille :
+ * - Colonnes auto-adaptatives
+ * - Espacement uniforme
+ * - Superposition sur motif
+ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;                           /* Espacement */
+    margin-top: 3rem;                    /* Marge supérieure */
+    position: relative;                  /* Pour z-index */
+    z-index: 2;                         /* Au-dessus du motif */
+}
+
+/*
+ * Cartes de statistique
+ * ------------------
+ * Design avec effet verre :
+ * - Fond semi-transparent
+ * - Effet de flou d'arrière-plan
+ * - Animation au survol
+ * - Bordure subtile
+ */
+.stat-item {
+    text-align: center;                  /* Centrage contenu */
+    padding: 2rem;                       /* Espacement interne */
+    background: rgba(255,255,255,0.1);   /* Fond translucide */
+    border-radius: 20px;                 /* Coins arrondis */
+    backdrop-filter: blur(10px);         /* Effet verre */
+    border: 1px solid rgba(255,255,255,0.2);  /* Bordure subtile */
+    transition: transform 0.3s ease;     /* Animation douce */
+}
+
+/*
+ * Animation au survol
+ * ---------------
+ * Effet d'élévation :
+ * - Translation verticale
+ * - Transition douce
+ */
+.stat-item:hover {
+    transform: translateY(-10px);        /* Élévation */
+}
+
+/*
+ * Nombre statistique
+ * --------------
+ * Mise en valeur du chiffre :
+ * - Taille importante
+ * - Couleur thématique
+ * - Effet de lueur
+ */
+.stat-number {
+    font-size: 3rem;                     /* Grande taille */
+    font-weight: 700;                    /* Très gras */
+    color: var(--japanese-cherry);       /* Couleur sakura */
+    margin-bottom: 0.5rem;               /* Espacement */
+    text-shadow: 0 0 20px rgba(253, 121, 168, 0.5);  /* Lueur */
+}
+
+/*
+ * Label de statistique
+ * ----------------
+ * Description sous le nombre :
+ * - Taille modérée
+ * - Légère transparence
+ */
+.stat-label {
+    font-size: 1.1rem;                  /* Taille lisible */
+    opacity: 0.9;                       /* Légère transparence */
+}
+
+/*
+ * Section Call-to-Action (CTA)
+ * =========================
+ * Section finale incitant à l'action avec
+ * un design attractif et des boutons interactifs
+ */
+
+/*
+ * Conteneur CTA
+ * ----------
+ * Design accrocheur :
+ * - Fond avec gradient thématique
+ * - Texte blanc contrasté
+ * - Centrage du contenu
+ */
+.cta-section {
+    padding: 4rem 0;                    /* Espacement vertical */
+    background: var(--japanese-gradient); /* Fond dégradé */
+    color: white;                       /* Texte blanc */
+    text-align: center;                 /* Centrage */
+}
+
+/*
+ * Titre CTA
+ * -------
+ * Style impactant :
+ * - Grande taille
+ * - Police semi-grasse
+ * - Espacement contrôlé
+ */
+.cta-content h2 {
+    font-size: 2.5rem;                  /* Taille importante */
+    margin-bottom: 1rem;                /* Espacement bas */
+    font-weight: 600;                   /* Semi-gras */
+}
+
+/*
+ * Texte descriptif
+ * -------------
+ * Style équilibré :
+ * - Taille confortable
+ * - Largeur limitée
+ * - Légère transparence
+ */
+.cta-content p {
+    font-size: 1.2rem;                  /* Taille lisible */
+    margin-bottom: 2.5rem;              /* Grand espacement */
+    opacity: 0.9;                       /* Légère transparence */
+    max-width: 600px;                   /* Largeur optimale */
+    margin-left: auto;                  /* Centrage horizontal */
+    margin-right: auto;
+}
+
+/*
+ * Conteneur des boutons
+ * -----------------
+ * Layout flexible :
+ * - Disposition horizontale
+ * - Espacement uniforme
+ * - Adaptation responsive
+ */
+.cta-buttons {
+    display: flex;                      /* Layout flex */
+    gap: 1.5rem;                        /* Espacement boutons */
+    justify-content: center;            /* Centrage */
+    flex-wrap: wrap;                    /* Retour ligne si besoin */
+}
+
+/*
+ * Styles communs des boutons
+ * ----------------------
+ * Base partagée :
+ * - Forme arrondie
+ * - Bordure blanche
+ * - Animations au hover
+ */
+.btn-primary, .btn-secondary {
+    padding: 1rem 2rem;                 /* Espacement interne */
+    border-radius: 30px;                /* Coins très arrondis */
+    text-decoration: none;              /* Pas de soulignement */
+    font-weight: 600;                   /* Semi-gras */
+    font-size: 1.1rem;                  /* Taille confortable */
+    transition: all 0.3s ease;          /* Animation douce */
+    border: 2px solid white;            /* Bordure blanche */
+}
+
+/*
+ * Bouton principal
+ * -------------
+ * Style distinctif :
+ * - Fond blanc
+ * - Texte rouge japonais
+ */
+.btn-primary {
+    background: white;                  /* Fond blanc */
+    color: var(--japanese-red);         /* Texte rouge */
+}
+
+/*
+ * Hover bouton principal
+ * ------------------
+ * Inversion des couleurs :
+ * - Fond transparent
+ * - Texte blanc
+ * - Effet d'élévation
+ */
+.btn-primary:hover {
+    background: transparent;            /* Fond transparent */
+    color: white;                      /* Texte blanc */
+    transform: translateY(-2px);        /* Élévation */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);  /* Ombre */
+}
+
+/*
+ * Bouton secondaire
+ * -------------
+ * Style alternatif :
+ * - Fond transparent
+ * - Texte blanc
+ */
+.btn-secondary {
+    background: transparent;           /* Fond transparent */
+    color: white;                     /* Texte blanc */
+}
+
+/*
+ * Hover bouton secondaire
+ * ------------------
+ * Inversion des couleurs :
+ * - Fond blanc
+ * - Texte rouge
+ * - Effet d'élévation
+ */
+.btn-secondary:hover {
+    background: white;                /* Fond blanc */
+    color: var(--japanese-red);       /* Texte rouge */
+    transform: translateY(-2px);       /* Élévation */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);  /* Ombre */
+}
+
+/*
+ * Navigation Déroulante
+ * ==================
+ * Menu dropdown pour la navigation secondaire
+ * avec animations et effets interactifs
+ */
+
+/*
+ * Conteneur dropdown
+ * --------------
+ * Structure de base :
+ * - Position relative pour sous-menu
+ * - Affichage en ligne
+ */
+.dropdown {
+    position: relative;                /* Pour positionnement absolu */
+    display: inline-block;             /* Alignement en ligne */
+}
+
+/*
+ * Contenu déroulant
+ * -------------
+ * Panel qui apparaît au hover :
+ * - Fond blanc
+ * - Ombre portée
+ * - Coins arrondis
+ * - Animation d'apparition
+ */
+.dropdown-content {
+    display: none;                     /* Masqué par défaut */
+    position: absolute;                /* Positionnement flottant */
+    background-color: white;           /* Fond clair */
+    min-width: 200px;                 /* Largeur minimum */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);  /* Ombre douce */
+    border-radius: 10px;              /* Coins arrondis */
+    z-index: 1000;                    /* Au-dessus du contenu */
+    top: 100%;                        /* Sous le bouton */
+    left: 0;                          /* Aligné à gauche */
+    overflow: hidden;                 /* Masque débordements */
+}
+
+/*
+ * Liens du dropdown
+ * -------------
+ * Style des options :
+ * - Couleur navy
+ * - Transition sur hover
+ * - Espacement confortable
+ */
+.dropdown-content a {
+    color: var(--japanese-navy) !important;  /* Couleur forcée */
+    padding: 12px 16px;                      /* Espacement */
+    text-decoration: none;                   /* Pas de soulignement */
+    display: block;                          /* Pleine largeur */
+    transition: background-color 0.3s ease;  /* Transition douce */
+}
+
+/*
+ * Hover des liens
+ * -----------
+ * Effet au survol :
+ * - Fond rose
+ * - Texte blanc
+ */
+.dropdown-content a:hover {
+    background-color: var(--japanese-cherry);  /* Fond rose */
+    color: white !important;                   /* Texte blanc */
+}
+
+/*
+ * Animation d'apparition
+ * ------------------
+ * Affichage du dropdown :
+ * - Au survol du conteneur
+ * - Animation de glissement
+ */
+.dropdown:hover .dropdown-content {
+    display: block;                    /* Affichage */
+    animation: slideDown 0.3s ease;    /* Animation */
+}
+
+/*
+ * Animation de glissement
+ * -------------------
+ * Effet d'apparition douce :
+ * - Opacité progressive
+ * - Translation vers le haut
+ */
+@keyframes slideDown {
+    0% { 
+        opacity: 0;                    /* Invisible */
+        transform: translateY(-10px);  /* Position haute */
+    }
+    100% { 
+        opacity: 1;                    /* Visible */
+        transform: translateY(0);      /* Position finale */
+    }
+}
+
+/*
+ * Icône du dropdown
+ * -------------
+ * Flèche qui indique le dropdown :
+ * - Espacement à gauche
+ * - Taille réduite
+ * - Rotation au hover
+ */
+.dropbtn .fas {
+    margin-left: 0.5rem;              /* Espacement */
+    font-size: 0.8rem;                /* Taille icône */
+    transition: transform 0.3s ease;   /* Animation rotation */
+}
+
+/*
+ * Rotation de l'icône
+ * ---------------
+ * Au survol du dropdown :
+ * - Rotation 180° de la flèche
+ */
+.dropdown:hover .dropbtn .fas {
+    transform: rotate(180deg);         /* Rotation complète */
+}
+
+/*
+ * Styles Responsifs
+ * ==============
+ * Adaptations pour différentes tailles d'écran
+ * avec optimisation de l'expérience mobile
+ */
+
+/*
+ * Tablettes et petits écrans
+ * -----------------------
+ * Breakpoint : 768px
+ * Adaptations principales :
+ * - Réduction des tailles de texte
+ * - Réorganisation des grilles
+ * - Simplification des layouts
+ */
+@media (max-width: 768px) {
+    /* Ajustement des titres */
+    .kanji {
+        font-size: 2rem;                /* Réduction titre japonais */
+    }
+    
+    .french {
+        font-size: 1.8rem;              /* Réduction titre français */
+    }
+    
+    /* Réorganisation grille photos */
+    .photos-grid {
+        grid-template-columns: 1fr;      /* Une seule colonne */
+    }
+    
+    .main-photo {
+        height: 250px;                   /* Hauteur réduite */
+        grid-row: span 1;                /* Plus de spanning */
+    }
+    
+    .memory-photo {
+        height: 200px;                   /* Hauteur uniforme */
+    }
+    
+    /* Adaptation info voyageur */
+    .traveler-info {
+        flex-direction: column;          /* Empilage vertical */
+        text-align: center;              /* Centrage */
+    }
+    
+    /* Ajustement stats */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);  /* 2 colonnes */
+        gap: 1rem;                              /* Espacement réduit */
+    }
+    
+    .stat-number {
+        font-size: 2rem;                 /* Chiffres plus petits */
+    }
+    
+    /* Adaptation CTA */
+    .cta-buttons {
+        flex-direction: column;          /* Boutons empilés */
+        align-items: center;             /* Centrage */
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;                     /* Pleine largeur */
+        max-width: 300px;                /* Largeur maximale */
+    }
+    
+    /* Simplification dropdown */
+    .dropdown-content {
+        position: relative;              /* Intégré au flux */
+        display: block;                  /* Toujours visible */
+        box-shadow: none;                /* Sans ombre */
+        background: transparent;         /* Fond transparent */
+    }
+    
+    .dropdown-content a {
+        color: white !important;         /* Liens blancs */
+        padding: 0.5rem 0;              /* Espacement réduit */
+    }
+}
+
+/*
+ * Mobiles
+ * ------
+ * Breakpoint : 480px
+ * Adaptations supplémentaires :
+ * - Réduction hauteur hero
+ * - Ajustement espacements
+ * - Simplification grilles
+ */
+@media (max-width: 480px) {
+    /* Réduction hero */
+    .japan-hero {
+        height: 70vh;                    /* Hauteur réduite */
+    }
+    
+    /* Ajustement titres */
+    .section-title-japan {
+        font-size: 1.8rem;               /* Taille réduite */
+    }
+    
+    /* Espacement cards */
+    .testimonial-card {
+        margin-bottom: 2rem;             /* Marge réduite */
+    }
+    
+    /* Réduction padding */
+    .card-header, .memory-content {
+        padding: 1.5rem;                 /* Espacement réduit */
+    }
+    
+    /* Stats en colonne */
+    .stats-grid {
+        grid-template-columns: 1fr;      /* Une seule colonne */
+    }
+}

@@ -4,9 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À propos - VoyagePassion</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
+<!--
+    Explications :
+    - Ce fichier HTML suit une structure classique : head (métadonnées + feuilles de styles),
+        body (header, main, footer) et quelques scripts JavaScript pour le comportement interactif.
+    - Les commentaires ci-dessous expliquent les rôles des blocs importants et détaillent
+        ligne par ligne les parties JavaScript (fonctions, variables, conditions, événements).
+    -->
+
+<script>
+/*
+    Script 1 : gestion du menu déroulant "Carnet de voyage" au clic
+
+    But : permettre l'ouverture/fermeture du sous-menu au clic (utile sur mobile)
+    Principaux éléments manipulés :
+        - dropdown : l'élément de liste <li class="dropdown"> qui contient le bouton et le contenu
+        - dropbtn : le lien cliquable qui déclenche l'ouverture (.dropbtn)
+        - dropdownContent : le conteneur des liens du sous-menu (.dropdown-content)
+
+    Comportement :
+        - au clic sur dropbtn : bascule l'affichage du menu (ouvert / fermé)
+        - au clic ailleurs dans le document : ferme le menu si il est ouvert
+        - au clic sur un lien du menu : ferme le menu (pour navigation immédiate)
+
+    Contraintes :
+        - le script suppose que les éléments existent (querySelector ne renvoie pas null). Si la page
+            n'a pas de .dropdown, une erreur JavaScript apparaîtra. On pourrait ajouter des gardes (null checks)
+            pour rendre le script plus résilient.
+*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    // selection de l'élément parent du dropdown (attend un <li class="dropdown">)
+    var dropdown = document.querySelector('.dropdown');
+    // sécurité minimale : si aucun dropdown sur la page, on sort (évite une erreur)
+    if (!dropdown) return; // aucune action si le menu n'existe pas
+
+    // selection du bouton (lien cliquable) à l'intérieur du dropdown
+    var dropbtn = dropdown.querySelector('.dropbtn');
+    // selection du contenu du menu (les liens)
+    var dropdownContent = dropdown.querySelector('.dropdown-content');
+
+    // garde supplémentaire : s'assurer que les éléments existent
+    if (!dropbtn || !dropdownContent) return;
+
+    // Au clic sur le bouton : empêcher le comportement par défaut (navigation href="#")
+    // puis basculer l'affichage du menu
+    dropbtn.addEventListener('click', function(e) {
+        e.preventDefault(); // empêche le # de faire défiler la page
+
+        // isOpen est vrai si le style inline display vaut 'block'
+        // note : on utilise le style inline pour un contrôle simple ; on pourrait aussi utiliser
+        // une classe CSS (ex : .open) pour un contrôle plus propre.
+        var isOpen = dropdownContent.style.display === 'block';
+
+        if (!isOpen) {
+            // si le menu est fermé, on l'ouvre
+            dropdownContent.style.display = 'block';
+            // application d'une animation CSS (la clé @keyframes est dans style.css)
+            dropdownContent.style.animation = 'slideDown 0.3s ease';
+            // marque visuelle sur le bouton (utile pour CSS : .dropbtn.active)
+            dropbtn.classList.add('active');
+        } else {
+            // sinon on ferme
+            dropdownContent.style.display = 'none';
+            dropbtn.classList.remove('active');
+        }
+    });
+
+    // Fermer le menu si on clique en dehors du dropdown
+    // événement sur tout le document : si la cible du clic n'est pas dans dropdown, on ferme
+    document.addEventListener('click', function(e) {
+        // contains vérifie si l'élément cliqué est enfant du dropdown
+        if (!dropdown.contains(e.target)) {
+            dropdownContent.style.display = 'none';
+            dropbtn.classList.remove('active');
+        }
+    });
+
+    // Fermer le menu après sélection d'une option : boucle sur tous les liens du sous-menu
+    dropdownContent.querySelectorAll('a').forEach(function(link) {
+        // pour chaque lien, ajouter un écouteur click
+        link.addEventListener('click', function() {
+            // fermer le menu (permet une navigation propre sur mobile)
+            dropdownContent.style.display = 'none';
+            dropbtn.classList.remove('active');
+        });
+    });
+});
+</script>
+
 <body>
     <header>
         <div class="header-container">
@@ -20,6 +110,14 @@
                     <li><a href="circuits.html">Circuits</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="apropos.html" class="active">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Carnet de voyage <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="souvenirs-japon.html">🌸 Souvenirs du Japon</a>
+                            <a href="souvenirs-kenya.html">🦁 Souvenirs du Kenya</a>
+                            <a href="souvenirs-maldives.html">🏝️ Souvenirs des Maldives</a>
+                        </div>
+                    </li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
@@ -76,7 +174,7 @@
 
                     <div class="service-item">
                         <div class="service-icon">
-                            <i class="fas fa-shield-check"></i>
+                            <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>Confiance</h3>
                         <p>Votre confiance est notre plus belle récompense. Transparence, honnêteté et engagement sont au cœur de notre relation client.</p>
@@ -290,6 +388,77 @@
             <p>📞 01 23 45 67 89 | ✉️ contact@voyagepassion.fr</p>
         </div>
     </footer>
+
+<script>
+/*
+  Script 2 : masquage / affichage intelligent de la barre de navigation pendant le scroll
+
+  Objectif : lorsqu'un utilisateur fait défiler la page vers le bas, masquer la barre
+  pour libérer de l'espace vertical ; lorsqu'il défile vers le haut, ré-afficher la barre.
+
+  Principales variables :
+    - lastScrollTop : conserve la position verticale du dernier événement scroll (nombre)
+    - scrollTimer : identifiant du timer (utilisé pour détecter l'arrêt du scroll)
+    - navbar : référence à l'élément <header> qui contient la barre de navigation
+
+  Logique :
+    - on compare la position courante du scroll (scrollTop) à la précédente (lastScrollTop)
+    - si scrollTop > lastScrollTop && scrollTop > 100 => on a scrollé vers le bas suffisamment : on cache la navbar
+    - si scrollTop < lastScrollTop => on a scrollé vers le haut : on affiche la navbar
+    - on utilise setTimeout pour détecter l'arrêt du scroll et forcer l'affichage après 150ms
+
+  Contraintes et points importants :
+    - navbar doit exister dans le DOM (dans notre page il y a bien un <header>), sinon querySelector renverra null
+    - la logique utilise une valeur arbitraire (100px) pour éviter de cacher la navbar sur un court scroll
+    - on peut ajuster 150ms (délai après arrêt) et 100 (seuil) selon l'UX désirée
+*/
+
+// position du scroll au précédent événement (initialisée à 0)
+let lastScrollTop = 0;
+
+// identifiant du timer qui permet de détecter quand le scroll s'arrête
+let scrollTimer;
+
+// référence de la navbar (header)
+const navbar = document.querySelector('header');
+
+// écouteur d'événement sur le scroll
+window.addEventListener('scroll', function() {
+    // lecture de la position de scroll actuelle, compatible navigateurs
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Si on scrolle vers le bas (scrollTop > lastScrollTop) et qu'on a dépassé 100px,
+    // alors on cache la navbar en ajoutant la classe .navbar-hidden
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        navbar.classList.add('navbar-hidden');
+        navbar.classList.remove('navbar-visible');
+    } else if (scrollTop < lastScrollTop) {
+        // Si on scrolle vers le haut, on montre la navbar
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }
+
+    // clearTimeout sert à réinitialiser le timer à chaque pixel de scroll :
+    // on veut détecter l'arrêt du scroll (quand l'utilisateur a fini de défiler)
+    clearTimeout(scrollTimer);
+
+    // après 150ms sans mouvement, on considère que le scroll est arrêté -> on affiche la navbar
+    scrollTimer = setTimeout(function() {
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }, 150);
+
+    // mise à jour de la position précédente pour la prochaine comparaison
+    lastScrollTop = scrollTop;
+});
+
+// À la charge de la page, s'assurer que la navbar est affichée
+window.addEventListener('load', function() {
+    if (navbar) {
+      navbar.classList.add('navbar-visible');
+    }
+});
+</script>
 
 </body>
 </html>

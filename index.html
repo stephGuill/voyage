@@ -4,9 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoyagePassion - Votre agence de voyage</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
+<!--
+    Script : gestion du menu déroulant "Carnet de voyage".
+    Explication ligne par ligne (variables, fonctions, conditions, boucles, contraintes) :
+        - document.addEventListener('DOMContentLoaded', ...)
+                -> s'assure que le DOM est complètement chargé avant d'accéder aux éléments.
+        - var dropdown = document.querySelector('.dropdown')
+                -> sélectionne l'élément principal du dropdown; peut être null si la page n'en possède pas.
+        - check nulls (if (!dropdown) return)
+                -> contrainte importante pour éviter des erreurs JS si le header est absent.
+        - dropbtn, dropdownContent
+                -> sous-éléments du dropdown ; vérifier leur existence avant de les utiliser.
+        - openDropdown / closeDropdown (fonctions utilitaires)
+                -> encapsulent la logique d'ouverture/fermeture pour éviter la répétition.
+        - dropbtn.addEventListener('click', ...)
+                -> événement principal; e.preventDefault() évite le saut dû au lien '#'.
+                -> condition if (!isOpen) { open } else { close } : comportement toggle (condition simple vraie/fausse).
+        - document.addEventListener('click', ...)
+                -> détecte les clics hors du dropdown; utilise dropdown.contains(e.target) pour déterminer la portée.
+        - dropdownContent.querySelectorAll('a').forEach(...)
+                -> boucle implicite : on attache un listener à chaque lien pour fermer le menu après sélection.
+
+    Contraintes et bonnes pratiques :
+        - lecture de style.display lit le style inline uniquement; si vous voulez lire l'état calculé, préférez
+            window.getComputedStyle(dropdownContent).display, ou mieux : gérer l'état via des classes CSS (.open).
+        - le script évite de provoquer des erreurs si des éléments sont manquants (null-checks).
+-->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Récupération sécurisée des éléments (peut retourner null)
+    var dropdown = document.querySelector('.dropdown');
+
+    // Si aucun dropdown sur la page, on quitte proprement (aucune erreur lancer)
+    if (!dropdown) return; // CONTRAINTE : protège les pages sans menu déroulant
+
+    var dropbtn = dropdown.querySelector('.dropbtn');
+    var dropdownContent = dropdown.querySelector('.dropdown-content');
+
+    // Vérification supplémentaire : si une des parties manque, on n'attache pas d'écouteurs
+    if (!dropbtn || !dropdownContent) return;
+
+    // Fonction utilitaire : fermer le dropdown (réutilisable)
+    function closeDropdown() {
+        dropdownContent.style.display = 'none';
+        dropbtn.classList.remove('active');
+    }
+
+    // Fonction utilitaire : ouvrir le dropdown
+    function openDropdown() {
+        dropdownContent.style.display = 'block';
+        dropdownContent.style.animation = 'slideDown 0.3s ease';
+        dropbtn.classList.add('active');
+    }
+
+    // Toggle au clic : lecture de l'état actuel via style inline
+    dropbtn.addEventListener('click', function(e) {
+        // Empêche le comportement par défaut du lien (navigation vers '#')
+        e.preventDefault();
+
+        var isOpen = dropdownContent.style.display === 'block';
+        if (!isOpen) {
+            openDropdown();
+        } else {
+            closeDropdown();
+        }
+    });
+
+    // Fermer le menu si un clic se produit en dehors du dropdown
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+
+    // Fermer le menu après sélection d'une option
+    // querySelectorAll retourne une NodeList; forEach parcourt chaque élément (boucle)
+    dropdownContent.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            closeDropdown();
+            // Ne pas preventDefault : le lien doit naviguer normalement vers la page cible
+        });
+    });
+});
+</script>
 <body>
     <header>
         <div class="header-container">
@@ -20,10 +104,15 @@
                     <li><a href="circuits.html">Circuits</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="apropos.html">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Carnet de voyage <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="souvenirs-japon.html">🌸 Souvenirs du Japon</a>
+                            <a href="souvenirs-kenya.html">🦁 Souvenirs du Kenya</a>
+                            <a href="souvenirs-maldives.html">🏝️ Souvenirs des Maldives</a>
+                        </div>
+                    </li>
                     <li><a href="contact.html">Contact</a></li>
-                    <!-- <li><a href="Japon.html">Asie</a></li>
-                    <li><a href="Maldives.html">Europe</a></li>
-                    <li><a href="Kenya.html">Afrique</a></li> -->
                 </ul>
             </nav>
         </div>
@@ -177,6 +266,69 @@
             <p>📞 01 23 45 67 89 | ✉️ contact@voyagepassion.fr</p>
         </div>
         </footer>
+
+<script>
+/*
+    Script : masquer/afficher la barre de navigation lors du scroll.
+
+    Description ligne par ligne / concepts :
+        - lastScrollTop : conserve la position verticale précédente du scroll (variable d'état)
+        - scrollTimer : identifiant du timeout utilisé pour le debounce (detection de l'arrêt du scroll)
+        - navbar : élément DOM <header> sur lequel on ajoute/retire les classes CSS
+
+    Logique :
+        - si l'utilisateur scrolle vers le bas (scrollTop > lastScrollTop) et dépasse 100px,
+            on cache la navbar pour maximiser l'affichage du contenu.
+        - si l'utilisateur scrolle vers le haut, on affiche la navbar.
+        - un timeout (debounce) permet d'afficher la navbar quelques ms après l'arrêt du scroll.
+
+    Contraintes :
+        - vérifier que navbar existe avant de manipuler ses classes pour éviter des erreurs JS
+        - choisir un seuil (100px) pour ne pas déclencher le masquage sur de petits mouvements
+*/
+
+let lastScrollTop = 0;
+let scrollTimer;
+
+// Récupère la navbar ; peut être null si le DOM a été modifié
+const navbar = document.querySelector('header');
+
+// Si la navbar n'existe pas, ne rien faire (sécurité)
+if (navbar) {
+    window.addEventListener('scroll', function() {
+        // Position verticale actuelle (cross-browser)
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Condition : scroll vers le bas et au-delà d'un seuil -> cacher la navbar
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            navbar.classList.add('navbar-hidden');
+            navbar.classList.remove('navbar-visible');
+        } else if (scrollTop < lastScrollTop) {
+            // Scroll vers le haut -> afficher la navbar
+            navbar.classList.add('navbar-visible');
+            navbar.classList.remove('navbar-hidden');
+        }
+
+        // Debounce : si aucun scroll supplémentaire n'arrive pendant 150ms, afficher la navbar
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function() {
+            navbar.classList.add('navbar-visible');
+            navbar.classList.remove('navbar-hidden');
+        }, 150);
+
+        // Mise à jour de la position précédente pour la prochaine itération
+        lastScrollTop = scrollTop;
+    });
+
+    // S'assurer que la navbar est visible au chargement de la page
+    window.addEventListener('load', function() {
+        navbar.classList.add('navbar-visible');
+    });
+} else {
+    // Optionnel : log pour le debug si nécessaire
+    // console && console.warn && console.warn('Navbar non trouvée: script de scroll désactivé');
+}
+</script>
 
 </body>
 </html>

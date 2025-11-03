@@ -1,0 +1,889 @@
+/* ===== CSS SPÉCIFIQUE POUR LA PAGE SOUVENIRS DU KENYA ===== */
+/* Ce fichier contient tous les styles spécifiques à la page des souvenirs du Kenya
+ * Il utilise un système de variables CSS pour la cohérence des couleurs
+ * et inclut des animations pour une expérience utilisateur immersive
+ */
+
+/* Import des polices Google Fonts:
+ * - Ubuntu: Police principale pour le texte (poids: 300, 400, 500, 700)
+ * - Kalam: Police décorative pour les accents africains (poids: 400, 700)
+ */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Kalam:wght@400;700&display=swap');
+
+/* Définition des variables CSS pour le thème Kenya/Afrique
+ * Ces couleurs sont inspirées des paysages et de la culture kenyane :
+ * - Oranges et rouges : rappellent les couchers de soleil africains
+ * - Marrons et beiges : évoquent la savane
+ * - Vert : représente la végétation
+ */
+:root {
+    /* Couleurs primaires */
+    --kenya-orange: #ff6b35; /* Orange vif pour les accents et points focaux */
+    --kenya-red: #d63031;    /* Rouge terre pour les éléments importants */
+    --kenya-gold: #f39c12;   /* Or pour les éléments prestigieux et décoratifs */
+    --kenya-brown: #8b4513;  /* Marron terre pour les éléments naturels */
+    --kenya-green: #27ae60;  /* Vert pour la végétation et la nature */
+    --kenya-beige: #f4a460;  /* Beige pour les fonds neutres */
+    --kenya-dark: #2c1810;   /* Marron foncé pour le texte et les ombres */
+    
+    /* Dégradés et effets */
+    --kenya-gradient: linear-gradient(135deg, #ff6b35 0%, #f39c12 50%, #d63031 100%);  /* Dégradé principal */
+    --shadow-kenya: 0 8px 32px rgba(255, 107, 53, 0.15);                               /* Ombre douce */
+    --savane-gradient: linear-gradient(135deg, #f4a460 0%, #ff6b35 50%, #8b4513 100%); /* Dégradé savane */
+}
+
+/* Container principal de la page
+ * - Utilise la police Ubuntu pour une meilleure lisibilité
+ * - Line-height augmenté pour améliorer la lecture
+ */
+.kenya-page {
+    font-family: 'Ubuntu', sans-serif; /* Police principale */
+    line-height: 1.7;                  /* Espacement des lignes optimal */
+}
+
+/* ===== HERO SECTION KENYA =====
+ * Section d'en-tête avec image de fond et animations
+ * Crée une première impression immersive avec des effets visuels
+ */
+/* Section héro avec image de fond de la savane */
+.kenya-hero {
+    position: relative;                /* Pour le positionnement des éléments enfants */
+    height: 100vh;                     /* Hauteur plein écran */
+    background: linear-gradient(rgba(44, 24, 16, 0.3), rgba(255, 107, 53, 0.2)), /* Superposition de dégradés pour l'ambiance */
+                url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+    display: flex;                     /* Centrage vertical et horizontal du contenu */
+    align-items: center;               /* Centrage vertical */
+    justify-content: center;           /* Centrage horizontal */
+    overflow: hidden;                  /* Masque les débordements des animations */
+    animation: savaneBreathe 25s ease-in-out infinite; /* Animation de "respiration" de l'image */
+}
+
+/* Superposition avec effet de chaleur de la savane
+ * Crée un effet visuel de chaleur ondulante typique de la savane
+ */
+.savane-overlay {
+    position: absolute;        /* Couvre toute la zone du héro */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dégradé radial pour simuler la chaleur */
+    background: radial-gradient(ellipse at center, rgba(244, 164, 96, 0.1) 0%, transparent 70%);
+    animation: heatWave 15s ease-in-out infinite; /* Animation d'ondulation */
+}
+
+/* Silhouettes d'animaux en SVG
+ * Crée une bande décorative d'animaux africains en bas de la section
+ * Les silhouettes sont animées pour donner l'impression d'une migration
+ */
+.animals-silhouettes {
+    position: absolute;     /* Positionnement en bas de la section héro */
+    bottom: 10%;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    /* SVG inline pour les silhouettes d'animaux */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><g fill="rgba(139, 69, 19, 0.3)"><path d="M50,80 C60,60 80,70 100,80 L100,120 L50,120 Z"/><path d="M200,85 C220,65 240,75 260,85 L260,120 L200,120 Z"/><path d="M400,75 C430,55 460,65 490,75 L490,120 L400,120 Z"/><path d="M700,80 C730,60 760,70 790,80 L790,120 L700,120 Z"/><path d="M950,85 C980,65 1010,75 1040,85 L1040,120 L950,120 Z"/></g></svg>');
+    background-repeat: repeat-x;      /* Répétition horizontale */
+    background-size: 400px 120px;    /* Taille des silhouettes */
+    animation: animalsMarch 30s linear infinite; /* Animation de défilement */
+}
+
+/* Animations pour la section héro */
+
+/* Animation de "respiration" de l'image de fond
+ * Crée un effet subtil de zoom avant/arrière */
+@keyframes savaneBreathe {
+    0%, 100% { transform: scale(1); }    /* Taille normale */
+    50% { transform: scale(1.03); }      /* Léger zoom */
+}
+
+/* Animation de l'effet de chaleur
+ * Simule les ondulations de l'air chaud */
+@keyframes heatWave {
+    0%, 100% { 
+        transform: skewX(0deg);   /* Position normale */
+        opacity: 0.8;            /* Semi-transparent */
+    }
+    50% { 
+        transform: skewX(1deg);   /* Légère inclinaison */
+        opacity: 1;              /* Plus visible */
+    }
+}
+
+/* Animation du défilement des silhouettes d'animaux
+ * Crée un mouvement continu de gauche à droite */
+@keyframes animalsMarch {
+    0% { transform: translateX(-400px); }     /* Départ hors écran à gauche */
+    100% { transform: translateX(100vw); }    /* Arrivée hors écran à droite */
+}
+
+/* Structure du titre principal
+ * Comprend un titre en Swahili et sa traduction en français */
+.kenya-title {
+    text-align: center;      /* Centrage horizontal */
+    margin-bottom: 2rem;     /* Espacement avec le contenu suivant */
+}
+
+/* Titre en Swahili
+ * Utilise une police décorative et un effet de lueur */
+.swahili {
+    display: block;          /* Placement sur une ligne séparée */
+    font-size: 3rem;        /* Grande taille pour l'impact */
+    color: var(--kenya-gold);/* Couleur dorée thématique */
+    font-weight: 300;       /* Police fine pour l'élégance */
+    margin-bottom: 0.5rem;  /* Espacement avec le titre français */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Ombre portée */
+    animation: sunGlow 4s ease-in-out infinite alternate; /* Animation de lueur */
+    font-family: 'Kalam', cursive; /* Police manuscrite africaine */
+}
+
+/* Titre en français
+ * Style plus sobre et lisible */
+.french {
+    display: block;         /* Placement sur une ligne séparée */
+    font-size: 2.5rem;     /* Taille légèrement plus petite */
+    color: white;          /* Texte blanc pour la lisibilité */
+    font-weight: 700;      /* Police grasse pour l'emphase */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Ombre plus prononcée */
+}
+
+/* Animation de lueur pour le titre Swahili
+ * Simule la lumière du soleil africain */
+@keyframes sunGlow {
+    0% { 
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5),    /* Ombre de base */
+                     0 0 15px rgba(243, 156, 18, 0.3);/* Lueur faible */
+    }
+    100% { 
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5),    /* Ombre de base */
+                     0 0 30px rgba(243, 156, 18, 0.7);/* Lueur forte */
+    }
+}
+
+/* Sous-titre de la section héro
+ * Texte descriptif en dessous du titre principal */
+.hero-subtitle {
+    font-size: 1.3rem;                 /* Taille lisible */
+    color: var(--kenya-beige);         /* Couleur claire thématique */
+    text-align: center;                /* Alignement centré */
+    max-width: 700px;                  /* Largeur limitée pour la lisibilité */
+    margin: 0 auto;                    /* Centrage horizontal */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8); /* Ombre pour la lisibilité */
+}
+
+/* Séparateur décoratif en forme d'acacia
+ * Crée une transition visuelle entre les sections */
+.acacia-divider {
+    position: absolute;     /* Positionnement en bas de la section */
+    bottom: 0;
+    left: 0;
+    width: 100%;           /* Largeur pleine */
+    height: 80px;          /* Hauteur fixe */
+    overflow: hidden;      /* Masque les débordements */
+}
+
+/* SVG de l'acacia
+ * Contient le dessin stylisé de l'arbre */
+.acacia-divider svg {
+    width: 100%;          /* Occupe tout l'espace disponible */
+    height: 100%;
+}
+
+/* ===== SECTIONS PRINCIPALES =====
+ * Styles communs et spécifiques pour les différentes sections */
+
+/* Section d'introduction
+ * Présente le contexte du voyage au Kenya */
+.intro-section {
+    padding: 4rem 0;                      /* Espacement vertical */
+    background: var(--savane-gradient);    /* Dégradé thématique */
+    position: relative;                    /* Pour le positionnement du motif */
+}
+
+/* Motif de points en arrière-plan
+ * Crée une texture subtile rappelant les étoiles africaines */
+.intro-section::before {
+    content: '';
+    position: absolute;                    /* Couvre toute la section */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* SVG inline avec motif de points */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="15" cy="25" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="85" cy="45" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="35" cy="75" r="1.2" fill="rgba(255,255,255,0.1)"/><circle cx="65" cy="15" r="0.8" fill="rgba(255,255,255,0.1)"/></svg>');
+    background-size: 80px 80px;           /* Taille du motif répété */
+}
+
+/* Conteneur du contenu d'introduction
+ * Assure la lisibilité sur le motif */
+.intro-content {
+    position: relative;    /* Pour passer au-dessus du motif */
+    z-index: 2;           /* Niveau de superposition */
+    text-align: center;   /* Alignement du texte */
+}
+
+/* Titre de section avec style Kenya
+ * Utilisé pour tous les titres principaux des sections */
+.section-title-kenya {
+    font-size: 2.5rem;                /* Grande taille pour l'impact */
+    color: var(--kenya-dark);         /* Couleur sombre pour le contraste */
+    text-align: center;               /* Centrage horizontal */
+    margin-bottom: 2rem;              /* Espacement avec le contenu */
+    font-weight: 600;                 /* Police semi-grasse */
+    position: relative;               /* Pour les décorations */
+}
+
+/* Ornement décoratif du titre
+ * Emoji ou icône animée à côté du titre */
+.title-ornament {
+    font-size: 2.5rem;                /* Taille égale au titre */
+    margin: 0 1rem;                   /* Espacement horizontal */
+    animation: roar 3s ease-in-out infinite; /* Animation de rugissement */
+}
+
+/* Animation de l'ornement
+ * Simule un mouvement de rugissement de lion */
+@keyframes roar {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);     /* Position normale */
+    }
+    50% { 
+        transform: scale(1.1) rotate(5deg);   /* Légère rotation et agrandissement */
+    }
+}
+
+/* Texte d'introduction
+ * Paragraphe descriptif principal */
+.intro-text {
+    font-size: 1.2rem;                /* Taille confortable pour la lecture */
+    color: var(--kenya-dark);         /* Couleur sombre pour la lisibilité */
+    max-width: 850px;                 /* Largeur limitée pour la lecture */
+    margin: 0 auto;                   /* Centrage horizontal */
+    line-height: 1.8;                 /* Espacement des lignes aéré */
+    font-weight: 400;                 /* Épaisseur normale */
+}
+
+/* ===== GALERIE DE TÉMOIGNAGES =====
+ * Section présentant les expériences des voyageurs */
+.testimonials-gallery {
+    padding: 4rem 0;              /* Espacement vertical */
+    background: #f8f5f0;          /* Fond clair légèrement beige */
+}
+
+/* Carte de témoignage
+ * Composant principal affichant un témoignage individuel */
+.testimonial-card {
+    background: white;            /* Fond blanc pour la lisibilité */
+    border-radius: 20px;         /* Coins arrondis */
+    overflow: hidden;            /* Masque les débordements */
+    margin-bottom: 3rem;         /* Espacement entre les cartes */
+    box-shadow: var(--shadow-kenya); /* Ombre portée thématique */
+    transition: all 0.3s ease;   /* Animation fluide */
+    border: 3px solid transparent; /* Bordure pour l'effet de survol */
+    background-clip: padding-box;  /* Empêche le débordement du gradient */
+    position: relative;           /* Pour l'effet de bordure au survol */
+}
+
+/* Effet de bordure en dégradé au survol
+ * Crée un contour animé lors de l'interaction */
+.testimonial-card::before {
+    content: '';
+    position: absolute;           /* Positionnement absolu */
+    top: -3px;                   /* Compensation de la bordure */
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: var(--kenya-gradient); /* Dégradé thématique */
+    border-radius: 23px;         /* Coins arrondis légèrement plus grands */
+    z-index: -1;                 /* Placement en arrière-plan */
+    opacity: 0;                  /* Invisible par défaut */
+    transition: opacity 0.3s ease; /* Animation de l'apparition */
+}
+
+/* États de survol de la carte */
+.testimonial-card:hover::before {
+    opacity: 1;                  /* Affiche la bordure en dégradé */
+}
+
+.testimonial-card:hover {
+    transform: translateY(-15px); /* Élévation de la carte */
+    box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3); /* Ombre plus prononcée */
+}
+
+/* En-tête de carte de témoignage
+ * Contient les informations sur le voyageur */
+.card-header {
+    padding: 2rem;                    /* Espacement interne */
+    background: var(--kenya-gradient); /* Dégradé thématique */
+    color: white;                     /* Texte blanc pour la lisibilité */
+    position: relative;               /* Pour l'icône décorative */
+}
+
+/* Icône décorative du globe
+ * Ajoute un élément visuel en arrière-plan */
+.card-header::after {
+    content: '🌍';                    /* Emoji du globe */
+    position: absolute;               /* Positionnement absolu */
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;                 /* Grande taille */
+    opacity: 0.3;                    /* Semi-transparent */
+}
+
+/* Conteneur des informations du voyageur
+ * Organisation horizontale des éléments */
+.traveler-info {
+    display: flex;                   /* Layout flexible */
+    align-items: center;             /* Alignement vertical centré */
+    gap: 1.5rem;                    /* Espacement entre les éléments */
+}
+
+/* Photo de profil du voyageur
+ * Style circulaire avec bordure et ombre */
+.traveler-photo {
+    width: 80px;                    /* Dimensions fixes */
+    height: 80px;
+    border-radius: 50%;             /* Forme circulaire */
+    object-fit: cover;              /* Ajustement de l'image */
+    border: 4px solid white;        /* Bordure blanche */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Ombre portée */
+}
+
+/* Détails du voyageur (nom) */
+.traveler-details h3 {
+    margin: 0 0 0.5rem 0;          /* Espacement minimal */
+    font-size: 1.5rem;             /* Taille importante */
+    font-weight: 600;              /* Police semi-grasse */
+}
+
+/* Date du voyage */
+.travel-date {
+    margin: 0 0 0.5rem 0;          /* Espacement minimal */
+    opacity: 0.9;                  /* Légèrement atténué */
+    font-size: 1rem;               /* Taille standard */
+}
+
+/* Note d'évaluation
+ * Affichée en couleur dorée avec effet d'ombre */
+.rating {
+    color: var(--kenya-gold);      /* Couleur dorée thématique */
+    font-size: 1.2rem;             /* Taille légèrement plus grande */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Ombre subtile */
+}
+
+/* Contenu principal du souvenir
+ * Section contenant les photos et le récit */
+.memory-content {
+    padding: 2rem;                /* Espacement interne uniforme */
+}
+
+/* Grille de photos
+ * Organisation des photos en disposition asymétrique */
+.photos-grid {
+    display: grid;                /* Layout en grille */
+    grid-template-columns: 2fr 1fr 1fr; /* Colonne principale plus large */
+    gap: 1rem;                    /* Espacement entre les photos */
+    margin-bottom: 2rem;          /* Espacement avec le texte */
+    border-radius: 15px;          /* Coins arrondis */
+    overflow: hidden;             /* Masque les débordements */
+}
+
+/* Style commun pour toutes les photos
+ * Inclut des effets interactifs */
+.memory-photo {
+    width: 100%;                 /* Largeur complète */
+    height: 200px;               /* Hauteur fixe */
+    object-fit: cover;           /* Ajustement de l'image */
+    transition: all 0.3s ease;   /* Animation fluide */
+    cursor: pointer;             /* Indique l'interactivité */
+    border-radius: 8px;         /* Coins légèrement arrondis */
+    filter: sepia(10%);         /* Léger effet sépia pour l'ambiance */
+}
+
+/* Photo principale
+ * Plus grande et occupe deux rangées */
+.main-photo {
+    height: 400px;              /* Double hauteur */
+    grid-row: span 2;           /* Occupe deux rangées */
+}
+
+/* Effet de survol des photos
+ * Animation et amélioration visuelle */
+.memory-photo:hover {
+    transform: scale(1.05);     /* Léger zoom */
+    filter: sepia(0%);          /* Suppression de l'effet sépia */
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3); /* Ombre portée */
+}
+
+/* Contenu textuel du souvenir
+ * Mise en forme du récit et des citations */
+
+/* Titre du récit */
+.story-content h4 {
+    font-size: 1.4rem;              /* Taille importante */
+    color: var(--kenya-red);        /* Couleur thématique */
+    margin-bottom: 1rem;            /* Espacement bas */
+    font-weight: 600;               /* Police semi-grasse */
+}
+
+/* Paragraphes du récit */
+.story-content p {
+    color: #555;                    /* Gris foncé pour la lisibilité */
+    line-height: 1.8;              /* Espacement des lignes aéré */
+    margin-bottom: 1.5rem;         /* Espacement entre paragraphes */
+    font-size: 1.1rem;             /* Taille confortable pour la lecture */
+}
+
+/* Citations mises en valeur
+ * Style distinctif avec dégradé et bordure */
+.story-content blockquote {
+    background: var(--kenya-gradient); /* Dégradé thématique */
+    color: white;                     /* Texte blanc */
+    padding: 1.5rem;                  /* Espacement interne */
+    border-radius: 15px;              /* Coins arrondis */
+    border-left: 5px solid var(--kenya-gold); /* Bordure décorative */
+    margin: 1.5rem 0;                 /* Espacement vertical */
+    font-style: italic;               /* Style italique */
+    font-size: 1.1rem;                /* Taille légèrement plus grande */
+    position: relative;                /* Pour le guillemet décoratif */
+}
+
+/* Guillemet décoratif des citations
+ * Ajoute un grand guillemet en arrière-plan */
+.story-content blockquote::before {
+    content: '"';                     /* Guillemet */
+    font-size: 4rem;                  /* Grande taille */
+    position: absolute;               /* Positionnement absolu */
+    top: -15px;                      /* Ajustement de la position */
+    left: 15px;
+    color: rgba(255,255,255,0.2);    /* Blanc semi-transparent */
+    font-family: 'Kalam', cursive;    /* Police décorative */
+}
+
+/* Section des points forts
+ * Affichage des tags représentant les moments clés */
+.highlights {
+    display: flex;           /* Layout flexible */
+    flex-wrap: wrap;        /* Passage à la ligne automatique */
+    gap: 0.5rem;           /* Espacement entre les tags */
+    margin-top: 1.5rem;    /* Espacement avec le contenu précédent */
+}
+
+/* Tags individuels des points forts
+ * Style des étiquettes avec effets interactifs */
+.highlight-tag {
+    background: var(--kenya-gradient); /* Dégradé thématique */
+    color: white;                     /* Texte blanc */
+    padding: 0.6rem 1.2rem;          /* Espacement interne */
+    border-radius: 25px;             /* Forme arrondie */
+    font-size: 0.9rem;               /* Taille réduite */
+    font-weight: 500;                /* Police medium */
+    transition: all 0.3s ease;       /* Animation fluide */
+    border: 2px solid transparent;   /* Bordure pour l'effet de survol */
+}
+
+/* Effet de survol des tags
+ * Animation de rotation et mise en valeur */
+.highlight-tag:hover {
+    transform: scale(1.1) rotate(2deg);  /* Agrandissement et rotation */
+    border-color: var(--kenya-gold);     /* Bordure dorée */
+}
+
+/* ===== SECTION STATISTIQUES =====
+ * Affichage des chiffres clés avec effets visuels */
+.stats-section {
+    padding: 4rem 0;                /* Espacement vertical */
+    background: var(--kenya-dark);  /* Fond sombre */
+    color: white;                   /* Texte blanc */
+    position: relative;             /* Pour l'effet d'étoiles */
+    overflow: hidden;               /* Masque les débordements */
+}
+
+/* Effet d'étoiles en arrière-plan
+ * Crée un motif animé rappelant le ciel nocturne africain */
+.stats-section::before {
+    content: '';
+    position: absolute;             /* Positionnement absolu */
+    top: -50%;                     /* Débordement pour la rotation */
+    left: -50%;
+    width: 200%;                   /* Taille étendue pour la rotation */
+    height: 200%;
+    /* Motif de points en dégradé radial */
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 1px, transparent 1px);
+    background-size: 60px 60px;    /* Taille du motif */
+    animation: starsSavane 80s linear infinite; /* Animation de rotation */
+}
+
+/* Animation de rotation des étoiles */
+@keyframes starsSavane {
+    0% { transform: rotate(0deg) scale(1); }         /* Position initiale */
+    100% { transform: rotate(360deg) scale(1.1); }   /* Rotation complète avec léger zoom */
+}
+
+/* Grille des statistiques
+ * Organisation responsive des éléments */
+.stats-grid {
+    display: grid;                 /* Layout en grille */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Colonnes responsives */
+    gap: 2rem;                    /* Espacement entre les éléments */
+    margin-top: 3rem;             /* Espacement avec le titre */
+    position: relative;           /* Pour la superposition */
+    z-index: 2;                  /* Au-dessus de l'effet d'étoiles */
+}
+
+/* Élément individuel de statistique
+ * Carte avec effets de glassmorphisme */
+.stat-item {
+    text-align: center;          /* Centrage du contenu */
+    padding: 2.5rem;             /* Espacement interne */
+    background: rgba(255,107,53,0.1); /* Fond semi-transparent */
+    border-radius: 20px;         /* Coins arrondis */
+    backdrop-filter: blur(10px); /* Effet de flou derrière */
+    border: 2px solid rgba(243, 156, 18, 0.3); /* Bordure dorée */
+    transition: all 0.3s ease;   /* Animation fluide */
+    position: relative;          /* Pour l'effet de bordure */
+}
+
+/* Effet de bordure en dégradé au survol */
+.stat-item::before {
+    content: '';
+    position: absolute;          /* Positionnement absolu */
+    top: -2px;                  /* Débordement pour la bordure */
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--kenya-gradient); /* Dégradé thématique */
+    border-radius: 22px;        /* Coins arrondis */
+    z-index: -1;                /* En arrière-plan */
+    opacity: 0;                 /* Invisible par défaut */
+    transition: opacity 0.3s ease; /* Animation d'apparition */
+}
+
+/* Effets de survol */
+.stat-item:hover {
+    transform: translateY(-10px); /* Élévation de la carte */
+}
+
+.stat-item:hover::before {
+    opacity: 1;                  /* Affichage de la bordure en dégradé */
+}
+
+/* Nombre de la statistique
+ * Style distinctif pour mettre en valeur le chiffre */
+.stat-number {
+    font-size: 3.2rem;          /* Grande taille */
+    font-weight: 700;           /* Police grasse */
+    color: var(--kenya-orange); /* Couleur thématique */
+    margin-bottom: 0.5rem;      /* Espacement avec le label */
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.6); /* Effet de lueur */
+}
+
+/* Label de la statistique */
+.stat-label {
+    font-size: 1.1rem;          /* Taille lisible */
+    opacity: 0.9;               /* Légèrement atténué */
+}
+
+/* ===== SECTION BIG FIVE =====
+ * Présentation des cinq grands animaux emblématiques d'Afrique */
+.big-five-section {
+    padding: 4rem 0;             /* Espacement vertical */
+    background: linear-gradient(135deg, #f4a460 0%, #ff6b35 100%); /* Dégradé savane */
+}
+
+/* Grille d'affichage des animaux
+ * Organisation responsive des cartes */
+.big-five-grid {
+    display: grid;               /* Layout en grille */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Colonnes responsives */
+    gap: 2rem;                  /* Espacement entre les cartes */
+    margin-top: 3rem;           /* Espacement avec le titre */
+}
+
+/* Carte individuelle d'animal
+ * Présentation d'un animal du Big Five */
+.animal-card {
+    background: white;          /* Fond blanc */
+    padding: 2rem;             /* Espacement interne */
+    border-radius: 20px;       /* Coins arrondis */
+    text-align: center;        /* Centrage du contenu */
+    box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2); /* Ombre portée */
+    transition: all 0.3s ease; /* Animation fluide */
+    border: 3px solid transparent; /* Bordure pour l'effet de survol */
+}
+
+/* Effet de survol de la carte
+ * Animation et mise en valeur visuelle */
+.animal-card:hover {
+    transform: translateY(-10px) scale(1.02); /* Élévation et léger zoom */
+    border-color: var(--kenya-gold);         /* Bordure dorée */
+    box-shadow: 0 20px 40px rgba(139, 69, 19, 0.3); /* Ombre plus prononcée */
+}
+
+/* Icône de l'animal
+ * Emoji ou icône représentant l'animal */
+.animal-icon {
+    font-size: 4rem;           /* Grande taille */
+    margin-bottom: 1rem;       /* Espacement avec le titre */
+    animation: animalBounce 2s ease-in-out infinite; /* Animation de rebond */
+}
+
+/* Animation de rebond de l'icône
+ * Donne vie à l'icône de l'animal */
+@keyframes animalBounce {
+    0%, 100% { transform: translateY(0); }    /* Position normale */
+    50% { transform: translateY(-8px); }      /* Rebond vers le haut */
+}
+
+/* Nom de l'animal */
+.animal-card h3 {
+    font-size: 1.5rem;         /* Taille importante */
+    color: var(--kenya-dark);  /* Couleur sombre */
+    margin-bottom: 1rem;       /* Espacement avec la description */
+    font-weight: 600;          /* Police semi-grasse */
+}
+
+/* Description de l'animal */
+.animal-card p {
+    color: #666;              /* Gris pour la lisibilité */
+    line-height: 1.6;        /* Espacement des lignes */
+}
+
+/* ===== SECTION CALL TO ACTION =====
+ * Section finale incitant à l'action avec boutons */
+.cta-section {
+    padding: 4rem 0;                /* Espacement vertical */
+    background: var(--kenya-gradient); /* Dégradé thématique */
+    color: white;                   /* Texte blanc */
+    text-align: center;             /* Centrage du contenu */
+    position: relative;             /* Pour le motif décoratif */
+}
+
+/* Motif décoratif en arrière-plan
+ * Ajoute une texture subtile de points */
+.cta-section::before {
+    content: '';
+    position: absolute;            /* Couvre toute la section */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* SVG inline avec motif de points */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="150" cy="100" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="100" cy="150" r="2.5" fill="rgba(255,255,255,0.1)"/></svg>');
+    background-size: 200px 200px; /* Taille du motif */
+}
+
+/* Conteneur du contenu CTA
+ * Assure la lisibilité sur le motif */
+.cta-content {
+    position: relative;           /* Pour la superposition */
+    z-index: 2;                  /* Au-dessus du motif */
+}
+
+/* Titre du CTA */
+.cta-content h2 {
+    font-size: 2.5rem;           /* Grande taille */
+    margin-bottom: 1rem;         /* Espacement avec le texte */
+    font-weight: 600;            /* Police semi-grasse */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Ombre pour la lisibilité */
+}
+
+/* Texte descriptif du CTA */
+.cta-content p {
+    font-size: 1.2rem;          /* Taille confortable */
+    margin-bottom: 2.5rem;      /* Espacement avec les boutons */
+    opacity: 0.95;              /* Légère transparence */
+    max-width: 650px;           /* Largeur limitée */
+    margin-left: auto;          /* Centrage horizontal */
+    margin-right: auto;
+}
+
+/* Conteneur des boutons
+ * Organisation horizontale avec flexbox */
+.cta-buttons {
+    display: flex;              /* Layout flexible */
+    gap: 1.5rem;               /* Espacement entre les boutons */
+    justify-content: center;    /* Centrage horizontal */
+    flex-wrap: wrap;           /* Passage à la ligne si nécessaire */
+}
+
+/* Styles communs aux boutons
+ * Base pour les boutons primaire et secondaire */
+.btn-primary, .btn-secondary {
+    padding: 1.2rem 2.5rem;    /* Espacement interne généreux */
+    border-radius: 35px;       /* Coins très arrondis */
+    text-decoration: none;     /* Pas de soulignement */
+    font-weight: 600;          /* Police semi-grasse */
+    font-size: 1.1rem;         /* Taille confortable */
+    transition: all 0.3s ease; /* Animation fluide */
+    border: 3px solid white;   /* Bordure blanche */
+    position: relative;        /* Pour l'effet de survol */
+    overflow: hidden;          /* Masque les débordements */
+}
+
+/* Bouton principal
+ * Style distinctif avec fond blanc */
+.btn-primary {
+    background: white;         /* Fond blanc */
+    color: var(--kenya-red);   /* Texte rouge thématique */
+}
+
+/* Effet de survol du bouton principal */
+.btn-primary::before {
+    content: '';
+    position: absolute;        /* Positionnement absolu */
+    top: 0;
+    left: -100%;              /* Hors écran initialement */
+    width: 100%;
+    height: 100%;
+    background: var(--kenya-dark); /* Couleur de l'effet */
+    transition: left 0.3s ease;   /* Animation de glissement */
+    z-index: -1;                  /* En arrière-plan */
+}
+
+.btn-primary:hover::before {
+    left: 0;                     /* Glisse vers la droite */
+}
+
+.btn-primary:hover {
+    color: white;                /* Texte blanc au survol */
+    transform: translateY(-3px); /* Légère élévation */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3); /* Ombre portée */
+}
+
+/* Bouton secondaire
+ * Style alternatif transparent */
+.btn-secondary {
+    background: transparent;    /* Fond transparent */
+    color: white;              /* Texte blanc */
+}
+
+/* Effet de survol du bouton secondaire */
+.btn-secondary::before {
+    content: '';
+    position: absolute;        /* Positionnement absolu */
+    top: 0;
+    left: -100%;              /* Hors écran initialement */
+    width: 100%;
+    height: 100%;
+    background: white;         /* Fond blanc pour l'effet */
+    transition: left 0.3s ease; /* Animation de glissement */
+    z-index: -1;               /* En arrière-plan */
+}
+
+.btn-secondary:hover::before {
+    left: 0;                   /* Glisse vers la droite */
+}
+
+.btn-secondary:hover {
+    color: var(--kenya-red);   /* Texte rouge au survol */
+    transform: translateY(-3px); /* Légère élévation */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3); /* Ombre portée */
+}
+
+/* ===== STYLES RESPONSIVES =====
+ * Adaptations pour différentes tailles d'écran */
+
+/* Tablettes et écrans moyens
+ * Adaptations pour écrans jusqu'à 768px */
+@media (max-width: 768px) {
+    /* Ajustements des titres */
+    .swahili {
+        font-size: 2.2rem;      /* Réduction de la taille */
+    }
+    
+    .french {
+        font-size: 1.8rem;      /* Réduction de la taille */
+    }
+    
+    /* Réorganisation de la grille de photos
+     * Passage en colonne unique */
+    .photos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Ajustement des photos */
+    .main-photo {
+        height: 250px;          /* Hauteur réduite */
+        grid-row: span 1;       /* N'occupe plus deux rangées */
+    }
+    
+    .memory-photo {
+        height: 200px;          /* Hauteur uniforme */
+    }
+    
+    /* Réorganisation des informations voyageur
+     * Passage en colonne */
+    .traveler-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    /* Ajustement des grilles */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+        gap: 1rem;                            /* Espacement réduit */
+    }
+    
+    .big-five-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+        gap: 1rem;                            /* Espacement réduit */
+    }
+    
+    /* Réduction des statistiques */
+    .stat-number {
+        font-size: 2.5rem;      /* Taille plus petite */
+    }
+    
+    /* Réorganisation des boutons CTA
+     * Passage en colonne */
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Ajustement des boutons */
+    .btn-primary, .btn-secondary {
+        width: 100%;            /* Largeur complète */
+        max-width: 320px;       /* Largeur maximale */
+    }
+}
+
+/* Mobiles et petits écrans
+ * Adaptations pour écrans jusqu'à 480px */
+@media (max-width: 480px) {
+    /* Réduction de la hauteur du hero */
+    .kenya-hero {
+        height: 70vh;           /* Hauteur réduite */
+    }
+    
+    /* Ajustement des titres */
+    .section-title-kenya {
+        font-size: 1.8rem;      /* Taille plus petite */
+    }
+    
+    /* Espacement des cartes */
+    .testimonial-card {
+        margin-bottom: 2rem;    /* Espacement réduit */
+    }
+    
+    /* Réduction des paddings */
+    .card-header, .memory-content {
+        padding: 1.5rem;        /* Espacement interne réduit */
+    }
+    
+    /* Passage en colonne unique */
+    .stats-grid, .big-five-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Réduction des icônes */
+    .animal-icon {
+        font-size: 3rem;        /* Taille plus petite */
+    }
+    
+    .title-ornament {
+        font-size: 2rem;        /* Taille plus petite */
+    }
+}

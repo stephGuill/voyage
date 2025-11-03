@@ -4,9 +4,86 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contact - VoyagePassion</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
      </head>
+         <script>
+/*
+    Dropdown script (explications détaillées) - ligne par ligne en commentaire
+
+    Rôle : gérer l'ouverture/fermeture du menu "Carnet de voyage" au clic
+    (utile sur mobile où :hover n'est pas fiable)
+
+    Résumé technique :
+        - on attend l'événement DOMContentLoaded pour s'assurer que le DOM est prêt
+        - on récupère les éléments : .dropdown (parent), .dropbtn (le lien), .dropdown-content (le sous-menu)
+        - on ajoute un écouteur click sur le bouton pour basculer l'affichage
+        - on ajoute un écouteur click global pour fermer le menu lorsque l'utilisateur clique en dehors
+        - on ferme aussi le menu lorsque l'utilisateur clique sur une option du sous-menu
+
+    Contraintes :
+        - le script suppose que .dropdown existe sur la page. Si ce n'est pas le cas, on sort proprement.
+        - l'utilisation de styles inline (dropdownContent.style.display) est simple mais moins propre que
+            l'ajout/retrait d'une classe CSS (ex : .open). On pourrait refactorer pour basculer une classe.
+*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    // -> sélection de l'élément contenant le dropdown (attend un <li class="dropdown">)
+    var dropdown = document.querySelector('.dropdown');
+
+    // garde de sécurité : si aucun dropdown n'existe, on abandonne l'exécution
+    if (!dropdown) return; // évite les erreurs plus bas (ex: cannot read property 'querySelector' of null)
+
+    // -> sélection du bouton clicable à l'intérieur du dropdown
+    var dropbtn = dropdown.querySelector('.dropbtn');
+    // -> sélection du conteneur des liens du menu
+    var dropdownContent = dropdown.querySelector('.dropdown-content');
+
+    // encore une garde : si la structure n'est pas complète, on sort
+    if (!dropbtn || !dropdownContent) return;
+
+    // Ajout d'un écouteur sur le bouton .dropbtn
+    // e : l'objet Event correspondant au clic
+    dropbtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // isOpen vérifie si le style inline display est déjà 'block'
+        // Note : cela vérifie uniquement le style inline, pas la visibilité calculée par CSS
+        var isOpen = dropdownContent.style.display === 'block';
+
+        if (!isOpen) {
+            // Si le menu est fermé, on l'ouvre : display block + animation
+            dropdownContent.style.display = 'block';
+            dropdownContent.style.animation = 'slideDown 0.3s ease';
+            // On ajoute une classe sur le bouton pour permettre un style visuel (ex : rotation icône)
+            dropbtn.classList.add('active');
+        } else {
+            // Si le menu est ouvert, on le ferme
+            dropdownContent.style.display = 'none';
+            dropbtn.classList.remove('active');
+        }
+    });
+
+    // Écouteur global sur le document : si on clique en dehors du dropdown, on ferme le menu
+    document.addEventListener('click', function(e) {
+        // contains retourne true si l'élément cliqué est un descendant du dropdown
+        if (!dropdown.contains(e.target)) {
+            dropdownContent.style.display = 'none';
+            dropbtn.classList.remove('active');
+        }
+    });
+
+    // Boucle sur tous les liens du menu (NodeList) : lorsqu'on clique sur une option,
+    // on ferme le menu pour que la navigation soit propre (utile sur mobile)
+    dropdownContent.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            dropdownContent.style.display = 'none';
+            dropbtn.classList.remove('active');
+            // Remarque : si le lien navigue vers une autre page, le navigateur chargera la nouvelle page
+            // et tout l'état JS sera réinitialisé automatiquement.
+        });
+    });
+});
+</script>
      <body>
         <header>
             <div class="header-container">
@@ -20,6 +97,14 @@
                     <li><a href="circuits.html">Circuits</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="apropos.html">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Carnet de voyage <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="souvenirs-japon.html">🌸 Souvenirs du Japon</a>
+                            <a href="souvenirs-kenya.html">🦁 Souvenirs du Kenya</a>
+                            <a href="souvenirs-maldives.html">🏝️ Souvenirs des Maldives</a>
+                        </div>
+                    </li>
                     <li><a href="contact.html" class="active">Contact</a></li>
                 </ul> 
                 </nav>
@@ -359,12 +444,73 @@
         </div>
     </footer>
 
+<script>
+/*
+  Navbar auto-hide script (explications détaillées)
 
-     </body>
-     </html>
+  But : masquer la barre de navigation lors du scroll vers le bas pour gagner de l'espace,
+  et la réafficher lors du scroll vers le haut ou lorsque le scroll s'arrête.
 
+  Variables principales :
+    - lastScrollTop (Number) : position du scroll lors du dernier événement (initial 0)
+    - scrollTimer (Number/Timeout ID) : identifiant du timer permettant de détecter l'arrêt du scroll
+    - navbar (Element) : référence au <header> contenant la barre de navigation
 
+  Comportement détaillé (ligne par ligne) :
+    - window.addEventListener('scroll', ...) : écoute les événements de défilement
+    - on lit scrollTop : position verticale actuelle (pageYOffset ou document.documentElement.scrollTop)
+    - si scrollTop > lastScrollTop && scrollTop > 100 : on considère que l'utilisateur scrolle vers le bas
+      suffisamment => on cache la navbar (ajout de la classe .navbar-hidden)
+    - si scrollTop < lastScrollTop : on scrolle vers le haut => on montre la navbar (.navbar-visible)
+    - clearTimeout + setTimeout : on met en place un timer pour détecter l'arrêt du scroll et forcer
+      l'affichage de la navbar après 150ms sans mouvement (améliore l'UX)
 
+  Contraintes et remarques :
+    - si l'élément header n'existe pas, navbar vaudra null et les appels à classList échoueront.
+      Une amélioration possible : vérifier la présence de navbar avant de l'utiliser.
+    - seuil 100px et délai 150ms sont arbitraires et peuvent être ajustés pour une meilleure UX.
+*/
 
+// position précédente du scroll
+let lastScrollTop = 0;
 
+// identifiant du timer pour détecter l'arrêt du scroll
+let scrollTimer;
+
+// référence à l'élément header (navbar)
+const navbar = document.querySelector('header');
+
+// écouteur principal sur l'événement scroll
+window.addEventListener('scroll', function() {
+    // lecture de la position verticale actuelle du scroll
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // si on scrolle vers le bas et qu'on a dépassé 100px, cacher la navbar
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        navbar.classList.add('navbar-hidden');
+        navbar.classList.remove('navbar-visible');
+    } else if (scrollTop < lastScrollTop) {
+        // si on scrolle vers le haut, afficher la navbar
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }
+
+    // on réinitialise le timer à chaque mouvement : si 150ms sans mouvement, on force l'affichage
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function() {
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }, 150);
+
+    // mise à jour de la position précédente (pour la prochaine comparaison)
+    lastScrollTop = scrollTop;
+});
+
+// s'assurer que la navbar est visible au chargement de la page
+window.addEventListener('load', function() {
+    if (navbar) navbar.classList.add('navbar-visible');
+});
+</script>
+
+</body>
 </html>

@@ -1,0 +1,601 @@
+<!--
+  souvenirs-maldives.html
+  -----------------------
+  Page de témoignages et souvenirs des voyages aux Maldives
+  
+  Structure globale :
+  1. Header avec navigation responsive
+  2. Hero section avec animation d'eau
+  3. Section introduction
+  4. Galerie de témoignages
+  5. Statistiques Maldives
+  6. Section activités
+  7. Call-to-action
+  8. Footer
+  
+  Dépendances :
+  - style.css : Styles communs du site
+  - souvenirs-maldives.css : Styles spécifiques Maldives
+  - Font Awesome 6.0.0 : Icônes
+  - Google Fonts :
+    * Poppins (300-700) : Texte principal
+    * Dancing Script (400,700) : Éléments décoratifs
+  
+  Caractéristiques :
+  - Design responsive
+  - Animations d'eau et de vagues
+  - Navigation avec dropdown
+  - Galerie de photos grid
+  - Sections interactives
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Configuration de l'encodage et du viewport pour responsive -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souvenirs des Maldives - VoyagePassion</title>
+    
+    <!-- Styles CSS : global, page-spécifique, et bibliothèques externes -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/souvenirs-maldives.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-plane"></i> VoyagePassion
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="circuits.html">Circuits</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn active">Carnet de voyage <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="souvenirs-japon.html">🌸 Souvenirs du Japon</a>
+                            <a href="souvenirs-kenya.html">🦁 Souvenirs du Kenya</a>
+                            <a href="souvenirs-maldives.html" class="active">🏝️ Souvenirs des Maldives</a>
+                        </div>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!--
+      Structure principale de la page Maldives.
+      Organisation :
+      1. Hero Section avec animations aquatiques
+      2. Introduction avec ornements 🌊
+      3. Galerie de témoignages (cards)
+      4. Statistiques séjours
+      5. Section activités
+      6. Call-to-action final
+
+      Classes spécifiques :
+      - .maldives-page : styles thématiques Maldives
+      - .ocean-waves : animation des vagues
+      - .floating-bubbles : animation des bulles
+      - .coral-divider : séparateur style corail
+    -->
+    <main class="maldives-page">
+        <!--
+          Hero Section Maldives
+          --------------------
+          Composants :
+          1. Animations d'ambiance océanique
+             - Vagues animées en CSS
+             - Bulles flottantes
+          2. Contenu central
+             - Titre bilingue (dhivehi/français)
+             - Sous-titre descriptif
+          3. Séparateur corail en SVG
+             - Double vague superposée
+             - Couleurs océan semi-transparentes
+
+          Structure des classes :
+          - .maldives-hero : conteneur principal
+          - .ocean-waves : effet de vagues
+          - .floating-bubbles : animation bulles
+          - .hero-content : centrage contenu
+          - .maldives-title : styles titres
+          - .coral-divider : transition décorative
+        -->
+        <section class="maldives-hero">
+            <!-- Éléments d'ambiance animés -->
+            <div class="ocean-waves"></div>
+            <div class="floating-bubbles"></div>
+            <!-- Contenu central -->
+            <div class="hero-content">
+                <h1 class="maldives-title">
+                    <span class="dhivehi">ރާއްޖެ</span>
+                    <span class="french">Souvenirs des Maldives</span>
+                </h1>
+                <p class="hero-subtitle">Les escapades paradisiaques de nos voyageurs au cœur de l'océan Indien</p>
+                <!-- 
+                  Séparateur corail SVG
+                  - Utilise 2 chemins pour effet de profondeur
+                  - Courbes de Bézier pour aspect naturel
+                  - Couleurs océaniques semi-transparentes
+                -->
+                <div class="coral-divider">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,60 C150,20 300,100 450,60 C600,20 750,100 900,60 C1050,20 1150,80 1200,60 L1200,120 L0,120 Z" fill="rgba(0, 191, 255, 0.3)"></path>
+                        <path d="M0,80 C200,40 400,120 600,80 C800,40 1000,120 1200,80 L1200,120 L0,120 Z" fill="rgba(64, 224, 208, 0.2)"></path>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="intro-content">
+                    <h2 class="section-title-maldives">
+                        <span class="title-ornament">🌊</span>
+                        Paradis sur terre, souvenirs éternels
+                        <span class="title-ornament">🌊</span>
+                    </h2>
+                    <p class="intro-text">
+                        Plongez dans l'univers magique des Maldives à travers les récits enchanteurs de nos voyageurs. 
+                        Des eaux cristallines aux bungalows sur pilotis, des couchers de soleil flamboyants aux fonds marins 
+                        extraordinaires, découvrez ce paradis tropical à travers leurs yeux émerveillés.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galerie de témoignages -->
+        <section class="testimonials-gallery">
+            <div class="container">
+                
+                <!-- Témoignage 1 - Lune de miel -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Emma & Thomas" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Emma & Thomas Leroy</h3>
+                                <p class="travel-date">Lune de miel en septembre 2024 • 12 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/depositphotos_9186147-stock-photo-over-water-bungalows-with-steps.jpg" alt="Bungalows sur pilotis" class="memory-photo main-photo">
+                            <img src="assets/img/coucher_de_soleil_maldives_poster.jpg" alt="Coucher de soleil maldivien" class="memory-photo">
+                            <img src="assets/img/loving-couple-dives-among-corals-600nw-1645512892.webp" alt="Plongée en couple" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>💕 "Notre lune de miel de rêve dans un bungalow sur l'eau"</h4>
+                            <p>
+                                "Nous rêvions de cette lune de miel depuis nos fiançailles... Et les Maldives ont dépassé toutes nos attentes ! 
+                                Notre bungalow sur pilotis à Huvafen Fushi était absolument magique. Se réveiller chaque matin avec l'océan turquoise 
+                                sous nos pieds, plonger directement depuis notre terrasse privée, et ces couchers de soleil à couper le souffle... 
+                                Pure poésie romantique !"
+                            </p>
+                            <blockquote>
+                                "VoyagePassion a organisé la lune de miel parfaite. Chaque détail était pensé pour nous. Merci pour ces souvenirs éternels !"
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">💕 Lune de miel</span>
+                                <span class="highlight-tag">🏖️ Bungalow sur l'eau</span>
+                                <span class="highlight-tag">🤿 Snorkeling</span>
+                                <span class="highlight-tag">🌅 Couchers de soleil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 2 - Famille avec enfants -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Famille Rodriguez" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Famille Rodriguez</h3>
+                                <p class="travel-date">Vacances familiales en juillet 2024 • 10 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/Vacances_en_famille_a_la_plage_les_conseils_detente_pour_petits_et_grands_521163331.webp" alt="Famille sur la plage" class="memory-photo main-photo">
+                            <img src="assets/img/happy-family-mother-kid-snorkeling-260nw-1316130710.webp" alt="Enfants avec poissons tropicaux" class="memory-photo">
+                            <img src="assets/img/palmier_hamac_poster.jpg" alt="Palmier et hamac" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>👨‍👩‍👧‍👦 "Les Maldives en famille : des vacances magiques pour tous !"</h4>
+                            <p>
+                                "Partir aux Maldives avec nos deux enfants (8 et 12 ans), nous hésitions... Mais quel choix parfait ! 
+                                L'île de Kurumba a été idéale pour les familles. Les enfants ont adoré nager avec les poissons colorés 
+                                dans le lagon, construire des châteaux de sable blanc, et même voir des raies manta lors de notre sortie 
+                                en dhoni traditionnel. Et nous, parents, on a enfin pu se détendre !"
+                            </p>
+                            <blockquote>
+                                "Les enfants disent que c'étaient les plus belles vacances de leur vie ! Un resort family-friendly exceptionnel recommandé par VoyagePassion."
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">👨‍👩‍👧‍👦 Famille</span>
+                                <span class="highlight-tag">🐠 Poissons tropicaux</span>
+                                <span class="highlight-tag">🛶 Dhoni traditionnel</span>
+                                <span class="highlight-tag">🏝️ Lagon turquoise</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 3 - Plongée passion -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Antoine plongeur" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Antoine Dufresne</h3>
+                                <p class="travel-date">Séjour plongée en novembre 2024 • 14 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/entete_img_whale_shark_and_underwater_photographer_shutterstock_krzysztof_odziomek_70078366.jpg-1280x512.webp" alt="Requins baleines" class="memory-photo main-photo">
+                            <img src="assets/img/coraux_colorés.jpg" alt="Coraux colorés" class="memory-photo">
+                            <img src="assets/img/Manta-06.webp" alt="Raie manta" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🤿 "Plongée aux Maldives : un aquarium géant à ciel ouvert"</h4>
+                            <p>
+                                "Plongeur passionné depuis 15 ans, les Maldives représentaient mon Graal... Et quelle découverte ! 
+                                Les atolls de Baa et Ari m'ont offert des plongées exceptionnelles. Nager avec les requins-baleines à Hanifaru Bay, 
+                                observer les raies manta géantes, explorer les récifs coralliens les plus colorés que j'aie jamais vus... 
+                                Un paradis sous-marin absolument unique au monde !"
+                            </p>
+                            <blockquote>
+                                "14 jours, 28 plongées inoubliables ! Les guides locaux connaissent chaque spot secret. Merci VoyagePassion pour cette organisation parfaite."
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">🤿 Plongée sous-marine</span>
+                                <span class="highlight-tag">🦈 Requins-baleines</span>
+                                <span class="highlight-tag">🐟 Raies manta</span>
+                                <span class="highlight-tag">🪸 Récifs coralliens</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 4 - Couple senior -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="assets/img/Retraités-16.webp" alt="Couple Martin" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Geneviève & Claude Martin</h3>
+                                <p class="travel-date">Retraite bien-être en mars 2024 • 16 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/depositphotos_45889559-stock-photo-sunset-on-maldives-island.jpg" alt="Coucher de soleil maldivien" class="memory-photo main-photo">
+                            <img src="assets/img/overwater-luxurious-spa-tropical-blue-260nw-1046639452.webp" alt="Spa overwater" class="memory-photo">
+                            <img src="assets/img/diner_romantique.jpg" alt="Dîner romantique plage" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🌅 "Une retraite bien-être dans le paradis terrestre"</h4>
+                            <p>
+                                "Pour nos 40 ans de mariage, nous voulions quelque chose d'exceptionnel... Les Maldives au Conrad Rangali 
+                                ont été la destination parfaite ! Les soins au spa overwater, les dîners aux chandelles sur la plage privée, 
+                                les promenades au lever du soleil... Chaque moment était d'une sérénité absolue. Nous avons retrouvé 
+                                une seconde jeunesse dans ce cadre idyllique !"
+                            </p>
+                            <blockquote>
+                                "40 ans de mariage célébrés dans le plus beau des décors. Ces 16 jours resteront gravés pour toujours. Merci VoyagePassion !"
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">💆‍♀️ Spa wellness</span>
+                                <span class="highlight-tag">🕯️ Dîners romantiques</span>
+                                <span class="highlight-tag">🌅 Lever de soleil</span>
+                                <span class="highlight-tag">💎 Anniversaire de mariage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Statistiques Maldives
+          ---------------------------
+          Objectif : Présenter les chiffres clés de manière impactante
+          
+          Structure :
+          1. Conteneur avec titre thématique
+          2. Grille responsive de statistiques
+          3. Quatre métriques clés avec :
+             - Nombre mis en valeur
+             - Label descriptif
+          
+          Classes :
+          - .stats-section : Layout principal
+          - .stats-grid : Disposition en grille
+          - .stat-item : Style de carte individuelle
+          - .stat-number : Mise en forme des chiffres
+          - .stat-label : Style des descriptions
+          
+          Métriques présentées :
+          1. Nombre total de voyageurs (social proof)
+          2. Satisfaction client (crédibilité)
+          3. Couverture géographique (expertise)
+          4. Taux de fidélisation (qualité service)
+        -->
+        <section class="stats-section">
+            <div class="container">
+                <!-- Titre de la section -->
+                <h2 class="section-title-maldives">Nos séjours aux Maldives en chiffres</h2>
+                <!-- Grille de statistiques -->
+                <div class="stats-grid">
+                    <!-- Métrique voyageurs -->
+                    <div class="stat-item">
+                        <div class="stat-number">312</div>
+                        <div class="stat-label">Voyageurs comblés</div>
+                    </div>
+                    <!-- Métrique satisfaction -->
+                    <div class="stat-item">
+                        <div class="stat-number">4.9/5</div>
+                        <div class="stat-label">Note moyenne</div>
+                    </div>
+                    <!-- Métrique couverture -->
+                    <div class="stat-item">
+                        <div class="stat-number">26</div>
+                        <div class="stat-label">Atolls visités</div>
+                    </div>
+                    <!-- Métrique fidélisation -->
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Reviennent aux Maldives</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Activités Maldives
+          ------------------------
+          Présentation des expériences disponibles aux Maldives
+          
+          Structure :
+          1. Conteneur avec titre orné
+          2. Grille d'activités
+          3. Cartes d'activités avec :
+             - Icône emoji thématique
+             - Titre de l'activité
+             - Description courte
+          
+          Classes :
+          - .activities-section : Layout principal
+          - .activities-grid : Disposition responsive
+          - .activity-card : Style des cartes
+          - .activity-icon : Format des emojis
+          - .title-ornament : Décorations titre
+          
+          Organisation des activités :
+          1. Activités aquatiques (plongée)
+          2. Sports nautiques (surf, etc.)
+          3. Expériences culturelles (pêche)
+          4. Bien-être (spa)
+          5. Moments romantiques
+        -->
+        <section class="activities-section">
+            <div class="container">
+                <!-- Titre orné -->
+                <h2 class="section-title-maldives">
+                    <span class="title-ornament">🐠</span>
+                    Activités paradisiaques
+                    <span class="title-ornament">🐠</span>
+                </h2>
+                <!-- Grille des activités -->
+                <div class="activities-grid">
+                    <!-- Plongée & Snorkeling -->
+                    <div class="activity-card">
+                        <div class="activity-icon">🤿</div>
+                        <h3>Plongée & Snorkeling</h3>
+                        <p>Explorez les récifs coralliens les plus préservés au monde</p>
+                    </div>
+                    <!-- Sports nautiques -->
+                    <div class="activity-card">
+                        <div class="activity-icon">🏄‍♂️</div>
+                        <h3>Sports nautiques</h3>
+                        <p>Surf, kayak, paddle, jet-ski dans les lagons turquoise</p>
+                    </div>
+                    <!-- Pêche traditionnelle -->
+                    <div class="activity-card">
+                        <div class="activity-icon">🐟</div>
+                        <h3>Pêche traditionnelle</h3>
+                        <p>Sortie en dhoni et pêche au coucher du soleil</p>
+                    </div>
+                    <!-- Spa & bien-être -->
+                    <div class="activity-card">
+                        <div class="activity-icon">💆‍♀️</div>
+                        <h3>Spa & bien-être</h3>
+                        <p>Soins relaxants face à l'océan Indien</p>
+                    </div>
+                    <!-- Excursions romantiques -->
+                    <div class="activity-card">
+                        <div class="activity-icon">🌅</div>
+                        <h3>Excursions romantiques</h3>
+                        <p>Croisières au coucher de soleil et dîners privés</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Call-to-Action (CTA)
+          ---------------------------
+          Objectif : Convertir l'intérêt des visiteurs en actions concrètes
+          
+          Structure :
+          1. Conteneur avec fond distinctif
+          2. Contenu centré comprenant :
+             - Titre engageant
+             - Texte de motivation
+             - Boutons d'action
+          
+          Classes :
+          - .cta-section : Style et mise en page
+          - .cta-content : Format du contenu
+          - .cta-buttons : Layout des boutons
+          - .btn-primary : Style bouton principal
+          - .btn-secondary : Style bouton alternatif
+          
+          Actions proposées :
+          1. Demande de devis (action principale)
+             - Lien vers formulaire de contact
+             - Style distinctif et accrocheur
+          2. Exploration des séjours (alternative)
+             - Lien vers page destinations
+             - Style plus discret
+        -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <!-- Titre incitatif -->
+                    <h2>Prêt pour votre évasion paradisiaque ?</h2>
+                    <!-- Texte de motivation -->
+                    <p>Rejoignez nos voyageurs enchantés et vivez votre propre séjour de rêve dans l'archipel des Maldives.</p>
+                    <!-- Boutons d'action -->
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn-primary">Demander un devis Maldives</a>
+                        <a href="destinations.html" class="btn-secondary">Voir nos séjours Maldives</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Accueil</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="circuits.html">Circuits</a>
+                <a href="services.html">Services</a>
+                <a href="apropos.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2024 VoyagePassion. Tous droits réservés.</p>
+            <p>📞 01 23 45 67 89 | ✉️ contact@voyagepassion.fr</p>
+        </div>
+    </footer>
+
+<script>
+/*
+ * Script de navigation intelligente
+ * -------------------------------
+ * Fonctionnalités :
+ * 1. Auto-masquage de la barre de navigation lors du défilement vers le bas
+ * 2. Réapparition automatique lors du défilement vers le haut
+ * 3. Affichage automatique après une pause dans le défilement
+ * 4. Initialisation au chargement de la page
+ *
+ * Variables :
+ * @var {number} lastScrollTop - Mémorise la dernière position de défilement
+ * @var {number} scrollTimer - ID du timer pour la détection de pause de défilement
+ * @var {HTMLElement} navbar - Référence à l'élément header
+ *
+ * Classes CSS utilisées :
+ * - navbar-hidden : Masque la barre avec animation
+ * - navbar-visible : Affiche la barre avec animation
+ *
+ * Contraintes et seuils :
+ * - Masquage uniquement après 100px de défilement
+ * - Délai de 150ms avant réapparition après pause
+ */
+
+// Variables de suivi du défilement
+let lastScrollTop = 0;
+let scrollTimer;
+const navbar = document.querySelector('header');
+
+// Gestionnaire principal de l'événement de défilement
+window.addEventListener('scroll', function() {
+    // Récupère la position actuelle (compatible cross-browser)
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Logique de masquage/affichage basée sur la direction
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Défilement vers le bas ET plus de 100px depuis le haut
+        // -> Masque la barre de navigation
+        navbar.classList.add('navbar-hidden');
+        navbar.classList.remove('navbar-visible');
+    } else if (scrollTop < lastScrollTop) {
+        // Défilement vers le haut
+        // -> Affiche immédiatement la barre
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }
+    
+    // Gestion de la pause de défilement
+    clearTimeout(scrollTimer); // Annule le timer précédent
+    scrollTimer = setTimeout(function() {
+        // Réaffiche la barre après 150ms sans défilement
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }, 150);
+    
+    // Mémorise la position pour la prochaine itération
+    lastScrollTop = scrollTop;
+});
+
+// Initialisation au chargement
+window.addEventListener('load', function() {
+    // Assure que la barre est visible initialement
+    navbar.classList.add('navbar-visible');
+});
+</script>
+
+</body>
+</html>

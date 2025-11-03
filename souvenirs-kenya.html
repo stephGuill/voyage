@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souvenirs du Kenya - VoyagePassion</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/souvenirs-kenya.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-plane"></i> VoyagePassion
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="circuits.html">Circuits</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn active">Carnet de voyage <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="souvenirs-japon.html">🌸 Souvenirs du Japon</a>
+                            <a href="souvenirs-kenya.html" class="active">🦁 Souvenirs du Kenya</a>
+                        </div>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!--
+      Structure principale de la page Kenya.
+      Organisation :
+      1. Hero Section avec overlay savane et silhouettes d'animaux
+      2. Introduction avec ornements 🦁
+      3. Galerie de témoignages (cards)
+      4. Statistiques safari
+      5. Section Big Five
+      6. Call-to-action final
+
+      Classes spécifiques :
+      - .kenya-page : styles thématiques Kenya
+      - .savane-overlay : effet de chaleur/poussière
+      - .animals-silhouettes : silhouettes animées d'animaux
+      - .acacia-divider : séparateur style acacia
+    -->
+    <main class="kenya-page">
+        <!--
+          Hero Section Kenya
+          - Utilise des overlays pour créer l'ambiance savane
+          - Titre bilingue (swahili + français)
+          - Silhouettes d'animaux en arrière-plan
+          - Séparateur style acacia en SVG
+
+          Structure :
+          - .kenya-hero : conteneur avec image de fond savane
+          - .savane-overlay : effet atmosphérique
+          - .animals-silhouettes : animations des silhouettes
+          - .hero-content : centrage et espacement
+          - .kenya-title : style spécial pour titre bilingue
+        -->
+        <section class="kenya-hero">
+            <div class="savane-overlay"></div>
+            <div class="animals-silhouettes"></div>
+            <div class="hero-content">
+                <h1 class="kenya-title">
+                    <span class="swahili">Kumbuka Kenya</span>
+                    <span class="french">Souvenirs du Kenya</span>
+                </h1>
+                <p class="hero-subtitle">Les aventures authentiques de nos explorateurs au cœur de l'Afrique sauvage</p>
+                <div class="acacia-divider">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,60 C200,120 400,0 600,60 C800,120 1000,0 1200,60 L1200,120 L0,120 Z" fill="rgba(244, 164, 96, 0.2)"></path>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Introduction
+          -------------------
+          Structure :
+          1. Container pour centrage et marges
+          2. Contenu intro avec titre orné et texte
+          3. Emojis lions comme ornements
+
+          Classes principales :
+          - .intro-section : Mise en page générale
+          - .section-title-kenya : Style spécifique Kenya
+          - .title-ornament : Emojis décoratifs
+          - .intro-text : Style paragraphe intro
+        -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="intro-content">
+                    <!-- 
+                      Titre avec ornements emoji
+                      - Utilisation d'emojis lions pour thématique safari
+                      - Structure en 3 parties : emoji + texte + emoji
+                    -->
+                    <h2 class="section-title-kenya">
+                        <span class="title-ornament">🦁</span>
+                        Safari inoubliable au pays des Big Five
+                        <span class="title-ornament">🦁</span>
+                    </h2>
+                    <!-- 
+                      Texte d'introduction
+                      - Présentation des destinations clés
+                      - Accent sur l'expérience immersive
+                    -->
+                    <p class="intro-text">
+                        Plongez dans l'univers sauvage du Kenya à travers les récits passionnants de nos aventuriers. 
+                        Du Masaï Mara aux parcs nationaux d'Amboseli et Tsavo, découvrez la magie de l'Afrique 
+                        à travers leurs yeux émerveillés et leurs rencontres exceptionnelles avec la faune sauvage.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galerie de témoignages -->
+        <section class="testimonials-gallery">
+            <div class="container">
+                
+                <!-- Témoignage 1 - Jean & Catherine -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Jean" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Jean & Catherine Moreau</h3>
+                                <p class="travel-date">Safari en août 2024 • 14 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/depositphotos_8902844-stock-photo-elephant-family-in-front-of.jpg" alt="Famille d'éléphants" class="memory-photo main-photo">
+                            <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Lion au coucher de soleil" class="memory-photo">
+                            <img src="assets/img/w08369-small_1.jpg" alt="Zèbres dans la savane" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🐘 "Une rencontre magique avec les géants de la savane"</h4>
+                            <p>
+                                "Notre premier safari au Kenya nous a littéralement coupé le souffle ! Voir cette famille d'éléphants 
+                                traverser majestueusement devant notre 4x4 dans le parc d'Amboseli, avec le Kilimandjaro en arrière-plan... 
+                                C'était un moment d'émotion pure. Notre guide masaï nous a fait découvrir les secrets de la savane avec 
+                                une passion communicative."
+                            </p>
+                            <blockquote>
+                                "VoyagePassion a organisé le safari de nos rêves. Chaque jour apportait son lot de surprises et d'émotions fortes !"
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">🐘 Big Five</span>
+                                <span class="highlight-tag">🏔️ Kilimandjaro</span>
+                                <span class="highlight-tag">🏛️ Culture Masaï</span>
+                                <span class="highlight-tag">📸 Photo safari</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 2 - Famille Dubois -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="assets/img/christophe-dubois-et-sa-petite-famille-aiment-venir-en-station-1533832600.jpg" alt="Famille Dubois" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Famille Dubois</h3>
+                                <p class="travel-date">Safari en février 2024 • 12 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/4-la-grande-migration-438991.jpg" alt="Grande migration" class="memory-photo main-photo">
+                            <img src="assets/img/lionne chassant.jpg" alt="Lionne chassant" class="memory-photo">
+                            <img src="assets/img/girafe-groupe-famille-girafon-couple-mere-scaled.jpg" alt="Girafes famille" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🦓 "Témoins privilégiés de la grande migration"</h4>
+                            <p>
+                                "Partir en famille au Kenya était un pari, mais quel succès ! Nos trois enfants (10, 14 et 16 ans) 
+                                ont été émerveillés par la grande migration dans le Masaï Mara. Voir ces milliers de gnous et zèbres 
+                                traverser la rivière Mara était un spectacle grandiose. Et quand une lionne a traversé devant notre véhicule 
+                                avec ses petits... Frissons garantis !"
+                            </p>
+                            <blockquote>
+                                "Les enfants en parlent encore ! Un voyage qui a marqué toute la famille. Merci VoyagePassion pour cette organisation parfaite."
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">🦓 Grande migration</span>
+                                <span class="highlight-tag">🦁 Lions</span>
+                                <span class="highlight-tag">🏞️ Masaï Mara</span>
+                                <span class="highlight-tag">👨‍👩‍👧‍👦 Famille</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 3 - Marc l'aventurier -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Marc" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Marc Aventurier</h3>
+                                <p class="travel-date">Safari en octobre 2024 • 16 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/Rhinocérosnoir1435753398.jpg" alt="Rhinocéros noir" class="memory-photo main-photo">
+                            <img src="assets/img/leopard-drinking-260nw-190979438.webp" alt="Léopard nocturne" class="memory-photo">
+                            <img src="assets/img/buffles-marchant-route-terre_1048944-6947022.jpg" alt="Buffles dans la poussière" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🦏 "À la recherche du Big Five : mission accomplie !"</h4>
+                            <p>
+                                "Photographe animalier amateur, mon objectif était de capturer les Big Five en un seul voyage. 
+                                Défi relevé ! Le moment le plus intense : cette rencontre avec un rhinocéros noir solitaire à Ol Pejeta. 
+                                Le safari nocturne à Samburu m'a offert des clichés exceptionnels de léopards. Une expérience photographique 
+                                et humaine extraordinaire."
+                            </p>
+                            <blockquote>
+                                "16 jours intenses avec plus de 3000 photos ! Le Kenya offre une diversité incroyable. Guide exceptionnel, logistique parfaite."
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">📷 Photographie</span>
+                                <span class="highlight-tag">🦏 Rhinocéros noir</span>
+                                <span class="highlight-tag">🌙 Safari nocturne</span>
+                                <span class="highlight-tag">🏆 Big Five</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 4 - Groupe d'amis retraités -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="assets/img/smiling-senior-woman-enjoying-nature-600nw-2586291429.webp" alt="Groupe retraités" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Groupe "Les Explorateurs Seniors"</h3>
+                                <p class="travel-date">Safari en juin 2024 • 10 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/couche-de-soleil-dans-la-savane-africaine.jpg" alt="Coucher de soleil savane" class="memory-photo main-photo">
+                            <img src="assets/img/massai_village_shutterstock_1781384759.jpg" alt="Village Masaï" class="memory-photo">
+                            <img src="assets/img/cover-hippopotame-00746551-000005.jpg" alt="Hippopotames" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🌅 "Le Kenya : un rêve de retraite devenu réalité"</h4>
+                            <p>
+                                "À 65 ans passés, nous six amis avons enfin réalisé notre rêve d'Afrique ! Ce voyage au Kenya a dépassé 
+                                toutes nos attentes. La rencontre avec la communauté Masaï a été bouleversante, leurs traditions et leur 
+                                hospitalité nous ont profondément touchés. Les couchers de soleil sur la savane, les bruits de la nature 
+                                la nuit... Des moments de pure magie !"
+                            </p>
+                            <blockquote>
+                                "À notre âge, on pensait que c'était trop tard... Merci VoyagePassion de nous avoir prouvé le contraire ! L'aventure n'a pas d'âge."
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">👥 Groupe seniors</span>
+                                <span class="highlight-tag">🌅 Couchers de soleil</span>
+                                <span class="highlight-tag">🏘️ Village Masaï</span>
+                                <span class="highlight-tag">💫 Rêve réalisé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Statistiques Safari
+          -------------------------
+          Objectif : Présenter les chiffres clés de manière visuelle
+          
+          Structure :
+          1. Conteneur avec titre thématique
+          2. Grille de 4 statistiques
+          3. Chaque stat a un nombre et un label
+
+          Classes :
+          - .stats-section : Mise en page principale
+          - .stats-grid : Disposition en grille responsive
+          - .stat-item : Carte individuelle de stat
+          - .stat-number : Style des chiffres
+          - .stat-label : Style des descriptions
+          
+          Données présentées :
+          1. Nombre total d'aventuriers
+          2. Note de satisfaction
+          3. Nombre de parcs couverts
+          4. Taux de réussite Big Five
+        -->
+        <section class="stats-section">
+            <div class="container">
+                <h2 class="section-title-kenya">Nos safaris au Kenya en chiffres</h2>
+                <!-- 
+                  Grille de statistiques
+                  - Display grid avec 4 colonnes en desktop
+                  - Responsive : 2 colonnes en tablette, 1 en mobile
+                -->
+                <div class="stats-grid">
+                    <!-- Stats aventuriers -->
+                    <div class="stat-item">
+                        <div class="stat-number">186</div>
+                        <div class="stat-label">Aventuriers satisfaits</div>
+                    </div>
+                    <!-- Stats satisfaction -->
+                    <div class="stat-item">
+                        <div class="stat-number">4.8/5</div>
+                        <div class="stat-label">Note moyenne</div>
+                    </div>
+                    <!-- Stats parcs -->
+                    <div class="stat-item">
+                        <div class="stat-number">7</div>
+                        <div class="stat-label">Parcs nationaux</div>
+                    </div>
+                    <!-- Stats Big Five -->
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Voient les Big Five</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Big Five
+          ---------------
+          Présentation des 5 animaux emblématiques du Kenya
+          
+          Structure :
+          1. Conteneur avec titre orné de couronnes
+          2. Grille de 5 cartes d'animaux
+          3. Chaque carte contient :
+             - Icône emoji de l'animal
+             - Nom de l'animal
+             - Description et localisation
+
+          Classes :
+          - .big-five-section : Conteneur principal
+          - .big-five-grid : Disposition en grille
+          - .animal-card : Style des cartes individuelles
+          - .animal-icon : Style des emojis
+          
+          Particularités :
+          - Utilisation d'emojis pour une approche visuelle ludique
+          - Descriptions concises avec localisation
+          - Association animal/parc national
+        -->
+        <section class="big-five-section">
+            <div class="container">
+                <!-- Titre orné de couronnes -->
+                <h2 class="section-title-kenya">
+                    <span class="title-ornament">👑</span>
+                    Les Big Five du Kenya
+                    <span class="title-ornament">👑</span>
+                </h2>
+                <!-- Grille des animaux -->
+                <div class="big-five-grid">
+                    <!-- Lion - Roi de la savane -->
+                    <div class="animal-card">
+                        <div class="animal-icon">🦁</div>
+                        <h3>Lion</h3>
+                        <p>Le roi de la savane, majestueux prédateur du Masaï Mara</p>
+                    </div>
+                    <!-- Éléphant - Le géant -->
+                    <div class="animal-card">
+                        <div class="animal-icon">🐘</div>
+                        <h3>Éléphant</h3>
+                        <p>Le géant intelligent d'Amboseli et Tsavo</p>
+                    </div>
+                    <!-- Rhinocéros - Le protégé -->
+                    <div class="animal-card">
+                        <div class="animal-icon">🦏</div>
+                        <h3>Rhinocéros</h3>
+                        <p>Le titan protégé d'Ol Pejeta et Lake Nakuru</p>
+                    </div>
+                    <!-- Léopard - Le discret -->
+                    <div class="animal-card">
+                        <div class="animal-icon">🐆</div>
+                        <h3>Léopard</h3>
+                        <p>Le fantôme tacheté des forêts de Samburu</p>
+                    </div>
+                    <!-- Buffle - Le puissant -->
+                    <div class="animal-card">
+                        <div class="animal-icon">🐃</div>
+                        <h3>Buffle</h3>
+                        <p>Le colosse redoutable des plaines kenyanes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Call-to-Action (CTA)
+          ---------------------------
+          Objectif : Convertir l'intérêt du visiteur en action
+          
+          Structure :
+          1. Conteneur avec fond distinctif
+          2. Contenu centré avec :
+             - Titre accrocheur
+             - Texte de motivation
+             - Boutons d'action
+          
+          Classes :
+          - .cta-section : Style et espacement global
+          - .cta-content : Mise en forme du contenu
+          - .cta-buttons : Disposition des boutons
+          - .btn-primary : Style bouton principal (devis)
+          - .btn-secondary : Style bouton secondaire (circuits)
+          
+          Actions proposées :
+          1. Demande de devis (action principale)
+          2. Exploration des circuits (alternative)
+        -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <!-- Titre incitatif -->
+                    <h2>Prêt pour votre aventure africaine ?</h2>
+                    <!-- Texte de motivation -->
+                    <p>Rejoignez nos explorateurs comblés et vivez votre propre safari inoubliable au cœur du Kenya sauvage.</p>
+                    <!-- Boutons d'action -->
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn-primary">Demander un devis safari</a>
+                        <a href="destinations.html" class="btn-secondary">Voir nos circuits Kenya</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Accueil</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="circuits.html">Circuits</a>
+                <a href="services.html">Services</a>
+                <a href="apropos.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2024 VoyagePassion. Tous droits réservés.</p>
+            <p>📞 01 23 45 67 89 | ✉️ contact@voyagepassion.fr</p>
+        </div>
+    </footer>
+
+<script>
+/*
+ * Script de gestion de la barre de navigation (navbar)
+ * ---------------------------------------------------
+ * Fonctionnalités :
+ * 1. Auto-masquage lors du défilement vers le bas
+ * 2. Réapparition lors du défilement vers le haut
+ * 3. Affichage automatique après arrêt du défilement
+ * 4. Initialisation au chargement de la page
+ *
+ * Variables :
+ * - lastScrollTop : mémorise la dernière position de scroll
+ * - scrollTimer : gère le délai avant réapparition
+ * - navbar : référence l'élément header
+ *
+ * Classes CSS utilisées :
+ * - navbar-hidden : masque la barre (transition en CSS)
+ * - navbar-visible : affiche la barre (transition en CSS)
+ */
+
+// Variables globales pour le suivi du scroll
+let lastScrollTop = 0;
+let scrollTimer;
+const navbar = document.querySelector('header');
+
+// Écouteur d'événement principal pour le scroll
+window.addEventListener('scroll', function() {
+    // Récupère la position actuelle du scroll (compatible tous navigateurs)
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Gestion du masquage/affichage selon la direction du scroll
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Scroll vers le bas : masque la navbar si on a défilé plus de 100px
+        navbar.classList.add('navbar-hidden');
+        navbar.classList.remove('navbar-visible');
+    } else if (scrollTop < lastScrollTop) {
+        // Scroll vers le haut : affiche immédiatement la navbar
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }
+    
+    // Gestion de l'affichage automatique après arrêt du scroll
+    clearTimeout(scrollTimer); // Reset du timer à chaque événement scroll
+    scrollTimer = setTimeout(function() {
+        // Réaffiche la navbar 150ms après l'arrêt du scroll
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }, 150);
+    
+    // Mémorise la position pour le prochain événement
+    lastScrollTop = scrollTop;
+});
+
+// Initialisation : s'assure que la navbar est visible au chargement
+window.addEventListener('load', function() {
+    navbar.classList.add('navbar-visible');
+});
+</script>
+
+</body>
+</html>

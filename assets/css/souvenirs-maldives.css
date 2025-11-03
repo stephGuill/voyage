@@ -1,0 +1,887 @@
+/* ===== CSS SPÉCIFIQUE POUR LA PAGE SOUVENIRS DES MALDIVES =====
+ * Ce fichier contient les styles spécifiques à la page des souvenirs des Maldives
+ * Il utilise un système de variables CSS pour une ambiance tropicale et océanique
+ * et inclut des animations pour simuler les mouvements de l'eau
+ */
+
+/* Import des polices Google Fonts :
+ * - Poppins : Police principale moderne (poids: 300 à 700)
+ * - Dancing Script : Police décorative pour les accents tropicaux (poids: 400, 700)
+ * Ces polices ont été choisies pour leur lisibilité et leur style élégant
+ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap');
+
+/* Définition des variables CSS pour le thème Maldives/Tropical
+ * Palette de couleurs inspirée des lagons et des plages :
+ * - Bleus et turquoises : rappellent l'océan
+ * - Blanc et sable : évoquent les plages
+ * - Corail : pour les accents chaleureux
+ */
+:root {
+    /* Couleurs primaires des océans */
+    --maldives-blue: #0099ff;      /* Bleu vif pour l'eau profonde */
+    --maldives-turquoise: #40e0d0; /* Turquoise pour les lagons */
+    --maldives-aqua: #00bfff;      /* Bleu clair pour l'eau peu profonde */
+    --maldives-teal: #008b8b;      /* Bleu-vert pour les accents sombres */
+    
+    /* Couleurs complémentaires */
+    --maldives-white: #ffffff;      /* Blanc pur pour le contraste */
+    --maldives-sand: #f5deb3;       /* Beige sable pour les plages */
+    --maldives-coral: #ff7f50;      /* Corail pour les accents chauds */
+    
+    /* Dégradés et effets spéciaux */
+    --maldives-gradient: linear-gradient(135deg, #0099ff 0%, #40e0d0 50%, #00bfff 100%); /* Dégradé principal */
+    --shadow-maldives: 0 8px 32px rgba(0, 153, 255, 0.15);                              /* Ombre douce */
+    --ocean-gradient: linear-gradient(135deg, #40e0d0 0%, #0099ff 50%, #008b8b 100%);   /* Dégradé océanique */
+}
+
+/* Container principal de la page
+ * Définit les styles de base pour tout le contenu
+ */
+.maldives-page {
+    font-family: 'Poppins', sans-serif; /* Police moderne et lisible */
+    line-height: 1.7;                   /* Espacement des lignes optimal */
+}
+
+/* ===== HERO SECTION MALDIVES =====
+ * Section d'en-tête immersive avec image de fond et animations
+ * Crée une première impression forte avec des effets d'eau */
+.maldives-hero {
+    position: relative;                 /* Pour le positionnement des éléments enfants */
+    height: 100vh;                      /* Hauteur plein écran */
+    /* Superposition d'un dégradé sur l'image de fond */
+    background: linear-gradient(rgba(0, 139, 139, 0.2), rgba(64, 224, 208, 0.2)), 
+                url('https://images.unsplash.com/photo-1573843981267-be1999ff37cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+    display: flex;                      /* Centrage vertical et horizontal */
+    align-items: center;                /* Centrage vertical */
+    justify-content: center;            /* Centrage horizontal */
+    overflow: hidden;                   /* Masque les débordements des animations */
+    animation: oceanFlow 30s ease-in-out infinite; /* Animation de "respiration" océanique */
+}
+
+/* Vagues océaniques animées
+ * Crée un effet de vagues en mouvement en bas de la section hero */
+.ocean-waves {
+    position: absolute;       /* Positionnement en bas de la section */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;           /* Hauteur fixe pour les vagues */
+    /* SVG inline pour les vagues avec deux couches superposées */
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,60 C150,20 300,100 450,60 C600,20 750,100 900,60 C1050,20 1150,80 1200,60 L1200,120 L0,120 Z" fill="rgba(64, 224, 208, 0.3)"/><path d="M0,80 C200,40 400,120 600,80 C800,40 1000,120 1200,80 L1200,120 L0,120 Z" fill="rgba(0, 153, 255, 0.2)"/></svg>');
+    background-size: 1200px 120px;  /* Taille du motif de vagues */
+    animation: waveMotion 20s ease-in-out infinite; /* Animation de mouvement */
+}
+
+/* Effet de bulles flottantes
+ * Crée une ambiance sous-marine avec des bulles qui remontent */
+.floating-bubbles {
+    position: absolute;      /* Couvre toute la section */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Trois couches de bulles avec différentes tailles et opacités */
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 2px, transparent 2px),  /* Grandes bulles */
+                      radial-gradient(circle, rgba(64, 224, 208, 0.3) 1px, transparent 1px),    /* Moyennes bulles */
+                      radial-gradient(circle, rgba(0, 153, 255, 0.2) 1.5px, transparent 1.5px); /* Petites bulles */
+    background-size: 100px 100px, 80px 80px, 120px 120px;       /* Tailles des motifs */
+    background-position: 0 0, 30px 30px, 60px 60px;             /* Décalage des couches */
+    animation: bubbleFloat 25s linear infinite;                  /* Animation de flottaison */
+}
+
+/* Animations pour les effets océaniques */
+
+/* Animation de "respiration" de l'océan
+ * Simule le mouvement doux des vagues */
+@keyframes oceanFlow {
+    0%, 100% { transform: scale(1); }     /* Taille normale */
+    50% { transform: scale(1.02); }       /* Léger zoom pour l'effet de respiration */
+}
+
+/* Animation du mouvement des vagues
+ * Déplace les vagues de gauche à droite */
+@keyframes waveMotion {
+    0%, 100% { transform: translateX(0); }      /* Position initiale */
+    50% { transform: translateX(-50px); }       /* Déplacement vers la gauche */
+}
+
+/* Animation des bulles flottantes
+ * Fait remonter les bulles en rotation */
+@keyframes bubbleFloat {
+    0% { 
+        transform: translateY(100vh) rotate(0deg);  /* Départ du bas de l'écran */
+    }
+    100% { 
+        transform: translateY(-100px) rotate(360deg); /* Remontée avec rotation complète */
+    }
+}
+
+/* Structure du titre principal
+ * Contient le titre en Dhivehi (langue des Maldives) et sa traduction */
+.maldives-title {
+    text-align: center;       /* Centrage horizontal */
+    margin-bottom: 2rem;      /* Espacement avec le contenu suivant */
+}
+
+/* Titre en Dhivehi
+ * Style décoratif avec effet de lueur aquatique */
+.dhivehi {
+    display: block;           /* Placement sur une ligne séparée */
+    font-size: 3rem;         /* Grande taille pour l'impact */
+    color: var(--maldives-turquoise); /* Couleur turquoise thématique */
+    font-weight: 300;        /* Police fine pour l'élégance */
+    margin-bottom: 0.5rem;   /* Espacement avec le titre français */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Ombre portée de base */
+    animation: aquaGlow 5s ease-in-out infinite alternate; /* Animation de lueur */
+    font-family: 'Dancing Script', cursive; /* Police décorative */
+}
+
+/* Titre en français
+ * Style plus sobre et moderne */
+.french {
+    display: block;          /* Placement sur une ligne séparée */
+    font-size: 2.5rem;      /* Taille légèrement plus petite */
+    color: white;           /* Texte blanc pour la lisibilité */
+    font-weight: 600;       /* Police semi-grasse */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Ombre plus prononcée */
+}
+
+/* Animation de lueur aquatique
+ * Effet de pulsation luminescente sur le titre Dhivehi */
+@keyframes aquaGlow {
+    0% { 
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3),     /* Ombre de base */
+                    0 0 20px rgba(64, 224, 208, 0.4);  /* Lueur faible */
+    }
+    100% { 
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3),     /* Ombre de base */
+                    0 0 40px rgba(64, 224, 208, 0.8);  /* Lueur intense */
+    }
+}
+
+/* Sous-titre de la section hero
+ * Texte descriptif complémentaire au titre principal */
+.hero-subtitle {
+    font-size: 1.3rem;                 /* Taille lisible */
+    color: var(--maldives-sand);       /* Couleur sable pour le contraste */
+    text-align: center;                /* Alignement centré */
+    max-width: 700px;                  /* Largeur limitée pour la lisibilité */
+    margin: 0 auto;                    /* Centrage horizontal */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7); /* Ombre pour la lisibilité */
+}
+
+/* Séparateur décoratif en forme de corail
+ * Crée une transition visuelle entre les sections
+ * avec motif de corail inspiré des récifs maldiviens */
+.coral-divider {
+    position: absolute;     /* Positionnement en bas de la section */
+    bottom: 0;
+    left: 0;
+    width: 100%;           /* Largeur pleine */
+    height: 120px;         /* Hauteur fixe */
+    overflow: hidden;      /* Masque les débordements */
+}
+
+/* Conteneur SVG du motif de corail
+ * Assure le dimensionnement correct du motif */
+.coral-divider svg {
+    width: 100%;          /* Occupe toute la largeur */
+    height: 100%;         /* Occupe toute la hauteur */
+}
+
+/* ===== SECTIONS PRINCIPALES =====
+ * NOTE: Un bloc corrompu/dupliqué a été retiré ici pour
+ * restaurer la validité du CSS. Les définitions valides
+ * pour la section CTA, l'introduction et autres blocs
+ * existent plus bas dans ce fichier. Conserver ce
+ * commentaire comme repère.
+ */
+
+/* ===== GALERIE DE TÉMOIGNAGES =====
+ * Section présentant les expériences des voyageurs
+ * avec un design inspiré des lagons maldiviens */
+.testimonials-gallery {
+    padding: 4rem 0;                /* Espacement vertical */
+    background: linear-gradient(135deg, #f0f8ff 0%, #e0f6ff 100%); /* Dégradé doux */
+}
+
+/* Carte de témoignage
+ * Composant principal avec effets de profondeur et animations */
+.testimonial-card {
+    background: white;            /* Fond blanc pour la lisibilité */
+    border-radius: 25px;         /* Coins très arrondis */
+    overflow: hidden;            /* Masque les débordements */
+    margin-bottom: 3rem;         /* Espacement entre les cartes */
+    box-shadow: var(--shadow-maldives); /* Ombre douce */
+    transition: all 0.3s ease;   /* Animation fluide */
+    border: 3px solid transparent; /* Bordure pour l'effet de survol */
+    background-clip: padding-box;  /* Évite le débordement du dégradé */
+    position: relative;           /* Pour l'effet de bordure */
+}
+
+/* Effet de bordure en dégradé au survol
+ * Crée un halo luminescent autour de la carte */
+.testimonial-card::before {
+    content: '';
+    position: absolute;           /* Positionnement absolu */
+    top: -3px;                   /* Déborde légèrement */
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: var(--maldives-gradient); /* Dégradé thématique */
+    border-radius: 28px;         /* Coins arrondis plus grands */
+    z-index: -1;                 /* En arrière-plan */
+    opacity: 0;                  /* Invisible par défaut */
+    transition: opacity 0.3s ease; /* Transition douce */
+}
+
+/* États de survol de la carte */
+.testimonial-card:hover::before {
+    opacity: 1;                  /* Affiche le dégradé */
+}
+
+.testimonial-card:hover {
+    transform: translateY(-15px); /* Élévation de la carte */
+    box-shadow: 0 25px 50px rgba(0, 153, 255, 0.3); /* Ombre plus prononcée */
+}
+
+/* En-tête de carte de témoignage
+ * Zone supérieure contenant les informations du voyageur */
+.card-header {
+    padding: 2rem;                    /* Espacement interne */
+    background: var(--maldives-gradient); /* Dégradé thématique */
+    color: white;                     /* Texte blanc */
+    position: relative;               /* Pour l'icône décorative */
+}
+
+/* Icône de coquillage décorative
+ * Ajout d'un élément visuel tournant */
+.card-header::after {
+    content: '🐚';                    /* Emoji coquillage */
+    position: absolute;               /* Positionnement dans le coin */
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;                 /* Grande taille */
+    opacity: 0.3;                    /* Semi-transparent */
+    animation: shellSpin 8s linear infinite; /* Animation de rotation */
+}
+
+/* Animation de rotation du coquillage
+ * Rotation continue à vitesse constante */
+@keyframes shellSpin {
+    0% { transform: rotate(0deg); }      /* Départ */
+    100% { transform: rotate(360deg); }  /* Rotation complète */
+}
+
+/* Conteneur des informations voyageur
+ * Organisation horizontale des éléments */
+.traveler-info {
+    display: flex;                   /* Layout flexible */
+    align-items: center;             /* Centrage vertical */
+    gap: 1.5rem;                    /* Espacement entre éléments */
+}
+
+/* Photo de profil du voyageur
+ * Style circulaire avec bordure blanche */
+.traveler-photo {
+    width: 80px;                    /* Dimensions fixes */
+    height: 80px;
+    border-radius: 50%;             /* Forme circulaire */
+    object-fit: cover;              /* Ajustement de l'image */
+    border: 4px solid white;        /* Bordure blanche */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Ombre portée */
+}
+
+/* Nom du voyageur */
+.traveler-details h3 {
+    margin: 0 0 0.5rem 0;          /* Espacement minimal */
+    font-size: 1.5rem;             /* Taille importante */
+    font-weight: 600;              /* Police semi-grasse */
+}
+
+/* Date du voyage */
+.travel-date {
+    margin: 0 0 0.5rem 0;          /* Espacement minimal */
+    opacity: 0.9;                  /* Légèrement atténué */
+    font-size: 1rem;               /* Taille standard */
+}
+
+/* Note d'évaluation
+ * Style distinct avec couleur corail */
+.rating {
+    color: var(--maldives-coral);  /* Couleur thématique */
+    font-size: 1.2rem;             /* Taille légèrement plus grande */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Ombre subtile */
+}
+
+/* Contenu principal du souvenir
+ * Section contenant les photos et le récit du voyage */
+.memory-content {
+    padding: 2rem;              /* Espacement uniforme */
+}
+
+/* Grille de photos
+ * Organisation asymétrique des images avec une photo principale */
+.photos-grid {
+    display: grid;              /* Layout en grille */
+    grid-template-columns: 2fr 1fr 1fr; /* Disposition asymétrique */
+    gap: 1rem;                 /* Espacement entre les photos */
+    margin-bottom: 2rem;       /* Espacement avec le texte */
+    border-radius: 20px;       /* Coins arrondis */
+    overflow: hidden;          /* Masque les débordements */
+}
+
+/* Style commun pour toutes les photos
+ * Inclut des effets de survol et filtres */
+.memory-photo {
+    width: 100%;              /* Largeur complète */
+    height: 200px;            /* Hauteur fixe */
+    object-fit: cover;        /* Ajustement de l'image */
+    transition: all 0.3s ease; /* Animation fluide */
+    cursor: pointer;          /* Indique l'interactivité */
+    border-radius: 12px;      /* Coins arrondis */
+    filter: brightness(1) saturate(1.1); /* Légère amélioration visuelle */
+}
+
+/* Photo principale
+ * Plus grande et occupe deux rangées */
+.main-photo {
+    height: 400px;           /* Double hauteur */
+    grid-row: span 2;        /* Occupe deux rangées */
+}
+
+/* Effet de survol des photos
+ * Amélioration visuelle et interaction */
+.memory-photo:hover {
+    transform: scale(1.05);  /* Léger zoom */
+    filter: brightness(1.1) saturate(1.3); /* Couleurs plus vives */
+    box-shadow: 0 12px 30px rgba(64, 224, 208, 0.4); /* Ombre colorée */
+}
+
+/* Section du récit écrit
+ * Style du contenu textuel */
+.story-content h4 {
+    font-size: 1.4rem;         /* Taille importante */
+    color: var(--maldives-teal); /* Couleur thématique */
+    margin-bottom: 1rem;       /* Espacement bas */
+    font-weight: 600;          /* Police semi-grasse */
+}
+
+/* Paragraphes du récit */
+.story-content p {
+    color: #555;              /* Gris foncé pour la lisibilité */
+    line-height: 1.8;         /* Espacement des lignes */
+    margin-bottom: 1.5rem;    /* Espacement entre paragraphes */
+    font-size: 1.1rem;        /* Taille confortable */
+}
+
+/* Citations mise en valeur
+ * Style distinctif avec dégradé */
+.story-content blockquote {
+    background: var(--maldives-gradient); /* Dégradé thématique */
+    color: white;             /* Texte blanc */
+    padding: 1.5rem;         /* Espacement interne */
+    border-radius: 20px;     /* Coins arrondis */
+    border-left: 5px solid var(--maldives-coral); /* Accent corail */
+    margin: 1.5rem 0;        /* Espacement vertical */
+    font-style: italic;      /* Style italique */
+    font-size: 1.1rem;       /* Taille légèrement plus grande */
+    position: relative;      /* Pour le guillemet décoratif */
+}
+
+/* Guillemet décoratif
+ * Ajoute un grand guillemet en arrière-plan */
+.story-content blockquote::before {
+    content: '"';            /* Guillemet */
+    font-size: 4rem;        /* Grande taille */
+    position: absolute;      /* Positionnement absolu */
+    top: -15px;             /* Ajustement de la position */
+    left: 15px;
+    color: rgba(255,255,255,0.2); /* Semi-transparent */
+    font-family: 'Dancing Script', cursive; /* Police décorative */
+}
+
+/* Section des points forts
+ * Affichage des tags représentant les moments clés du voyage */
+.highlights {
+    display: flex;           /* Layout flexible */
+    flex-wrap: wrap;        /* Passage à la ligne automatique */
+    gap: 0.5rem;           /* Espacement entre les tags */
+    margin-top: 1.5rem;    /* Espacement avec le contenu précédent */
+}
+
+/* Tags individuels des points forts
+ * Style des étiquettes avec effet de brillance */
+.highlight-tag {
+    background: var(--maldives-gradient); /* Dégradé thématique */
+    color: white;                        /* Texte blanc */
+    padding: 0.6rem 1.2rem;             /* Espacement interne */
+    border-radius: 30px;                /* Forme très arrondie */
+    font-size: 0.9rem;                  /* Taille réduite */
+    font-weight: 500;                   /* Police medium */
+    transition: all 0.3s ease;          /* Animation fluide */
+    border: 2px solid transparent;      /* Bordure pour l'effet */
+    position: relative;                 /* Pour l'effet de brillance */
+    overflow: hidden;                   /* Masque les débordements */
+}
+
+/* Effet de brillance au survol
+ * Crée un flash lumineux qui traverse le tag */
+.highlight-tag::before {
+    content: '';
+    position: absolute;                /* Positionnement absolu */
+    top: 0;
+    left: -100%;                      /* Commence hors champ */
+    width: 100%;
+    height: 100%;
+    /* Dégradé de brillance */
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transition: left 0.5s ease;       /* Animation fluide */
+}
+
+/* Animation de l'effet de brillance */
+.highlight-tag:hover::before {
+    left: 100%;                      /* Traverse le tag */
+}
+
+/* Transformation au survol
+ * Effet de mise en valeur */
+.highlight-tag:hover {
+    transform: scale(1.1) rotate(-2deg); /* Agrandissement et rotation */
+    border-color: var(--maldives-coral); /* Bordure colorée */
+}
+
+/* ===== SECTION STATISTIQUES =====
+ * Affichage des chiffres clés avec effets sous-marins */
+.stats-section {
+    padding: 4rem 0;                /* Espacement vertical */
+    background: var(--maldives-teal); /* Fond bleu-vert profond */
+    color: white;                   /* Texte blanc */
+    position: relative;             /* Pour l'effet d'arrière-plan */
+    overflow: hidden;               /* Masque les débordements */
+}
+
+/* Effet de courant sous-marin
+ * Crée un motif animé de points lumineux */
+.stats-section::before {
+    content: '';
+    position: absolute;             /* Positionnement étendu */
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    /* Motif de points avec dégradé radial */
+    background: radial-gradient(circle, rgba(64, 224, 208, 0.1) 1px, transparent 1px);
+    background-size: 80px 80px;     /* Taille du motif */
+    animation: underwaterCurrent 60s linear infinite; /* Animation de rotation */
+}
+
+/* Animation du courant sous-marin
+ * Rotation et zoom lent du motif */
+@keyframes underwaterCurrent {
+    0% { transform: rotate(0deg) scale(1); }         /* État initial */
+    100% { transform: rotate(360deg) scale(1.1); }   /* Rotation complète avec zoom */
+}
+
+/* Grille des statistiques
+ * Organisation responsive des éléments */
+.stats-grid {
+    display: grid;                  /* Layout en grille */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Colonnes adaptatives */
+    gap: 2rem;                     /* Espacement entre items */
+    margin-top: 3rem;              /* Espacement avec le titre */
+    position: relative;            /* Pour la superposition */
+    z-index: 2;                   /* Au-dessus du motif animé */
+}
+
+/* Élément individuel de statistique
+ * Style avec effet de verre et animations */
+.stat-item {
+    text-align: center;           /* Centrage du contenu */
+    padding: 2.5rem;              /* Espacement interne */
+    background: rgba(64, 224, 208, 0.1); /* Fond semi-transparent */
+    border-radius: 25px;          /* Coins arrondis */
+    backdrop-filter: blur(10px);  /* Effet de flou derrière */
+    border: 2px solid rgba(0, 153, 255, 0.3); /* Bordure subtile */
+    transition: all 0.3s ease;    /* Animation fluide */
+    position: relative;           /* Pour l'effet de bordure */
+}
+
+/* Effet de bordure en dégradé au survol */
+.stat-item::before {
+    content: '';
+    position: absolute;           /* Couvre tout l'élément */
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--maldives-gradient); /* Dégradé thématique */
+    border-radius: 27px;          /* Coins arrondis */
+    z-index: -1;                  /* En arrière-plan */
+    opacity: 0;                   /* Invisible par défaut */
+    transition: opacity 0.3s ease; /* Animation d'apparition */
+}
+
+/* Effets de survol */
+.stat-item:hover {
+    transform: translateY(-10px);  /* Élévation de la carte */
+}
+
+.stat-item:hover::before {
+    opacity: 1;                    /* Affiche le dégradé */
+}
+
+/* Nombre de la statistique
+ * Style distinctif pour mettre en valeur le chiffre */
+.stat-number {
+    font-size: 3.2rem;            /* Très grande taille */
+    font-weight: 700;             /* Police grasse */
+    color: var(--maldives-turquoise); /* Couleur thématique */
+    margin-bottom: 0.5rem;        /* Espacement avec le label */
+    text-shadow: 0 0 30px rgba(64, 224, 208, 0.6); /* Effet de lueur */
+}
+
+/* Label de la statistique */
+.stat-label {
+    font-size: 1.1rem;            /* Taille lisible */
+    opacity: 0.95;                /* Légèrement transparent */
+}
+
+/* ===== SECTION ACTIVITÉS =====
+ * Présentation des activités disponibles aux Maldives */
+.activities-section {
+    padding: 4rem 0;               /* Espacement vertical */
+    /* Dégradé du ciel à la plage */
+    background: linear-gradient(135deg, #f0f8ff 0%, var(--maldives-sand) 100%);
+}
+
+/* Grille des activités
+ * Organisation responsive des cartes d'activités */
+.activities-grid {
+    display: grid;                 /* Layout en grille */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Colonnes adaptatives */
+    gap: 2rem;                    /* Espacement entre cartes */
+    margin-top: 3rem;             /* Espacement avec le titre */
+}
+
+/* Carte individuelle d'activité
+ * Style avec effets de survol élaborés */
+.activity-card {
+    background: white;            /* Fond blanc */
+    padding: 2.5rem;             /* Espacement interne */
+    border-radius: 25px;         /* Coins très arrondis */
+    text-align: center;          /* Centrage du contenu */
+    box-shadow: 0 10px 30px rgba(0, 153, 255, 0.15); /* Ombre douce */
+    transition: all 0.3s ease;   /* Animation fluide */
+    border: 3px solid transparent; /* Bordure invisible */
+    position: relative;          /* Pour l'effet de remplissage */
+    overflow: hidden;            /* Masque les débordements */
+}
+
+/* Effet de remplissage au survol
+ * Crée un effet de vague qui remplit la carte */
+.activity-card::before {
+    content: '';
+    position: absolute;          /* Couvre toute la carte */
+    top: 0;
+    left: -100%;                /* Commence hors champ */
+    width: 100%;
+    height: 100%;
+    background: var(--maldives-gradient); /* Dégradé thématique */
+    transition: left 0.5s ease; /* Animation fluide */
+    z-index: -1;                /* En arrière-plan */
+}
+
+/* Animation de remplissage */
+.activity-card:hover::before {
+    left: 0;                    /* Remplit la carte */
+}
+
+/* États de survol de la carte */
+.activity-card:hover {
+    transform: translateY(-12px) scale(1.02); /* Élévation et zoom */
+    border-color: var(--maldives-turquoise); /* Bordure visible */
+    box-shadow: 0 20px 40px rgba(0, 153, 255, 0.25); /* Ombre plus prononcée */
+    color: white;              /* Texte blanc */
+}
+
+/* Icône de l'activité
+ * Emoji ou icône avec animation flottante */
+.activity-icon {
+    font-size: 4rem;          /* Grande taille */
+    margin-bottom: 1rem;      /* Espacement bas */
+    animation: activityFloat 3s ease-in-out infinite; /* Animation de flottaison */
+}
+
+/* Animation de flottaison
+ * Mouvement vertical doux */
+@keyframes activityFloat {
+    0%, 100% { transform: translateY(0); }     /* Position normale */
+    50% { transform: translateY(-10px); }      /* Élévation */
+}
+
+/* Titre de l'activité */
+.activity-card h3 {
+    font-size: 1.5rem;         /* Taille importante */
+    color: var(--maldives-teal); /* Couleur thématique */
+    margin-bottom: 1rem;       /* Espacement bas */
+    font-weight: 600;          /* Police semi-grasse */
+    transition: color 0.3s ease; /* Transition de couleur */
+}
+
+/* Changement de couleur au survol */
+.activity-card:hover h3 {
+    color: white;             /* Texte blanc */
+}
+
+/* Description de l'activité */
+.activity-card p {
+    color: #666;             /* Gris pour la lisibilité */
+    line-height: 1.6;        /* Espacement des lignes */
+    transition: color 0.3s ease; /* Transition de couleur */
+}
+
+/* Changement de couleur au survol */
+.activity-card:hover p {
+    color: rgba(255,255,255,0.9); /* Texte blanc légèrement transparent */
+}
+
+/* ===== CALL TO ACTION ===== */
+.cta-section {
+    padding: 4rem 0;
+    background: var(--maldives-gradient);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="150" cy="100" r="2" fill="rgba(255,255,255,0.08)"/><circle cx="100" cy="150" r="2.5" fill="rgba(255,255,255,0.12)"/><circle cx="180" cy="30" r="1.5" fill="rgba(255,255,255,0.09)"/></svg>');
+    background-size: 200px 200px;
+    animation: tropicalPattern 50s linear infinite;
+}
+
+@keyframes tropicalPattern {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-200px, -200px) rotate(360deg); }
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* CTA Buttons
+ * Définition des styles pour les boutons d'appel à l'action.
+ * - .btn-primary: bouton principal à remplissage animé
+ * - .btn-secondary: bouton secondaire à fond transparent
+ * Les pseudo-éléments ::before sont utilisés pour l'effet de remplissage au survol. */
+.btn-primary, .btn-secondary {
+    padding: 1.2rem 2.5rem;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 3px solid white;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: white;
+    color: var(--maldives-teal);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--maldives-teal);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    left: 0;
+}
+
+.btn-primary:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: white;
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.btn-secondary:hover::before {
+    left: 0;
+}
+
+.btn-secondary:hover {
+    color: var(--maldives-teal);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* ===== RESPONSIVE =====
+ * Points de rupture et adaptations principales
+ * Objectif : garantir lisibilité et ergonomie sur tablettes et mobiles
+ */
+@media (max-width: 768px) {
+    /* Tablettes / petits écrans : réduire les tailles importantes
+     * et passer certaines grilles en 2 colonnes pour conserver l'équilibre. */
+    .dhivehi {
+        font-size: 2.2rem; /* Réduction du titre Dhivehi pour s'adapter à la largeur */
+    }
+
+    .french {
+        font-size: 1.8rem; /* Titre français légèrement plus petit */
+    }
+
+    /* Galerie photo : empiler les images en une colonne pour éviter
+     * des miniatures trop petites sur écran réduit. */
+    .photos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Photo principale : réduire la hauteur et ne plus occuper deux rangées */
+    .main-photo {
+        height: 250px;
+        grid-row: span 1; /* Annule le span 2 sur mobile/tablette */
+    }
+
+    /* Photos secondaires : hauteur ajustée pour cohérence visuelle */
+    .memory-photo {
+        height: 200px;
+    }
+
+    /* Info voyageur : passer en colonne pour empilement vertical */
+    .traveler-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Grilles statistiques et activités : 2 colonnes pour tablettes */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .activities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    /* Ajustement du style des chiffres pour garder l'équilibre */
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    /* CTA : empiler les boutons et limiter leur largeur */
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 320px; /* Empêche les boutons d'être trop larges */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobiles : adaptations plus fortes pour lisibilité et ergonomie */
+    .maldives-hero {
+        height: 70vh; /* Réduit la hauteur héro pour montrer plus de contenu */
+    }
+
+    /* Titres de sections adaptés aux petits écrans */
+    .section-title-maldives {
+        font-size: 1.8rem;
+    }
+
+    /* Témoignages : espacement réduit pour économiser de l'espace */
+    .testimonial-card {
+        margin-bottom: 2rem;
+    }
+
+    /* Réduction des paddings sur les en-têtes et contenus pour compacter */
+    .card-header, .memory-content {
+        padding: 1.5rem;
+    }
+
+    /* Grilles : une seule colonne pour une lecture verticale naturelle */
+    .stats-grid, .activities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Icônes et ornements légèrement réduits */
+    .activity-icon {
+        font-size: 3rem;
+    }
+
+    .title-ornament {
+        font-size: 2rem;
+    }
+
+    /* Cartes d'activités : réduire le padding pour tenir sur l'écran */
+    .activity-card {
+        padding: 2rem;
+    }
+}
+
+/* Fin du fichier CSS spécifique à la page Souvenirs - Maldives */

@@ -1,0 +1,1218 @@
+/* reset et styles de base */
+/* But: uniformiser le rendu entre navigateurs et établir des bases prévisibles.
+ * Explications "ligne par ligne" pour le sélecteur universel ci‑dessous :
+ *   *  => s'applique à tous les éléments HTML.
+ *  margin: 0;       => supprime les marges par défaut (évite surprises entre navigateurs).
+ *  padding: 0;      => supprime les paddings par défaut (garantit que l'espacement est défini explicitement).
+ *  box-sizing: border-box; => change le modèle de boîte pour inclure le padding/border dans width/height.
+ * Contraintes: s'applique globalement; si un composant externe attend l'ancien comportement,
+ *              il faudra surcharger spécifiquement son box-sizing.
+ */
+* {
+    margin: 0;             /* Reset des marges par défaut de tous les éléments */
+    padding: 0;            /* Reset des paddings par défaut */
+    box-sizing: border-box;/* Inclut padding et border dans la largeur/hauteur déclarées */
+}
+
+/* styles appliqués à l'élément body (corps du document)
+ * Détail par propriété :
+ *  - font-family: définit la police principale; 'Arial' est utilisée ici avec un fallback sans-serif.
+ *  - line-height: 1.6 pour améliorer la lisibilité (contrainte de typographie).
+ *  - color: couleur du texte primaire (#333, gris foncé plutôt que noir pur pour moins de contraste agressif).
+ *  - background-color: couleur de fond global (gris très clair) pour une apparence douce.
+ */
+body {
+    font-family: 'Arial', sans-serif; /* Police principale avec fallback */
+    line-height: 1.6;                /* Interlignage pour lisibilité */
+    color: #333;                      /* Couleur du texte par défaut */
+    background-color: #f8f9fa;        /* Couleur de fond globale */
+}
+
+/* partie header (en-tête) avec son style
+ * Explications par propriété :
+ *  - background: linear-gradient(...) => dégradé diagonal pour un look moderne;
+ *  - color: couleur du texte à l'intérieur du header;
+ *  - padding: espace interne vertical (0.5rem en haut/bas) ;
+ *  - box-shadow: petite ombre pour séparation visuelle avec le contenu;
+ *  - position: fixed + top:0 + width:100% => fixe l'en-tête en haut de la fenêtre (hors flux normal);
+ *    Contraintes : les éléments suivants doivent compenser la hauteur (marge sur main).
+ *  - z-index: 1000 => assure que le header reste au dessus des autres éléments;
+ *  - transition: transform 0.3s => utilisé pour animer l'entrée/sortie via transform (ex: .navbar-hidden).
+ */
+header {
+    background: linear-gradient(135deg, #2c3e50, #3498db); /* Dégradé diagonal */
+    color: white;                                        /* Couleur du texte */
+    padding: 0.5rem 0;                                   /* Espacement vertical */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);              /* Ombre subtile */
+    position: fixed;                                     /* Fixe en haut de la page */
+    width: 100%;
+    top: 0;                                              /* Collé au sommet */
+    z-index: 1000;                                       /* Priorité d'affichage */
+    transition: transform 0.3s ease-in-out;              /* Transition pour animations via transform */
+}
+
+/* Classes pour l'auto-hide de la navbar pendant le scroll */
+/* Classes utilitaires pour montrer/cacher la navbar via translation (prévu pour JS)
+ * - .navbar-hidden : translateY(-100%) fait remonter le header hors écran --> effet de masquage.
+ * - .navbar-visible : remet en place (translateY(0)).
+ * Ces classes modifient la propriété 'transform' animée par la transition définie sur header.
+ */
+header.navbar-hidden { transform: translateY(-100%); }
+header.navbar-visible { transform: translateY(0); }
+
+.header-container {
+    /* un conteneur interne du header pour limiter la largeur */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* j'applique une largeur maximale 1200px pour design responsive avec un centrage horizontal automatique */
+    /* un espacement horizontal 20px de chaque côté, un flexbox pour alignement horizontal */
+    /* je réparti le logo à gauche et une navigation à droite avec un alignement vertical centré */
+
+}
+
+.logo {
+    /* style pour le logo de l'agence */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+
+/* j'applique la taille de police 1.5rem (24px) avec un texte en gras et une couleur blanche et supprime le soulignement du lien */
+}
+
+/* NAVIGATION PRINCIPALE
+ * Explications ligne-par-ligne pour les règles de navigation :
+ * - La barre utilise une liste non-stylée et un flexbox pour aligner horizontalement les éléments.
+ * - Les liens ont des zones cliquables généreuses (padding) et des transitions pour des hover doux.
+ */
+nav ul {
+    list-style: none;    /* Supprime les puces par défaut */
+    display: flex;       /* Aligne les items horizontalement via Flexbox */
+    gap: 2rem;           /* Espace entre les items (séparation constante) */
+}
+
+nav a {
+    color: white;                 /* Couleur du lien */
+    text-decoration: none;        /* Supprime le soulignement */
+    font-weight: 500;             /* Poids de police medium */
+    transition: color 0.3s ease;  /* Transition douce sur la couleur (hover/focus) */
+    padding: 0.3rem 0.8rem;       /* Zone cliquable : vertical/horizontal */
+    border-radius: 5px;           /* Légère rondeur des coins pour hover */
+}
+
+/* États d'interaction
+ * :hover => interaction souris ; :active ici utilisé pour marquer l'élément courant
+ * L'effet visuel utilise un fond blanc semi-transparent pour contraste sur le header sombre. */
+nav a:hover,
+nav a:active {
+    background-color: rgba(255,255,255,0.2);
+    color: #fff; /* Maintient le texte blanc pour lisibilité */
+}
+
+/* Dropdown Menu Styles */
+/* Styles pour le menu déroulant "Carnet de voyage" */
+/* DROPDOWN (menu déroulant)
+ * Structure : .dropdown (parent), .dropdown-content (contenu caché)
+ * Comportement : affichage via hover (desktop) ; sur mobile, transformé via media queries.
+ * Contraintes : reliance sur :hover pour ouvrir le menu — sur mobile, on adapte via queries.
+ */
+.dropdown {
+    position: relative;  /* Contexte pour position absolute du contenu */
+    display: inline-block; /* Permet d'être aligné inline tout en étant positionné */
+}
+
+.dropdown-content {
+    display: none;                /* Caché par défaut */
+    position: absolute;           /* Sors du flux pour se superposer */
+    background-color: white;      /* Fond contrasté pour lisibilité */
+    min-width: 220px;             /* Largeur minimale pour éléments lisibles */
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2); /* Ombre portée */
+    border-radius: 10px;          /* Coins arrondis */
+    z-index: 1000;                /* Au-dessus du reste */
+    top: 100%;                    /* Positionné juste sous l'élément parent */
+    left: 0;
+    overflow: hidden;             /* Masque débordements internes */
+    margin-top: 0.5rem;           /* Petit décalage visuel */
+}
+
+.dropdown-content a {
+    color: #2c3e50 !important;    /* Couleur texte dans dropdown (override si nécessaire) */
+    padding: 12px 16px;           /* Zone cliquable confortable */
+    text-decoration: none;        /* Pas de soulignement */
+    display: block;               /* Chaque lien sur sa ligne */
+    transition: all 0.3s ease;    /* Transition pour hover */
+    font-weight: 500;             /* Lisibilité */
+}
+
+.dropdown-content a:hover {
+    background-color: #3498db;    /* Fond bleu au survol */
+    color: white !important;      /* Texte blanc pour contraste */
+    transform: translateX(5px);   /* Petit décalage pour effet dynamique */
+}
+
+/* Activation du dropdown par hover (desktop) -> affichage + animation */
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: slideDown 0.3s ease; /* Animation d'entrée définie plus bas */
+}
+
+/* Animation slideDown : utilisé pour l'apparition du dropdown
+ * - commence légèrement en haut et transparent, s'anime vers sa position finale.
+ */
+@keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.dropbtn .fas {
+    margin-left: 0.5rem;               /* Espace entre texte et icône */
+    font-size: 0.8rem;                 /* Taille réduite pour l'icône */
+    transition: transform 0.3s ease;   /* Animation de rotation sur hover */
+}
+
+/* Rotation de l'icône (chevron) lors du hover du dropdown */
+.dropdown:hover .dropbtn .fas { transform: rotate(180deg); }
+
+/* main content */
+/* style pour pour le contenu principal des ppages */
+
+main {
+    /* élément du main contenant le contenu principal */
+    margin-top: 80px;
+    min-height: calc(100vh - 160px);
+    /* marge haute 80px pour compenser le header fixe et une hauteur mini calculée : 100vh -160px (header + footer) */
+}
+
+.container {
+    /* classe conteneur générique utilisée dans toutes les sections */
+    max-width: 1200px;                       
+    margin: 0 auto;                           
+    padding: 0 20px;
+    /* j'applique une largeur max 1200px, un centrage horizontal et un espacement horizontal 20px */
+}
+
+/* Hero Section */
+/* Commentaire : Styles pour la section bannière principale */
+
+.hero {
+    /* Section héro avec image de fond */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),   
+    /* Calque noir semi-transparent */
+                url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2835&q=80') center/cover; 
+    /* Image fond Unsplash centrée couvrant */
+    height: 70vh;                             
+    display: flex;                            
+    align-items: center;                      
+    justify-content: center;                  
+    text-align: center;                       
+    color: white;                            
+    margin-bottom: 4rem;                     
+    /* j'apllique une hauteur de 70% de la hauteur viewport, un flexbox pour centrer le contenu */
+    /* j'aplllique un centrage vertical et horizontal, le texte centré en blanc sur fond sombre */
+    /* une marge basse 4rem pour espacement */
+}
+
+.hero-content h1 {
+    /* Titre principal du héro */
+    font-size: 3.5rem;                       /* Taille très grande 3.5rem */
+    margin-bottom: 1rem;                     /* Marge basse 1rem */
+    animation: fadeInUp 1s ease-out;         /* Animation entrée fadeInUp, durée 1s, transition douce */
+}
+
+.hero-content p {
+    /* Paragraphe descriptif du héro */
+    font-size: 1.2rem;                       /* Taille légèrement plus grande */
+    margin-bottom: 2rem;                     /* Marge basse 2rem */
+    animation: fadeInUp 1s ease-out 0.3s both;  /* Animation identique avec délai 0.3s et both (forwards + backwards) */
+}
+
+.cta-button {
+    /* Bouton call-to-action (appel à l'action) */
+    background: linear-gradient(45deg, #e74c3c, #f39c12);  /* Dégradé rouge vers orange à 45° */
+    color: white;                            /* Texte blanc */
+    padding: 15px 30px;                      /* Espacement interne généreux */
+    text-decoration: none;                   /* Supprime soulignement lien */
+    border-radius: 50px;                     /* Coins très arrondis (forme pilule) */
+    font-weight: bold;                       /* Texte gras */
+    font-size: 1.1rem;                       /* Taille légèrement plus grande */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transitions multiples : transform et ombre */
+    display: inline-block;                   /* Affichage bloc en ligne pour pouvoir appliquer transform */
+    animation: fadeInUp 1s ease-out 0.6s both;  /* Animation avec délai 0.6s */
+}
+
+.cta-button:hover {
+    /* État survol du bouton CTA */
+    transform: translateY(-2px);             /* Translation vers le haut de 2px (effet lvitation) */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Ombre portée plus prononcée */
+}
+
+/* Section Styles */
+/* Commentaire : Styles génériques pour toutes les sections du site */
+
+.section {
+    /* Classe générique pour sections de contenu */
+    padding: 4rem 0;                         /* Espacement vertical important 4rem */
+}
+
+.section-title {
+    /* Titres de sections */
+    text-align: center;                      /* Centrage texte */
+    font-size: 2.5rem;                       /* Grande taille 2.5rem */
+    margin-bottom: 3rem;                     /* Grande marge basse */
+    color: #2c3e50;                         /* Couleur bleu-gris foncé */
+    position: relative;                      /* Position relative pour pseudo-élément */
+}
+
+.section-title::after {
+    /* Pseudo-élément décoratif sous le titre */
+    content: '';                            /* Contenu vide obligatoire */
+    width: 100px;                           /* Largeur 100px */
+    height: 3px;                            /* Hauteur 3px (ligne fine) */
+    background: linear-gradient(45deg, #3498db, #e74c3c);  /* Dégradé bleu vers rouge */
+    position: absolute;                      /* Position absolue par rapport au titre */
+    bottom: -10px;                          /* 10px sous le texte */
+    left: 50%;                              /* Positionnement à 50% de la largeur */
+    transform: translateX(-50%);             /* Translation -50% pour centrage parfait */
+}
+
+/* Cards Grid */
+/* Commentaire : Système de grille pour cartes de contenu */
+
+.cards-grid {
+    /* Grille responsive pour cartes */
+    display: grid;                           /* Affichage CSS Grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  /* Colonnes auto-adaptatives, min 300px */
+    gap: 2rem;                              /* Espacement 2rem entre cartes */
+    margin: 2rem 0;                         /* Marge verticale 2rem */
+}
+
+.card {
+    /* Styles pour cartes individuelles */
+    background: white;                       /* Fond blanc */
+    border-radius: 15px;                     /* Coins arrondis 15px */
+    overflow: hidden;                        /* Masque dépassements (important pour images) */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Ombre portée subtile */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transitions pour hover */
+}
+
+.card:hover {
+    /* État survol des cartes */
+    transform: translateY(-10px);            /* Élévation 10px vers le haut */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* Ombre plus prononcée */
+}
+
+.card img {
+    /* Images dans les cartes */
+    width: 100%;                            /* Largeur 100% du conteneur */
+    height: 200px;                          /* Hauteur fixe 200px */
+    object-fit: cover;                      /* Recadrage image pour couvrir zone sans déformation */
+}
+
+.card-content {
+    /* Contenu textuel des cartes */
+    padding: 1.5rem;                        /* Espacement interne généreux */
+}
+
+.card h3 {
+    /* Titres dans les cartes */
+    font-size: 1.3rem;                      /* Taille moyenne */
+    margin-bottom: 1rem;                    /* Marge basse */
+    color: #2c3e50;                         /* Couleur bleu-gris */
+}
+
+.card p {
+    /* Paragraphes dans les cartes */
+    color: #666;                            /* Gris moyen pour lisibilité */
+    margin-bottom: 1rem;                    /* Marge basse */
+}
+
+.price {
+    /* Affichage des prix */
+    font-size: 1.4rem;                      /* Taille plus grande */
+    font-weight: bold;                      /* Gras pour attirer attention */
+    color: #e74c3c;                         /* Rouge pour urgence/action */
+}
+
+/* Services Grid */
+/* Commentaire : Grille spécifique pour la page services */
+
+.services-grid {
+    /* Grille pour services (plus petites cellules que cards) */
+    display: grid;                           /* CSS Grid */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Colonnes min 250px (plus petites) */
+    gap: 2rem;                              /* Espacement identique */
+    margin: 2rem 0;                         /* Marge verticale */
+}
+
+.service-item {
+    /* Items individuels de services */
+    text-align: center;                     /* Centrage du contenu */
+    padding: 2rem;                          /* Espacement interne */
+    background: white;                       /* Fond blanc */
+    border-radius: 15px;                     /* Coins arrondis */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Ombre portée */
+    transition: transform 0.3s ease;         /* Transition pour hover */
+}
+
+.service-item:hover {
+    /* État survol des services */
+    transform: translateY(-5px);             /* Légère élévation 5px */
+}
+
+.service-icon {
+    /* Icônes des services */
+    font-size: 3rem;                        /* Très grande taille pour visibilité */
+    margin-bottom: 1rem;                    /* Marge basse */
+    color: #3498db;                         /* Couleur bleue cohérente */
+}
+
+/* Form Styles */
+/* Commentaire : Styles pour formulaires de contact */
+
+.contact-form {
+    /* Conteneur principal du formulaire */
+    max-width: 800px;                       /* Largeur max augmentée pour le formulaire complexe */
+    margin: 0 auto;                         /* Centrage horizontal */
+    background: white;                       /* Fond blanc */
+    padding: 2.5rem;                        /* Espacement interne plus généreux */
+    border-radius: 15px;                    /* Coins arrondis */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1); /* Ombre portée plus prononcée */
+}
+
+.form-group {
+    /* Groupes de champs (label + input) */
+    margin-bottom: 1.5rem;                  /* Espacement entre groupes */
+}
+
+.form-group label {
+    /* Labels des champs */
+    display: block;                         /* Affichage bloc pour saut de ligne */
+    margin-bottom: 0.5rem;                  /* Petit espacement sous label */
+    font-weight: 600;                       /* Gras pour lisibilité */
+    color: #2c3e50;                         /* Couleur cohérente */
+    font-size: 0.95rem;                     /* Taille de police légèrement réduite */
+}
+
+.form-group label i {
+    /* Icônes dans les labels */
+    color: #3498db;                         /* Couleur bleue pour les icônes */
+    margin-right: 0.5rem;                   /* Espacement entre icône et texte */
+}
+
+.form-group input,      /* Champs de saisie */
+.form-group textarea,   /* Zones de texte multi-lignes */
+.form-group select {    /* Listes déroulantes */
+    /* Styles communs à tous les champs */
+    width: 100%;                            /* Largeur 100% du conteneur */
+    padding: 12px 15px;                     /* Espacement interne augmenté horizontalement */
+    border: 2px solid #e0e0e0;              /* Bordure grise claire */
+    border-radius: 8px;                     /* Coins légèrement arrondis */
+    font-size: 1rem;                        /* Taille police standard */
+    transition: all 0.3s ease;              /* Transition sur toutes les propriétés */
+    background-color: #f8f9fa;              /* Fond légèrement grisé */
+    color: #2c3e50;                         /* Couleur de texte plus foncée */
+}
+
+.form-group input:focus,    /* État focus (clic/tab) sur input */
+.form-group textarea:focus, /* État focus sur textarea */
+.form-group select:focus {  /* État focus sur select */
+    /* Styles pour champs actifs */
+    outline: none;                          /* Supprime outline par défaut navigateur */
+    border-color: #3498db;                  /* Bordure bleue pour indiquer état actif */
+    background-color: #fff;                 /* Fond blanc quand actif */
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1); /* Halo bleu subtil */
+}
+
+/* Style pour les cases à cocher */
+.form-group input[type="checkbox"] {
+    width: auto;                            /* Annule la largeur 100% */
+    margin-right: 10px;                     /* Espace après la case */
+    cursor: pointer;                        /* Curseur pointeur */
+}
+
+.form-group input[type="checkbox"] + span {
+    color: #666;                            /* Couleur de texte plus claire */
+    font-size: 0.95rem;                     /* Taille de police légèrement réduite */
+    font-weight: normal;                    /* Police normale pour le texte */
+}
+
+/* Style pour le texte requis (*) */
+.form-group label span.required {
+    color: #e74c3c;                         /* Rouge pour les champs requis */
+    margin-left: 4px;                       /* Espace avant l'astérisque */
+}
+
+.submit-btn {
+    /* Bouton de soumission formulaire */
+    background: linear-gradient(45deg, #3498db, #2c3e50);  /* Dégradé bleu vers gris */
+    color: white;                           /* Texte blanc */
+    padding: 15px 30px;                     /* Espacement interne augmenté */
+    border: none;                           /* Supprime bordure par défaut */
+    border-radius: 50px;                    /* Coins très arrondis pour style moderne */
+    font-size: 1.1rem;                      /* Taille légèrement plus grande */
+    font-weight: 600;                       /* Police semi-grasse */
+    cursor: pointer;                        /* Curseur pointeur au survol */
+    transition: all 0.3s ease;              /* Transition sur toutes les propriétés */
+    width: 100%;                            /* Largeur 100% */
+    margin-top: 1rem;                       /* Marge supérieure */
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); /* Ombre portée bleue */
+}
+
+.submit-btn:hover {
+    /* État survol bouton soumission */
+    transform: translateY(-2px);            /* Élévation légère */
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); /* Ombre portée plus prononcée */
+    background: linear-gradient(45deg, #2980b9, #2c3e50); /* Dégradé légèrement plus foncé */
+}
+
+/* Footer */
+/* Commentaire : Styles pour pied de page */
+
+footer {
+    /* Pied de page du site */
+    background: #2c3e50;                    /* Fond gris foncé */
+    color: white;                           /* Texte blanc */
+    text-align: center;                     /* Centrage du contenu */
+    padding: 2rem 0;                        /* Espacement vertical */
+    margin-top: 4rem;                       /* Grande marge haute pour séparation */
+}
+
+.footer-content {
+    /* Conteneur interne du footer */
+    max-width: 1200px;                      /* Largeur max cohérente */
+    margin: 0 auto;                         /* Centrage horizontal */
+    padding: 0 20px;                        /* Espacement horizontal */
+}
+
+.footer-links {
+    /* Conteneur des liens de navigation footer */
+    display: flex;                          /* Flexbox pour alignement */
+    justify-content: center;                /* Centrage horizontal */
+    gap: 2rem;                             /* Espacement entre liens */
+    margin-bottom: 1rem;                   /* Marge basse */
+    flex-wrap: wrap;                       /* Retour à la ligne si nécessaire */
+}
+
+.footer-links a {
+    /* Liens dans le footer */
+    color: #bdc3c7;                        /* Gris clair */
+    text-decoration: none;                 /* Sans soulignement */
+    transition: color 0.3s ease;          /* Transition couleur */
+}
+
+.footer-links a:hover {
+    /* État survol liens footer */
+    color: #3498db;                        /* Bleu au survol */
+}
+
+/* Animations */
+/* Commentaire : Définitions des animations CSS */
+
+@keyframes fadeInUp {
+    /* Animation fadeInUp : apparition avec montée */
+    from {
+        /* État initial */
+        opacity: 0;                        /* Invisible */
+        transform: translateY(30px);       /* Décalé 30px vers le bas */
+    }
+    to {
+        /* État final */
+        opacity: 1;                        /* Visible */
+        transform: translateY(0);          /* Position normale */
+    }
+}
+
+.fade-in {
+    /* Classe utilitaire pour appliquer animation */
+    animation: fadeInUp 0.8s ease-out;     /* Animation fadeInUp durée 0.8s */
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+/* Media queries pour adaptation mobile et tablette */
+
+/* Tablettes et écrans moyens (1024px et moins) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .header-container {
+        padding: 0 15px;
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Tablettes petites et mobiles larges (768px et moins) */
+@media (max-width: 768px) {
+    /* Header et navigation responsive */
+    header {
+        padding: 0.3rem 0;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0 10px;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 0.3rem;
+        text-align: center;
+        width: 100%;
+    }
+    
+    nav li {
+        width: 100%;
+    }
+    
+    nav a {
+        display: block;
+        padding: 0.5rem 0.8rem;
+        width: 100%;
+    }
+    
+    /* Dropdown responsive */
+    .dropdown-content {
+        position: static;
+        display: block;
+        box-shadow: none;
+        background: rgba(255,255,255,0.1);
+        margin-top: 0.5rem;
+        border-radius: 5px;
+    }
+    
+    .dropdown-content a {
+        color: rgba(255,255,255,0.9) !important;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .dropdown-content a:last-child {
+        border-bottom: none;
+    }
+    
+    .dropbtn .fas {
+        display: none;
+    }
+    
+    /* Main content responsive */
+    main {
+        margin-top: 120px; /* Plus d'espace pour header mobile */
+    }
+    
+    /* Hero section responsive */
+    .hero {
+        height: 60vh;
+        padding: 2rem 0;
+    }
+    
+    .hero-content {
+        padding: 0 1rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    /* Grilles responsive */
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Cards responsive */
+    .card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .card img {
+        height: 200px;
+    }
+    
+    .service-item {
+        padding: 1.5rem;
+        text-align: center;
+    }
+    
+    .service-icon {
+        font-size: 2.5rem;
+    }
+    
+    /* Typography responsive */
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .section {
+        padding: 2.5rem 0;
+    }
+    
+    /* Footer responsive */
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .footer-content {
+        padding: 0 1rem;
+    }
+}
+
+/* Mobiles (480px et moins) */
+@media (max-width: 480px) {
+    /* Header ultra compact */
+    header {
+        padding: 0.5rem 0;
+    }
+    
+    .header-container {
+        padding: 0 10px;
+        gap: 0.5rem;
+    }
+    
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    nav ul {
+        gap: 0.3rem;
+    }
+    
+    nav a {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Main content mobile */
+    main {
+        margin-top: 140px;
+    }
+    
+    /* Hero mobile */
+    .hero {
+        height: 50vh;
+        padding: 1rem 0;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .cta-button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    /* Container mobile */
+    .container {
+        padding: 0 10px;
+    }
+    
+    /* Sections mobile */
+    .section {
+        padding: 2rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    
+    /* Cards mobile */
+    .card {
+        border-radius: 15px;
+    }
+    
+    .card-content {
+        padding: 1rem;
+    }
+    
+    .card img {
+        height: 180px;
+    }
+    
+    .service-item {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    .service-icon {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    /* Typography mobile */
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    /* Footer mobile */
+    footer {
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        padding: 0 10px;
+    }
+    
+    /* Utilitaires mobile */
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    /* Formulaires mobile */
+    .contact-form {
+        padding: 1.5rem;
+        margin: 0 10px;
+        border-radius: 12px;
+    }
+    
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+    
+    .form-group textarea {
+        min-height: 100px;
+    }
+    
+    /* Boutons mobile */
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Très petits écrans (360px et moins) */
+@media (max-width: 360px) {
+    .hero-content h1 {
+        font-size: 1.4rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.85rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .service-item,
+    .card-content {
+        padding: 0.8rem;
+    }
+    
+    nav a {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    /* Formulaires très petits écrans */
+    .contact-form {
+        padding: 1rem;
+        margin: 0 5px;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Améliorations spécifiques responsive */
+@media (max-width: 768px) {
+    /* Images responsive */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Tables responsive */
+    table {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+    
+    /* Footer responsive avancé */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .footer-section:last-child {
+        margin-bottom: 0;
+    }
+    
+    .social-links {
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    /* Navigation footer responsive */
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Pagination responsive */
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    /* Badges et tags responsive */
+    .badge,
+    .tag {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+/* ===== AMÉLIORATIONS RESPONSIVE SPÉCIFIQUES ===== */
+
+/* Média query pour tablettes en mode portrait */
+@media (max-width: 1024px) and (orientation: portrait) {
+    .hero {
+        height: 60vh;
+    }
+    
+    .section {
+        padding: 3rem 0;
+    }
+}
+
+/* Optimisations pour les écrans tactiles */
+@media (hover: none) and (pointer: coarse) {
+    /* Boutons plus grands pour les écrans tactiles */
+    .cta-button,
+    .btn,
+    nav a {
+        min-height: 44px; /* Taille minimale recommandée pour le tactile */
+        padding: 0.8rem 1.5rem;
+    }
+    
+    /* Espacement accru pour les liens tactiles */
+    nav ul {
+        gap: 1rem;
+    }
+    
+    /* Hover désactivé sur tactile */
+    .card:hover,
+    .service-item:hover {
+        transform: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+}
+
+/* Mode paysage mobile */
+@media (max-width: 896px) and (orientation: landscape) {
+    .hero {
+        height: 80vh;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .section {
+        padding: 2rem 0;
+    }
+    
+    /* Navigation compacte en paysage */
+    .header-container {
+        flex-direction: row;
+        padding: 0.5rem 10px;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    
+    nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    main {
+        margin-top: 70px;
+    }
+}
+
+/* Impression */
+@media print {
+    header,
+    footer,
+    nav,
+    .cta-button,
+    .btn {
+        display: none !important;
+    }
+    
+    main {
+        margin-top: 0 !important;
+    }
+    
+    .section {
+        page-break-inside: avoid;
+    }
+    
+    .card,
+    .service-item {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* Dark mode support (préférence système) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #ffffff;
+        --card-bg: #2a2a2a;
+    }
+    
+    /* Application optionnelle du dark mode */
+    /*
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+    
+    .card,
+    .service-item,
+    .contact-form {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+    }
+    */
+}
+
+/* Accessibilité - Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Contraste élevé */
+@media (prefers-contrast: high) {
+    .card,
+    .service-item {
+        border: 2px solid #000;
+    }
+    
+    .cta-button,
+    .btn {
+        border: 2px solid #000;
+        font-weight: bold;
+    }
+}
+
+/* ===== CLASSES UTILITAIRES RESPONSIVE ===== */
+
+/* Classes d'affichage responsive */
+.hidden-mobile {
+    display: block;
+}
+
+.visible-mobile {
+    display: none;
+}
+
+.hidden-tablet {
+    display: block;
+}
+
+.visible-tablet {
+    display: none;
+}
+
+.hidden-desktop {
+    display: none;
+}
+
+.visible-desktop {
+    display: block;
+}
+
+/* Classes de taille responsive */
+.text-responsive {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+}
+
+.title-responsive {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+.subtitle-responsive {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+}
+
+/* Container fluide responsive */
+.container-fluid {
+    width: 100%;
+    padding: 0 15px;
+    max-width: none;
+}
+
+/* Grille responsive simple */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.col {
+    flex: 1;
+    padding: 0 15px;
+    min-width: 0;
+}
+
+.col-auto {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+/* Espacements responsive */
+.spacing-mobile {
+    margin: 1rem 0;
+}
+
+.spacing-tablet {
+    margin: 1.5rem 0;
+}
+
+.spacing-desktop {
+    margin: 2rem 0;
+}
+
+/* Media queries pour classes utilitaires */
+@media (max-width: 768px) {
+    .hidden-mobile {
+        display: none !important;
+    }
+    
+    .visible-mobile {
+        display: block !important;
+    }
+    
+    .row {
+        flex-direction: column;
+    }
+    
+    .col {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .spacing-mobile {
+        margin: 0.5rem 0;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hidden-tablet {
+        display: none !important;
+    }
+    
+    .visible-tablet {
+        display: block !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    .hidden-desktop {
+        display: none !important;
+    }
+    
+    .visible-desktop {
+        display: block !important;
+    }
+}

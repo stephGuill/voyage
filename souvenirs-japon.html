@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souvenirs du Japon - VoyagePassion</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/souvenirs-japon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-plane"></i> VoyagePassion
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="circuits.html">Circuits</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn active">Carnet de voyage <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="souvenirs-japon.html" class="active">🌸 Souvenirs du Japon</a>
+                        </div>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!--
+      Structure principale de la page Japon.
+      Utilise une classe spécifique 'japan-page' pour les styles thématiques.
+      
+      Organisation :
+      1. Hero Section avec overlay sakura et titre bilingue
+      2. Introduction avec ornements 🌸
+      3. Galerie de témoignages (cards)
+      4. Statistiques
+      5. Call-to-action final
+    -->
+    <main class="japan-page">
+        <!--
+          Hero Section Japon
+          - .sakura-overlay : effet de pétales animés en CSS
+          - Titre bilingue (kanji + français)
+          - Sous-titre avec description
+          - Vague décorative en SVG pour transition visuelle
+          
+          Structure :
+          - .japan-hero : conteneur principal avec image de fond
+          - .hero-content : centrage et espacement du contenu
+          - .japan-title : style spécial pour le titre bilingue
+          - .wave-divider : effet de vague en bas de section
+        -->
+        <section class="japan-hero">
+            <div class="sakura-overlay"></div>
+            <div class="hero-content">
+                <h1 class="japan-title">
+                    <span class="kanji">日本の思い出</span>
+                    <span class="french">Souvenirs du Japon</span>
+                </h1>
+                <p class="hero-subtitle">Les récits authentiques de nos voyageurs au pays du soleil levant</p>
+                <div class="wave-divider">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,60 C300,120 600,0 900,60 C1050,90 1150,30 1200,60 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.1)"></path>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Introduction
+          - Utilise des ornements (fleurs de cerisier) pour le style japonais
+          - Structure en container pour l'alignement et la largeur max
+          - Titre stylisé avec des emoji comme décoration
+          
+          Classes :
+          - .intro-section : styles de base et espacement
+          - .section-title-japan : typographie spéciale pour les titres
+          - .title-ornament : gestion des emoji décoratifs
+          - .intro-text : style paragraphe avec taille et espacement adaptés
+        -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="intro-content">
+                    <h2 class="section-title-japan">
+                        <span class="title-ornament">🌸</span>
+                        Une aventure inoubliable
+                        <span class="title-ornament">🌸</span>
+                    </h2>
+                    <p class="intro-text">
+                        Découvrez à travers les yeux de nos voyageurs la magie du Japon : des temples ancestraux de Kyoto 
+                        aux néons de Tokyo, des jardins zen aux onsen traditionnels. Chaque témoignage raconte une 
+                        histoire unique, empreinte d'émotions et de découvertes.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!--
+          Section Galerie de Témoignages
+          Structure répétitive de cartes (testimonial-card) avec :
+          1. En-tête (.card-header)
+             - Photo du voyageur (.traveler-photo)
+             - Infos voyageur (.traveler-details)
+             - Note en étoiles (.rating)
+          2. Contenu (.memory-content)
+             - Grille de photos (.photos-grid)
+             - Histoire (.story-content)
+             - Tags d'expérience (.highlights)
+
+          Contraintes :
+          - Images responsives avec alt text
+          - Notation 5 étoiles via Font Awesome
+          - Dates formatées "mois année • durée"
+        -->
+        <section class="testimonials-gallery">
+            <div class="container">
+                
+                <!--
+                  Témoignage 1 - Marie & Pierre
+                  - Structure en carte avec header/content
+                  - Photos en grille 1 grande + 2 petites
+                  - Tags thématiques (Kyoto, Hanami, etc.)
+                -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="assets/img/marie-dubois-businesswoman.jpg" alt="Marie" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Marie & Pierre Dubois</h3>
+                                <p class="travel-date">Voyage en avril 2024 • 15 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Temple Kiyomizu-dera" class="memory-photo main-photo">
+                            <img src="assets/img/images_cérémonie_thé_ japonais.jpg" alt="Cérémonie du thé" class="memory-photo">
+                            <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Volcan japonais" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🌸 "Une expérience spirituelle extraordinaire"</h4>
+                            <p>
+                                "Notre voyage au Japon restera gravé à jamais dans nos mémoires. L'accueil chaleureux de nos guides francophones, 
+                                la beauté des temples de Kyoto sous les cerisiers en fleurs, et cette sérénité qui émane de chaque jardin zen... 
+                                Nous avons vécu des moments magiques lors de la cérémonie du thé traditionnelle et notre nuit en ryokan à Hakone 
+                                était pure poésie."
+                            </p>
+                            <blockquote>
+                                "VoyagePassion a organisé chaque détail avec une précision toute japonaise. Merci pour cette découverte authentique !"
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">🏯 Kyoto</span>
+                                <span class="highlight-tag">🌸 Hanami</span>
+                                <span class="highlight-tag">🛁 Onsen</span>
+                                <span class="highlight-tag">🍵 Cérémonie du thé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 2 - Famille Laurent -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Famille Laurent" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Famille Laurent</h3>
+                                <p class="travel-date">Voyage en juillet 2024 • 12 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tokyo moderne" class="memory-photo main-photo">
+                            <img src="assets/img/quels-sont-les-plats-typiques-japonais.png" alt="Sushi" class="memory-photo">
+                            <img src="assets/img/make-a-reservation-to.jpg" alt="Robot Restaurant" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🗼 "Tokyo avec des enfants : mission accomplie !"</h4>
+                            <p>
+                                "Partir au Japon avec trois enfants (8, 12 et 15 ans), nous étions un peu inquiets... Mais quelle réussite ! 
+                                Tokyo les a complètement fascinés : du quartier d'Harajuku aux robots de Shibuya, en passant par les temples 
+                                d'Asakusa et les boutiques de mangas à Akihabara. Chacun y a trouvé son bonheur !"
+                            </p>
+                            <blockquote>
+                                "Les enfants parlent encore du Robot Restaurant et de notre cours de sushi ! Merci VoyagePassion pour cette organisation parfaite."
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">🤖 Robot Restaurant</span>
+                                <span class="highlight-tag">🍣 Cours de sushi</span>
+                                <span class="highlight-tag">🎌 Harajuku</span>
+                                <span class="highlight-tag">🎮 Akihabara</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 3 - Sophie -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="assets/img/sophie-martin-sur-de-soi-jeune-femme-d-affaires-photo.jpg" alt="Sophie" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Sophie Martin</h3>
+                                <p class="travel-date">Voyage en novembre 2024 • 10 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/depositphotos_59732433-stock-photo-mt-fuji-with-fall-colors.jpg" alt="Mont Fuji automne" class="memory-photo main-photo">
+                            <img src="assets/img/rable-rouge.jpg" alt="Érable rouge" class="memory-photo">
+                            <img src="assets/img/jardin_zen_japonais.jpg" alt="Jardin zen" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🍁 "L'automne japonais : un festival de couleurs"</h4>
+                            <p>
+                                "Voyage solo au Japon en novembre, j'avais besoin de me ressourcer... Et quelle renaissance ! 
+                                Les érables rouges de Kyoto, le mont Fuji enneigé, les jardins paisibles où méditer... 
+                                Chaque temple visité, chaque onsen découvert m'ont apporté une paix intérieure extraordinaire."
+                            </p>
+                            <blockquote>
+                                "Merci à l'équipe VoyagePassion pour m'avoir permis de vivre cette transformation. Le Japon m'a changée."
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">🍁 Momiji</span>
+                                <span class="highlight-tag">🗻 Mont Fuji</span>
+                                <span class="highlight-tag">🧘‍♀️ Méditation</span>
+                                <span class="highlight-tag">♨️ Onsen</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 4 - Groupe d'amis -->
+                <div class="testimonial-card">
+                    <div class="card-header">
+                        <div class="traveler-info">
+                            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Groupe d'amis" class="traveler-photo">
+                            <div class="traveler-details">
+                                <h3>Groupe "Les Aventuriers"</h3>
+                                <p class="travel-date">Voyage en mai 2024 • 14 jours</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-content">
+                        <div class="photos-grid">
+                            <img src="assets/img/d25c60753d8f20d6c40fa72385b5.jpg" alt="Groupe au temple" class="memory-photo main-photo">
+                            <img src="assets/img/karaoke-box-min_1024x1024.webp" alt="Karaoke" class="memory-photo">
+                            <img src="assets/img/Zellweger-12Oct2012-IMG_3837.webp" alt="Saké" class="memory-photo">
+                        </div>
+                        
+                        <div class="story-content">
+                            <h4>🎌 "Entre tradition et modernité : le Japon nous a conquis !"</h4>
+                            <p>
+                                "Huit amis, quinze jours au Japon... Une aventure épique ! De nos fous rires en karaoke à Shibuya 
+                                aux moments de recueillement dans les temples de Nara, nous avons vécu mille émotions. 
+                                La gastronomie nous a bluffés : du marché aux poissons de Tsukiji aux yakitoris de rue."
+                            </p>
+                            <blockquote>
+                                "Organisé par VoyagePassion, ce voyage restera dans nos cœurs pour toujours. Sayonara Japon... mais pas pour longtemps !"
+                            </blockquote>
+                            <div class="highlights">
+                                <span class="highlight-tag">🎤 Karaoke</span>
+                                <span class="highlight-tag">🐟 Tsukiji</span>
+                                <span class="highlight-tag">🦌 Nara</span>
+                                <span class="highlight-tag">🍶 Dégustation saké</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section statistiques voyage -->
+        <section class="stats-section">
+            <div class="container">
+                <h2 class="section-title-japan">Nos voyageurs au Japon en chiffres</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">248</div>
+                        <div class="stat-label">Voyageurs satisfaits</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.9/5</div>
+                        <div class="stat-label">Note moyenne</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Villes visitées</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Recommandent</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to action -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Prêt pour votre propre aventure japonaise ?</h2>
+                    <p>Rejoignez nos voyageurs comblés et créez vos propres souvenirs inoubliables au pays du soleil levant.</p>
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn-primary">Demander un devis</a>
+                        <a href="destinations.html" class="btn-secondary">Voir nos circuits Japon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Accueil</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="circuits.html">Circuits</a>
+                <a href="services.html">Services</a>
+                <a href="apropos.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2024 VoyagePassion. Tous droits réservés.</p>
+            <p>📞 01 23 45 67 89 | ✉️ contact@voyagepassion.fr</p>
+        </div>
+    </footer>
+
+<!--
+  Script : Barre de navigation masquable au scroll.
+  Ce script gère le comportement intelligent de la barre de navigation :
+  - Masquage automatique lors du scroll vers le bas
+  - Réapparition au scroll vers le haut ou à l'arrêt du scroll
+  - Protection contre les absence d'éléments dans le DOM
+
+  Explications ligne par ligne :
+  1. Variables :
+     - lastScrollTop : position verticale précédente (pour détecter la direction)
+     - scrollTimer : identifiant du timeout pour le debounce (détection arrêt de scroll)
+     - navbar : élément <header> à manipuler (peut être null)
+
+  2. Logique :
+     - Si on scrolle vers le bas (scrollTop > lastScrollTop) et qu'on a dépassé 100px,
+       on masque la navbar pour maximiser l'espace de lecture
+     - Si on scrolle vers le haut, on affiche la navbar pour permettre la navigation
+     - Un timeout (debounce) de 150ms permet de détecter l'arrêt du scroll
+       et ré-affiche la navbar pour faciliter la navigation
+
+  3. Contraintes techniques :
+     - Vérifier que l'élément header existe avant de manipuler ses classes
+     - Éviter le flicker en utilisant un seuil de 100px
+     - Lisser l'expérience avec un debounce de 150ms sur l'arrêt du scroll
+
+  4. Améliorations possibles :
+     - Ajouter des transitions CSS pour adoucir les changements d'état
+     - Optimiser le debounce pour les performances
+     - Gérer les cas d'erreur de manière plus exhaustive
+-->
+<script>
+// Variables d'état pour le scroll
+let lastScrollTop = 0;
+let scrollTimer;
+
+// Récupère la navbar. Peut être null si le DOM est inattendu.
+const navbar = document.querySelector('header');
+
+// Sécurité : n'installe pas les écouteurs si la navbar est absente
+if (navbar) {
+  // Écouteur principal : réagit à chaque événement de scroll
+  window.addEventListener('scroll', function() {
+    // Position actuelle du scroll (cross-browser)
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Si on scroll vers le bas et qu'on dépasse le seuil -> masquer
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      navbar.classList.add('navbar-hidden');
+      navbar.classList.remove('navbar-visible');
+    } else if (scrollTop < lastScrollTop) {
+      // Si on scroll vers le haut -> afficher
+      navbar.classList.add('navbar-visible');
+      navbar.classList.remove('navbar-hidden');
+    }
+
+    // Debounce : si aucun scroll pendant 150ms -> afficher
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function() {
+      navbar.classList.add('navbar-visible');
+      navbar.classList.remove('navbar-hidden');
+    }, 150);
+
+    // Mise à jour de la position pour la prochaine comparaison
+    lastScrollTop = scrollTop;
+  });
+
+  // Au chargement initial, s'assurer que la navbar est visible
+  window.addEventListener('load', function() {
+    navbar.classList.add('navbar-visible');
+  });
+} else {
+  // Debug (optionnel) : console.warn('Navbar non trouvée');
+}
+</script>
+
+</body>
+</html>
