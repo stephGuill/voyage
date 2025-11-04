@@ -1055,7 +1055,7 @@ footer {
     }
     
     /* Application optionnelle du dark mode */
-    /*
+    
     body {
         background-color: var(--bg-color);
         color: var(--text-color);
@@ -1067,7 +1067,7 @@ footer {
         background-color: var(--card-bg);
         color: var(--text-color);
     }
-    */
+   
 }
 
 /* Accessibilité - Réduction de mouvement */
@@ -1216,3 +1216,6 @@ footer {
         display: block !important;
     }
 }
+
+/* ceci est la fin du responsive du site voyage */
+/* ceci est la fin du css du site voyage */
